@@ -11,7 +11,9 @@ const
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
 // Accepts POST requests at /webhook endpoint
-app.post('/webhook', (req, res) => {  
+app.post('/webhook', (req, res) => { 
+  
+  greetingMessage(webhook_event.sender.id)
 
   // Parse the request body from the POST
   let body = req.body;
@@ -78,9 +80,15 @@ app.get('/webhook', (req, res) => {
   }
 });
 
+function greetingMessage(sender_psid){
+  response = {
+    "text": `test`
+  }
+  callSendAPI(sender_psid, response)
+}
+
 function handleMessage(sender_psid, received_message) {
   let response;
-  let response2;
   
   // Checks if the message contains text
   if (received_message.text) {    
@@ -89,12 +97,6 @@ function handleMessage(sender_psid, received_message) {
     response = {
       "text": `Welcome! Thanks for sharing your experiences of disabled access, this shouldn't take too long!`
     }
-
-    response2 = {
-        "text": `Name of place reviewing`
-    }
-
-
   } else if (received_message.attachments) {
     // Get the URL of the message attachment
     let attachment_url = received_message.attachments[0].payload.url;
@@ -145,14 +147,13 @@ function handlePostback(sender_psid, received_postback) {
   callSendAPI(sender_psid, response);
 }
 
-function callSendAPI(sender_psid, response, response2) {
+function callSendAPI(sender_psid, response) {
   // Construct the message body
   let request_body = {
     "recipient": {
       "id": sender_psid
     },
     "message": response,
-    "message": response2
   }
 
   // Send the HTTP request to the Messenger Platform
