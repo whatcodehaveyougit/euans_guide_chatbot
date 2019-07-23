@@ -54,7 +54,7 @@ app.post('/webhook', (req, res) => {
 app.get('/webhook', (req, res) => {
   
   /** UPDATE YOUR VERIFY TOKEN **/
-  const VERIFY_TOKEN = "SWPhqTaqZQ";
+  const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
   
   
   // Parse params from the webhook verification request
@@ -87,7 +87,7 @@ function handleMessage(sender_psid, received_message) {
     // Create the payload for a basic text message, which
     // will be added to the body of our request to the Send API
     response = {
-      "text": ` !`
+      "text": `LOL`
     }
   } else if (received_message.attachments) {
     // Get the URL of the message attachment
