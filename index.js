@@ -81,6 +81,12 @@ app.get('/webhook', (req, res) => {
 function handleMessage(sender_psid, received_message) {
   let response;
   let response2;
+
+  response2 = {
+    "text": `Welcome greeting`
+  }
+  callSendAPI(sender_psid, response, response2);    
+
   
   // Checks if the message contains text
   if (received_message.text) {    
@@ -90,9 +96,9 @@ function handleMessage(sender_psid, received_message) {
       "text": `Welcome! Thanks for sharing your experiences of disabled access, this shouldn't take too long!`
     }
 
-    response2 = {
-        "text": `Name of place reviewing`
-    }
+    // response2 = {
+    //     "text": `Name of place reviewing`
+    // }
 
 
   } else if (received_message.attachments) {
@@ -151,8 +157,8 @@ function callSendAPI(sender_psid, response, response2) {
     "recipient": {
       "id": sender_psid
     },
-    "message": response,
-    "message2": response2
+    "message": response
+    // "message2": response2
   }
 
   // Send the HTTP request to the Messenger Platform
