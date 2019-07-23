@@ -32,7 +32,7 @@ app.post('/webhook', (req, res) => {
       let sender_psid = webhook_event.sender.id;
       console.log('Sender ID: ' + sender_psid);
       
-      greetingMessage(webhook_event.sender.id)
+      // greetingMessage(webhook_event.sender.id)
 
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
@@ -83,12 +83,12 @@ app.get('/webhook', (req, res) => {
   }
 });
 
-function greetingMessage(sender_psid){
-  response = {
-    "text": `test`
-  }
-  callSendAPI(sender_psid, response)
-}
+// function greetingMessage(sender_psid){
+//   response = {
+//     "text": `test`
+//   }
+//   callSendAPI(sender_psid, response)
+// }
 
 function handleMessage(sender_psid, received_message) {
   let response;
