@@ -20,7 +20,7 @@ app.post('/webhook', (req, res) => {
   if (body.object === 'page') {
 
     body.entry.forEach(function(entry) {
-
+        callSendAPI(sender_psid, "heloo work please")
       // Gets the body of the webhook event
       let webhook_event = entry.messaging[0];
       console.log(webhook_event);
@@ -87,8 +87,7 @@ function handleMessage(sender_psid, received_message) {
     // Create the payload for a basic text message, which
     // will be added to the body of our request to the Send API
     response = {
-      "text": `Welcome! Thanks for sharing your experiences of disabled access, this shouldn't take too long!`,
-      "text": "HELLLLLLLLLLLLLLLLO"
+      "text": `Welcome! Thanks for sharing your experiences of disabled access, this shouldn't take too long!`
     }
 
   } else if (received_message.attachments) {
