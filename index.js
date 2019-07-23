@@ -87,13 +87,10 @@ function handleMessage(sender_psid, received_message) {
     // Create the payload for a basic text message, which
     // will be added to the body of our request to the Send API
     response = {
-      "text": `Welcome! Thanks for sharing your experiences of disabled access, this shouldn't take too long!`
+      "text": `Welcome! Thanks for sharing your experiences of disabled access, this shouldn't take too long!`,
+      "text": "HELLLLLLLLLLLLLLLLO"
     }
 
-    response = {
-        "text": "HELLLLLLLLLLLLLLLLO"
-    }
-    
   } else if (received_message.attachments) {
     // Get the URL of the message attachment
     let attachment_url = received_message.attachments[0].payload.url;
