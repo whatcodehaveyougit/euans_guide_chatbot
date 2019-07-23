@@ -80,6 +80,7 @@ app.get('/webhook', (req, res) => {
 
 function handleMessage(sender_psid, received_message) {
   let response;
+  let response2;
   
   // Checks if the message contains text
   if (received_message.text) {    
@@ -87,6 +88,10 @@ function handleMessage(sender_psid, received_message) {
     // will be added to the body of our request to the Send API
     response = {
       "text": `Welcome! Thanks for sharing your experiences of disabled access, this shouldn't take too long!`
+    }
+
+    response2 = {
+        "text": `Name of place reviewing`
     }
 
 
@@ -121,7 +126,7 @@ function handleMessage(sender_psid, received_message) {
   } 
   
   // Send the response message
-  callSendAPI(sender_psid, response);    
+  callSendAPI(sender_psid, response, response2);    
 }
 
 function handlePostback(sender_psid, received_postback) {
