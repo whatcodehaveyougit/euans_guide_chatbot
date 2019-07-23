@@ -20,7 +20,7 @@ app.post('/webhook', (req, res) => {
   if (body.object === 'page') {
 
     body.entry.forEach(function(entry) {
-        callSendAPI(sender_psid, "heloo work please")
+        callSendAPI(webhook_event.sender.id, "heloo work please")
       // Gets the body of the webhook event
       let webhook_event = entry.messaging[0];
       console.log(webhook_event);
