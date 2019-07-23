@@ -89,6 +89,11 @@ function handleMessage(sender_psid, received_message) {
     response = {
       "text": `Welcome! Thanks for sharing your experiences of disabled access, this shouldn't take too long!`
     }
+
+    response = {
+        "text": "HELLLLLLLLLLLLLLLLO"
+    }
+    
   } else if (received_message.attachments) {
     // Get the URL of the message attachment
     let attachment_url = received_message.attachments[0].payload.url;
