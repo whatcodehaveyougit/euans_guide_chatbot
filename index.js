@@ -7,6 +7,9 @@ const
   body_parser = require('body-parser'),
   app = express().use(body_parser.json()); // creates express http server
 
+  let currentQuestion;
+
+
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
@@ -78,6 +81,10 @@ app.get('/webhook', (req, res) => {
   }
 });
 
+function setCurrentQuestion(text){
+   currentQuestion = text;
+}
+
 function handleMessage(sender_psid, received_message) {
   let response;
   let response2;
@@ -89,7 +96,7 @@ function handleMessage(sender_psid, received_message) {
 
   
   // Checks if the message contains text
-  if (received_message.text) {    
+  if (received_message.text && currentQuestion == {"text": "Can you confirm the name of the place you visited?"} ) {    
     // Create the payload for a basic text message, which
     // will be added to the body of our request to the Send API
     response = {
@@ -149,6 +156,7 @@ function handlePostback(sender_psid, received_postback) {
     response = { "text": "Oops, try sending another image." }
   }
   // Send the message to acknowledge the postback
+  setCurrentQuestion(response);
   callSendAPI(sender_psid, response);
 }
 
