@@ -144,8 +144,7 @@ function handlePostback(sender_psid, received_postback) {
   // Set the response based on the postback payload
  
   if(payload === 'GET_STARTED'){
-    response = placeVisited("Can you confirm the name of the place you visited?")
-    callSendAPI(sender_psid, response);
+    response = {"text": "Can you confirm the name of the place you visited?"}
   } else if (payload === 'no') {
     response = { "text": "Oops, try sending another image." }
   }
