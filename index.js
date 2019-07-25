@@ -93,10 +93,9 @@ function handleMessage(sender_psid, received_message) {
     response = {
       "text": `Ok, great! Can you confirm which town or city that is in?`
     }
-    console.log("RESPONSE", response["text"])
-    currentQuestion = "Ok, great! Can you confirm which town or city that is in?"
+    currentQuestion = response["text"]
 
-  } else if ((received_message.text) && (currentQuestion === "Ok, great! Can you confirm which town or city that is in?")){
+  } else if ((received_message.text !== currentQuestion) && (currentQuestion === "Ok, great! Can you confirm which town or city that is in?")){
     // console.log("FAEBDJQEBDJQ", received_message.text)
     response = {
       "text": `YEAHHHHH`
