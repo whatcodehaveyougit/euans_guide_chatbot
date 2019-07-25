@@ -84,13 +84,8 @@ app.get('/webhook', (req, res) => {
 // }
 
 function handleMessage(sender_psid, received_message) {
-
-  if (received_message.quick_replies) {
-    handleResponse = {
-      "text": "REALLY?"
-    }
     
-  } else if ((received_message.text !== currentQuestion) && (currentQuestion === "Can you confirm the name of the place you visited?")) {
+  if ((received_message.text !== currentQuestion) && (currentQuestion === "Can you confirm the name of the place you visited?")) {
     handleResponse = {
       "text": `Ok, great! Can you confirm which town or city ` + received_message.text + ` is in?`
     }
@@ -113,7 +108,11 @@ function handleMessage(sender_psid, received_message) {
       ]
     }
     currentQuestion = handleResponse["text"]
-  } 
+
+  } else if ((received_message.text === "No!") && (received_message.text !== currentQuestion) && (currentQuestion === `Do you have any photos or images you'd like to upload?`)) {
+    handleResponse = {
+      "text": "REALLY?"
+    }
 
   // Send the response message
   callSendAPI(sender_psid, handleResponse);
