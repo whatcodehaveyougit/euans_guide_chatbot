@@ -135,7 +135,7 @@ function handleMessage(sender_psid, received_message) {
   } 
   
   // Send the response message
-  callSendAPI(sender_psid, response, response2);    
+  callSendAPI(sender_psid, response);    
 }
 
 function handlePostback(sender_psid, received_postback) {
