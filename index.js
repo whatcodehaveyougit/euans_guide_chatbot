@@ -84,7 +84,6 @@ app.get('/webhook', (req, res) => {
 // }
 
 function handleMessage(sender_psid, received_message) {
-  console.log("HELLLLLLLLO", received_message.quick_reply)
 
   if (received_message.quick_replies) {
     handleResponse = {
@@ -103,18 +102,13 @@ function handleMessage(sender_psid, received_message) {
       "quick_replies": [
         {
           "content_type": "text",
-          "title": "Yes, now!",
-          "payload": "yes now"
-        },
-        {
-          "content_type": "text",
-          "title": "Yes, later!",
-          "payload": "yes later"
+          "title": "Yes!",
+          "payload": "yes"
         },
         {
           "content_type": "text",
           "title": "No!",
-          "payload": "no photos"
+          "payload": "yes"
         }
       ]
     }
