@@ -34,10 +34,8 @@ app.post('/webhook', (req, res) => {
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
       if (webhook_event.message) {
-        console.log("message!!!!!!!!!!!")
         handleMessage(sender_psid, webhook_event.message);
       } else if (webhook_event.postback) {
-        console.log("Postback!!!!!!!!!!!")
         handlePostback(sender_psid, webhook_event.postback);
       }
 
@@ -86,7 +84,7 @@ app.get('/webhook', (req, res) => {
 // }
 
 function handleMessage(sender_psid, received_message) {
-  console.log(received_message.quick_replies)
+  console.log("HELLLLLLLLO", received_message.quick_replies)
 
   if (received_message.quick_replies) {
     handleResponse = {
