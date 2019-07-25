@@ -85,6 +85,7 @@ app.get('/webhook', (req, res) => {
 // }
 
 function handleMessage(sender_psid, received_message) {
+  console.log("RESPONSE", received_message.text)
 
   // Checks if the message contains text
   if ((received_message.text !== currentQuestion) && (currentQuestion === "Can you confirm the name of the place you visited?")) {
