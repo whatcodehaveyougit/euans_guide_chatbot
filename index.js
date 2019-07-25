@@ -8,7 +8,7 @@ const
   app = express().use(body_parser.json()); // creates express http server
 
   let currentQuestion = "Can you confirm the name of the place you visited?"
-  let currentQuestion2 = "Ok, great! Can you confirm which town or city that is in?"
+  // let currentQuestion2 = "Ok, great! Can you confirm which town or city that is in?"
 
 
 // Sets server port and logs message on success
@@ -156,14 +156,13 @@ function handlePostback(sender_psid, received_postback) {
   callSendAPI(sender_psid, response);
 }
 
-function callSendAPI(sender_psid, response, response2) {
+function callSendAPI(sender_psid, response) {
   // Construct the message body
   let request_body = {
     "recipient": {
       "id": sender_psid
     },
     "message": response
-    // "message2": response2
   }
 
   // Send the HTTP request to the Messenger Platform
