@@ -100,10 +100,10 @@ function handleMessage(sender_psid, received_message) {
       "text": `Ok, great! Can you confirm which town or city that is in?`
     }
 
-  } else if ((received_message.text) && (currentQuestion2 === "Ok, great! Can you confirm which town or city that is in?")){
-    response = {
-      "text": `YEAHHHHH`
-    }
+  // } else if ((received_message.text) && (currentQuestion2 === "Ok, great! Can you confirm which town or city that is in?")){
+  //   response = {
+  //     "text": `YEAHHHHH`
+  //   }
   } else if (received_message.attachments) {
     // Get the URL of the message attachment
     let attachment_url = received_message.attachments[0].payload.url;
