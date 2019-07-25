@@ -88,7 +88,7 @@ function setCurrentQuestion(text){
 function handleMessage(sender_psid, received_message) {
   let response;
  
-  callSendAPI(sender_psid, response);    
+  // callSendAPI(sender_psid, response);    
 
   
   // Checks if the message contains text
