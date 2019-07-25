@@ -84,14 +84,17 @@ app.get('/webhook', (req, res) => {
 // }
 
 function handleMessage(sender_psid, received_message) {
+
+  let place;
     
   if ((received_message.text !== currentQuestion) && (currentQuestion === "Can you confirm the name of the place you visited?")) {
+    place = received_message.text
     handleResponse = {
-      "text": `Ok, great! Can you confirm which town or city ` + received_message.text + ` is in?`
+      "text": `Ok, great! Can you confirm which town or city ` + place + ` is in?`
     }
     currentQuestion = handleResponse["text"]
 
-  } else if ((received_message.text !== currentQuestion) && (currentQuestion === handleResponse["text"])) {
+  } else if ((received_message.text !== currentQuestion) && (currentQuestion === `Ok, great! Can you confirm which town or city ` + place + ` is in?`)) {
     handleResponse = {
       "text": `Do you have any photos or images you'd like to upload?`,
       "quick_replies": [
