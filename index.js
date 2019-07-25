@@ -85,7 +85,6 @@ function setCurrentQuestion(text){
 
 function handleMessage(sender_psid, received_message) {
   let response;
-  console.log("RESPONSE", response["text"])
     
   // Checks if the message contains text
   if ((received_message.text !== currentQuestion) && (currentQuestion === "Can you confirm the name of the place you visited?")) {  
@@ -97,6 +96,7 @@ function handleMessage(sender_psid, received_message) {
     currentQuestion = response["text"]
 
   } else if ((received_message.text !== currentQuestion) && (currentQuestion === response["text"])){
+    console.log("RESPONSE", response["text"])
     // console.log("FAEBDJQEBDJQ", received_message.text)
     response = {
       "text": `YEAHHHHH`
