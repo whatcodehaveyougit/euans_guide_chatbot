@@ -117,6 +117,13 @@ function handleMessage(sender_psid, received_message) {
     }
     currentQuestion = handleResponse["text"]
 
+  }
+  else if ((received_message.text === "Yes!") && (received_message.text !== currentQuestion) && (currentQuestion === `Do you have any photos or images you'd like to upload?`)) {
+    handleResponse = {
+      "text": "Great, lets do this later lol"
+    }
+    currentQuestion = handleResponse["text"]
+
   } else if ((received_message.text !== currentQuestion) && (currentQuestion === "No problem! Now, what would you like to title your review?")) {
     handleResponse = {
       "text": "Fucking amazing title!"
