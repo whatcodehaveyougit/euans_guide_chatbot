@@ -116,11 +116,7 @@ function handleMessage(sender_psid, received_message) {
       ]
     }
     currentQuestion = handleResponse["text"]
-  } else {
-    handleResponse = {
-      "text": `end of convo!`
-    }
-  }
+  } 
 
   // Send the response message
   callSendAPI(sender_psid, handleResponse);
