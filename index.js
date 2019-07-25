@@ -99,17 +99,17 @@ function handleMessage(sender_psid, received_message) {
       "text": `Do you have any photos or images you'd like to upload?`,
       "quick_replies": [
         {
-          "content_type": "text",
+          "type": "postback",
           "title": "Yes, now!",
           "payload": "yes now"
         },
         {
-          "content_type": "text",
+          "type": "postback",
           "title": "Yes, later!",
           "payload": "yes later"
         },
         {
-          "content_type": "text",
+          "type": "postback",
           "title": "No!",
           "payload": "no photos"
         }
