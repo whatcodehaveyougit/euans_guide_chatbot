@@ -8,6 +8,7 @@ const
   app = express().use(body_parser.json()); // creates express http server
 
   let currentQuestion;
+  let handleResponse;
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
@@ -79,31 +80,27 @@ app.get('/webhook', (req, res) => {
   }
 });
 
-function setCurrentQuestion(text){
-   currentQuestion = text;
-}
+// function setCurrentQuestion(text){
+//    currentQuestion = text;
+// }
 
 function handleMessage(sender_psid, received_message) {
-  let response;
     
   // Checks if the message contains text
   if ((received_message.text !== currentQuestion) && (currentQuestion === "Can you confirm the name of the place you visited?")) {  
-    // Create the payload for a basic text message, which
-    // will be added to the body of our request to the Send API
-    response = {
-      // "text": `Ok, great! Can you confirm which town or city ` + received_message.text + ` is in?`
+    handleResponse = {
       "text": `Ok, great! Can you confirm which town or city that is in?`
     }
-    currentQuestion = response["text"]
+    currentQuestion = handleResponse["text"]
 
   } else if ((received_message.text !== currentQuestion) && (currentQuestion === "Ok, great! Can you confirm which town or city that is in?")){
-    response = {
+    handleResponse = {
       "text": `YEAHHHHH`
     }
   } else if (received_message.attachments) {
     // Get the URL of the message attachment
     let attachment_url = received_message.attachments[0].payload.url;
-    response = {
+    handleResponse = {
       "attachment": {
         "type": "template",
         "payload": {
@@ -131,7 +128,7 @@ function handleMessage(sender_psid, received_message) {
   } 
   
   // Send the response message
-  callSendAPI(sender_psid, response);
+  callSendAPI(sender_psid, handleResponse);
   
 }
 
