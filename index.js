@@ -99,7 +99,7 @@ function handleMessage(sender_psid, received_message) {
       "text": `Ok, great! Can you confirm which town or city that is in?`
     }
 
-  } else if ((received_message.text) && (currentQuestion2 === "Ok, great! Can you confirm which town or city that is in?")){
+  } else if ((received_message.text) && (currentQuestion === "Ok, great! Can you confirm which town or city that is in?")){
     response = {
       "text": `YEAHHHHH`
     }
