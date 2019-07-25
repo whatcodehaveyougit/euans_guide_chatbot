@@ -97,23 +97,18 @@ function handleMessage(sender_psid, received_message) {
   } else if ((received_message.text !== currentQuestion) && (currentQuestion === handleResponse["text"])) {
     handleResponse = {
       "text": `Do you have any photos or images you'd like to upload?`,
-      "attachment": {
-        "type": "template",
-        "payload": {
-          "buttons": [
-            {
-              "type": "postback",
-              "title": "Yes!",
-              "payload": "yes",
-            },
-            {
-              "type": "postback",
-              "title": "No!",
-              "payload": "no",
-            }
-          ]
+      "quick_replies": [
+        {
+          "content_type": "text",
+          "title": "Yep!",
+          "payload": "yes"
+        },
+        {
+          "content_type": "text",
+          "title": "Nope!",
+          "payload": "no"
         }
-      }
+      ]
     }
   } else if (received_message.attachments) {
     // Get the URL of the message attachment
