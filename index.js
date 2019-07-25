@@ -95,12 +95,11 @@ function handleMessage(sender_psid, received_message) {
   if ((received_message.text) && (currentQuestion === "Can you confirm the name of the place you visited?")) {    
     // Create the payload for a basic text message, which
     // will be added to the body of our request to the Send API
-    setCurrentQuestion("Ok, great! Can you confirm which town or city that is in?")
     response = {
       "text": `Ok, great! Can you confirm which town or city that is in?`
     }
 
-  } else if ((received_message.text) && (currentQuestion === "Ok, great! Can you confirm which town or city that is in?")){
+  } else if ((received_message.text) && (currentQuestion2 === "Ok, great! Can you confirm which town or city that is in?")){
     response = {
       "text": `YEAHHHHH`
     }
@@ -135,7 +134,8 @@ function handleMessage(sender_psid, received_message) {
   } 
   
   // Send the response message
-  callSendAPI(sender_psid, response);    
+  callSendAPI(sender_psid, response);
+  setCurrentQuestion("Ok, great! Can you confirm which town or city that is in?")    
 }
 
 function handlePostback(sender_psid, received_postback) {
