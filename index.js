@@ -36,8 +36,9 @@ app.post('/webhook', (req, res) => {
       if (webhook_event.message) {
         handleMessage(sender_psid, webhook_event.message);
       } else if (webhook_event.postback) {
-
         handlePostback(sender_psid, webhook_event.postback);
+      } else if (webhook_event.quick_replies) {
+        handleQuickReply(sender_psid, webhook_event.quick_replies)
       }
 
     });
@@ -85,7 +86,6 @@ app.get('/webhook', (req, res) => {
 // }
 
 function handleMessage(sender_psid, received_message) {
-  console.log("RESPONSE", received_message.text)
 
   // Checks if the message contains text
   if ((received_message.text !== currentQuestion) && (currentQuestion === "Can you confirm the name of the place you visited?")) {
@@ -141,6 +141,10 @@ function handlePostback(sender_psid, received_postback) {
   // Send the message to acknowledge the postback
   // setCurrentQuestion(response);
   callSendAPI(sender_psid, response);
+}
+
+function handleQuickReply(sender_psid, received_quick_reply) {
+  console.log("HELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLO")
 }
 
 function callSendAPI(sender_psid, response) {
