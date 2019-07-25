@@ -84,7 +84,7 @@ function setCurrentQuestion(text){
 }
 
 function handleMessage(sender_psid, received_message) {
-  console.log("HELLLLLO", received_message.text)
+  console.log("HELLLLLO", received_message.text, currentQuestion)
   let response;
     
   // Checks if the message contains text
