@@ -135,7 +135,7 @@ function handleMessage(sender_psid, received_message) {
   
   // Send the response message
   callSendAPI(sender_psid, response);
-  setCurrentQuestion("Ok, great! Can you confirm which town or city that is in?")    
+     
 }
 
 function handlePostback(sender_psid, received_postback) {
