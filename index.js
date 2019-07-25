@@ -91,13 +91,12 @@ function handleMessage(sender_psid, received_message) {
     // Create the payload for a basic text message, which
     // will be added to the body of our request to the Send API
     response = {
-      "text": `Ok, great! Can you confirm which town or city ` + received_message.text + ` is in?`
+      // "text": `Ok, great! Can you confirm which town or city ` + received_message.text + ` is in?`
+      "text": `Ok, great! Can you confirm which town or city that is in?`
     }
     currentQuestion = response["text"]
 
-  } else if ((received_message.text !== currentQuestion) && (currentQuestion === response["text"])){
-    console.log("RESPONSE", response["text"])
-    // console.log("FAEBDJQEBDJQ", received_message.text)
+  } else if ((received_message.text !== currentQuestion) && (currentQuestion === "Ok, great! Can you confirm which town or city that is in?")){
     response = {
       "text": `YEAHHHHH`
     }
