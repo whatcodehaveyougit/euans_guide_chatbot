@@ -113,6 +113,7 @@ function handleMessage(sender_psid, received_message) {
     handleResponse = {
       "text": "REALLY?"
     }
+  }
 
   // Send the response message
   callSendAPI(sender_psid, handleResponse);
