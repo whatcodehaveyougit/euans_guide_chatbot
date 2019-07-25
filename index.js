@@ -89,11 +89,12 @@ function handleMessage(sender_psid, received_message) {
   // Checks if the message contains text
   if ((received_message.text !== currentQuestion) && (currentQuestion === "Can you confirm the name of the place you visited?")) {  
     handleResponse = {
-      "text": `Ok, great! Can you confirm which town or city that is in?`
+      "text": `Ok, great! Can you confirm which town or city ` + received_message.text + ` is in?`
+      // "text": `Ok, great! Can you confirm which town or city that is in?`
     }
     currentQuestion = handleResponse["text"]
 
-  } else if ((received_message.text !== currentQuestion) && (currentQuestion === "Ok, great! Can you confirm which town or city that is in?")){
+  } else if ((received_message.text !== currentQuestion) && (currentQuestion === handleResponse["text"])){
     handleResponse = {
       "text": `YEAHHHHH`
     }
