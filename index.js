@@ -86,6 +86,7 @@ app.get('/webhook', (req, res) => {
 // }
 
 function handleMessage(sender_psid, received_message) {
+  console.log(received_message.quick_replies)
 
   if (received_message.quick_replies) {
     handleResponse = {
