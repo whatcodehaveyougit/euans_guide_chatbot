@@ -87,7 +87,7 @@ app.get('/webhook', (req, res) => {
 
 function handleMessage(sender_psid, received_message) {
 
-  if (received_message.payload === "yes now") {
+  if (received_message.text === "yes now") {
     handleResponse = {
       "text": "REALLY?"
     }
