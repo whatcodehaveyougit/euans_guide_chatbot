@@ -96,7 +96,7 @@ function handleMessage(sender_psid, received_message) {
 
   } else if ((received_message.text !== currentQuestion) && (currentQuestion === handleResponse["text"])){
     handleResponse = {
-      "text": `YEAHHHHH`
+      "text": `Do you have any photos or images you'd like to upload?`
     }
   } else if (received_message.attachments) {
     // Get the URL of the message attachment
