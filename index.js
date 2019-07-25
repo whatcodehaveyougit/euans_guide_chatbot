@@ -100,17 +100,17 @@ function handleMessage(sender_psid, received_message) {
       "quick_replies": [
         {
           "content_type": "text",
-          "title": "Upload Photos Now",
+          "title": "Yes, now!",
           "payload": "yes now"
         },
         {
           "content_type": "text",
-          "title": "Upload Photos Later",
+          "title": "Yes, later!",
           "payload": "yes later"
         },
         {
           "content_type": "text",
-          "title": "No Photos",
+          "title": "No!",
           "payload": "no photos"
         }
       ]
