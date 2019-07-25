@@ -84,6 +84,7 @@ function setCurrentQuestion(text){
 }
 
 function handleMessage(sender_psid, received_message) {
+  console.log("HELLLLLO", received_message.text)
   let response;
     
   // Checks if the message contains text
@@ -95,7 +96,7 @@ function handleMessage(sender_psid, received_message) {
     }
 
   } else if ((received_message.text) && (currentQuestion === "Ok, great! Can you confirm which town or city that is in?")){
-    console.log("FAEBDJQEBDJQ", received_message.text)
+    // console.log("FAEBDJQEBDJQ", received_message.text)
     response = {
       "text": `YEAHHHHH`
     }
