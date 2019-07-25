@@ -33,10 +33,7 @@ app.post('/webhook', (req, res) => {
 
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
-      if (webhook_event.quick_replies) {
-        console.log("Quicky!!!!!!!!!!!")
-        handleQuickReply(sender_psid, webhook_event.message.quick_replies)
-      } else if (webhook_event.message) {
+      if (webhook_event.message) {
         console.log("message!!!!!!!!!!!")
         handleMessage(sender_psid, webhook_event.message);
       } else if (webhook_event.postback) {
@@ -90,11 +87,14 @@ app.get('/webhook', (req, res) => {
 
 function handleMessage(sender_psid, received_message) {
 
-  // Checks if the message contains text
-  if ((received_message.text !== currentQuestion) && (currentQuestion === "Can you confirm the name of the place you visited?")) {
+  if (received_message.payload === "yes now") {
+    handleResponse = {
+      "text": "REALLY?"
+    }
+    
+  } else if ((received_message.text !== currentQuestion) && (currentQuestion === "Can you confirm the name of the place you visited?")) {
     handleResponse = {
       "text": `Ok, great! Can you confirm which town or city ` + received_message.text + ` is in?`
-      // "text": `Ok, great! Can you confirm which town or city that is in?`
     }
     currentQuestion = handleResponse["text"]
 
@@ -144,10 +144,6 @@ function handlePostback(sender_psid, received_postback) {
   // Send the message to acknowledge the postback
   // setCurrentQuestion(response);
   callSendAPI(sender_psid, response);
-}
-
-function handleQuickReply(sender_psid, received_quick_reply) {
-  console.log("HELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLO")
 }
 
 function callSendAPI(sender_psid, response) {
