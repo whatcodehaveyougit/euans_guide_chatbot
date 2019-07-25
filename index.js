@@ -7,6 +7,7 @@ const
   body_parser = require('body-parser'),
   app = express().use(body_parser.json()); // creates express http server
 
+  let currentQuestion = "Can you confirm the name of the place you visited?"
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
@@ -84,8 +85,7 @@ function setCurrentQuestion(text){
 
 function handleMessage(sender_psid, received_message) {
   let response;
-  let currentQuestion = "Can you confirm the name of the place you visited?"
- 
+
   // callSendAPI(sender_psid, response);    
 
   
