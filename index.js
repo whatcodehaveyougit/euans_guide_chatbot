@@ -163,9 +163,10 @@ function handlePostback(sender_psid, received_postback) {
   if (payload === 'GET_STARTED') {
     response = { "text": "Can you confirm the name of the place you visited?" }
     currentQuestion = response["text"]
+  } else if (payload === 'yes now') {
+    response = { "text": "YEAH NOW BOI" }
   } else if (payload === 'no') {
     response = { "text": "Oops, try sending another image." }
-  }
   // Send the message to acknowledge the postback
   // setCurrentQuestion(response);
   callSendAPI(sender_psid, response);
