@@ -24,6 +24,8 @@ app.post('/webhook', (req, res) => {
     body.entry.forEach(function (entry) {
       // Gets the body of the webhook event
       let webhook_event = entry.messaging[0];
+      console.log(webhook_event);
+
 
       // Get the sender PSID
       let sender_psid = webhook_event.sender.id;
@@ -35,10 +37,10 @@ app.post('/webhook', (req, res) => {
         console.log("message!!!!!!!!!!!")
         handleMessage(sender_psid, webhook_event.message);
       } else if (webhook_event.postback) {
-        console.log("postback!!!!!!!!!!!")
+        console.log("Postback!!!!!!!!!!!")
         handlePostback(sender_psid, webhook_event.postback);
       } else if (webhook_event.quick_replies) {
-        console.log("QUICK!!!!!!!!!!!")
+        console.log("Quicky!!!!!!!!!!!")
         handleQuickReply(sender_psid, webhook_event.quick_replies)
       }
 
