@@ -89,7 +89,7 @@ app.get('/webhook', (req, res) => {
 function handleMessage(sender_psid, received_message) {
   let response;
  
-  callSendAPI(sender_psid, response, response2);    
+  callSendAPI(sender_psid, response);    
 
   
   // Checks if the message contains text
