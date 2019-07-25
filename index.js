@@ -113,10 +113,16 @@ function handleMessage(sender_psid, received_message) {
 
   } else if ((received_message.text === "No!") && (received_message.text !== currentQuestion) && (currentQuestion === `Do you have any photos or images you'd like to upload?`)) {
     handleResponse = {
-      "text": "REALLY?"
+      "text": "No problem! Now, what would you like to title your review?"
     }
-  }
+    currentQuestion = handleResponse["text"]
 
+  } else if ((received_message.text !== currentQuestion) && (currentQuestion === "No problem! Now, what would you like to title your review?")) {
+    handleResponse = {
+      "text": "Fucking amazing title!"
+    }
+
+  }
   // Send the response message
   callSendAPI(sender_psid, handleResponse);
 
