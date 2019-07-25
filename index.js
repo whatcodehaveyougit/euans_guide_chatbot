@@ -91,7 +91,7 @@ function handleMessage(sender_psid, received_message) {
     // Create the payload for a basic text message, which
     // will be added to the body of our request to the Send API
     response = {
-      "text": `Ok, great! Can you confirm which town or city {received_message.text} is in?`
+      "text": `Ok, great! Can you confirm which town or city ` + received_message.text + ` is in?`
     }
     currentQuestion = response["text"]
 
