@@ -9,6 +9,7 @@ const
 
 let currentQuestion;
 let handleResponse;
+let place;
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
@@ -84,8 +85,6 @@ app.get('/webhook', (req, res) => {
 // }
 
 function handleMessage(sender_psid, received_message) {
-
-  let place;
     
   if ((received_message.text !== currentQuestion) && (currentQuestion === "Can you confirm the name of the place you visited?")) {
     place = received_message.text
