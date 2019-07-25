@@ -33,7 +33,6 @@ app.post('/webhook', (req, res) => {
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
       if (webhook_event.message) {
-        console.log("WEBHOOOOOOOK", webhook_event.text)
         handleMessage(sender_psid, webhook_event.message);        
       } else if (webhook_event.postback) {
         
@@ -86,6 +85,7 @@ function setCurrentQuestion(text){
 
 function handleMessage(sender_psid, received_message) {
   let response;
+  console.log("RESPONSE", response)
     
   // Checks if the message contains text
   if ((received_message.text) && (currentQuestion === "Can you confirm the name of the place you visited?")) {  
