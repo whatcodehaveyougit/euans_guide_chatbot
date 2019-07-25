@@ -148,7 +148,6 @@ function handlePostback(sender_psid, received_postback) {
  
   if(payload === 'GET_STARTED'){
     response = {"text": "Can you confirm the name of the place you visited?"}
-    let currentQuestion = "Can you confirm the name of the place you visited?"
   } else if (payload === 'no') {
     response = { "text": "Oops, try sending another image." }
   }
