@@ -154,7 +154,39 @@ function handleMessage(sender_psid, received_message) {
   //   }
   } else if ((received_message.text !== currentQuestion) && (currentQuestion === "Great! Now, what would you like to title your review?")) {
     handleResponse = {
-      "text": "Fucking amazing title!"
+      "text": "Great Title! Now for a rating, how would you rate the disabled access overall?",
+      "quick_replies": [
+        {
+          "content_type": "text",
+          "title": "1",
+          "payload": "one",
+          "image_url": "./STAR.png"
+        },
+        {
+          "content_type": "text",
+          "title": "2",
+          "payload": "two",
+          "image_url": "./STAR.png"
+        },
+        {
+          "content_type": "text",
+          "title": "3",
+          "payload": "three",
+          "image_url": "./STAR.png"
+        },
+        {
+          "content_type": "text",
+          "title": "4",
+          "payload": "four",
+          "image_url": "./STAR.png"
+        },
+        {
+          "content_type": "text",
+          "title": "5",
+          "payload": "five",
+          "image_url": "./STAR.png"
+        }
+      ]
     }
 
   }
