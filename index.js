@@ -7,7 +7,7 @@ const
   body_parser = require('body-parser'),
   app = express().use(body_parser.json()); // creates express http server
 
-  let currentQuestion;
+  let currentQuestion = "Can you confirm the name of the place you visited?"
 
 
 // Sets server port and logs message on success
@@ -81,9 +81,9 @@ app.get('/webhook', (req, res) => {
   }
 });
 
-function setCurrentQuestion(text){
-   currentQuestion = text;
-}
+// function setCurrentQuestion(text){
+//    currentQuestion = text;
+// }
 
 function handleMessage(sender_psid, received_message) {
   let response;
@@ -152,7 +152,6 @@ function handlePostback(sender_psid, received_postback) {
  
   if(payload === 'GET_STARTED'){
     response = {"text": "Can you confirm the name of the place you visited?"}
-    setCurrentQuestion("Can you confirm the name of the place you visited?")
   } else if (payload === 'no') {
     response = { "text": "Oops, try sending another image." }
   }
