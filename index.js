@@ -7,7 +7,7 @@ const
   body_parser = require('body-parser'),
   app = express().use(body_parser.json()); // creates express http server
 
-  let currentQuestion = "Can you confirm the name of the place you visited?"
+  let currentQuestion;
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
@@ -145,6 +145,7 @@ function handlePostback(sender_psid, received_postback) {
  
   if(payload === 'GET_STARTED'){
     response = {"text": "Can you confirm the name of the place you visited?"}
+    currentQuestion = response["text"]
   } else if (payload === 'no') {
     response = { "text": "Oops, try sending another image." }
   }
