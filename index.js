@@ -183,6 +183,7 @@ function handleMessage(sender_psid, received_message) {
         }
       ]
     }
+    currentQuestion = handleResponse["text"]
 
   } else if((received_message.text === "1") && (received_message.text !== currentQuestion) && (currentQuestion === "Great Title! Now for a rating, how would you rate the disabled access overall?")){
     handleResponse = {
