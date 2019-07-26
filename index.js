@@ -125,7 +125,7 @@ function handleMessage(sender_psid, received_message) {
     }
     currentQuestion = handleResponse["text"]
 
-  } else if ((received_message.attachment) && (currentQuestion === "Great, send it!")) {
+  } else if ((received_message.attachment) && (currentQuestion === "Great, send it!") && (received_message.text !== currentQuestion)) {
     // Get the URL of the message attachment
     let attachment_url = received_message.attachment[0].payload.url;
     response = {
