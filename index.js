@@ -193,7 +193,7 @@ function handleMessage(sender_psid, received_message) {
   }
   else if((received_message.text === "2") && (received_message.text !== currentQuestion) && (currentQuestion === "Great Title! Now for a rating, how would you rate the disabled access overall?")){
     handleResponse = {
-      "text": `oh dear! ` + place + ` doesn't sound great? now for an acutal review of the place` 
+      "text": `oh dear! Could you summarize why you gave ` + place + ` a rating of ` + received_message.text + `?` 
     }
     currentQuestion = handleResponse["text"]
   }
