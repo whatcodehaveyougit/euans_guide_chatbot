@@ -108,13 +108,13 @@ function handleMessage(sender_psid, received_message) {
     }
     currentQuestion = handleResponse["text"]
 
-  } else if ((received_message.text === "No!") && (received_message.text !== currentQuestion) && (currentQuestion === `Do you have any photos or images you'd like to upload?`)) {
+  } else if ((received_message.text === "No!") && (received_message.text !== currentQuestion) && (currentQuestion === (`Do you have any photos or images you'd like to upload?` || `Do you have any more photos or images you'd like to upload?`))) {
     handleResponse = {
       "text": "Great! Now, what would you like to title your review?"
     }
     currentQuestion = handleResponse["text"]
 
-  } else if ((received_message.text === "Yes!") && (received_message.text !== currentQuestion) && (currentQuestion === `Do you have any photos or images you'd like to upload?`)) {
+  } else if ((received_message.text === "Yes!") && (received_message.text !== currentQuestion) && (currentQuestion === (`Do you have any photos or images you'd like to upload?` || `Do you have any more photos or images you'd like to upload?`))) {
     handleResponse = {
       "text": "Great, send it!"
     }
