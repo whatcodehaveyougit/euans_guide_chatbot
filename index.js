@@ -185,18 +185,14 @@ function handleMessage(sender_psid, received_message) {
     }
     currentQuestion = handleResponse["text"]
 
-  } else if((received_message.text === "1") && (received_message.text !== currentQuestion) && (currentQuestion === "Great Title! Now for a rating, how would you rate the disabled access overall?")){
+  } else if((received_message.text === "1" || "2" || "3" || "4" || "5") && (received_message.text !== currentQuestion) && (currentQuestion === "Great Title! Now for a rating, how would you rate the disabled access overall?")){
     handleResponse = {
-      "text": `Thats's not good! Could you summarize why you gave ` + place + ` a rating of ` + received_message.text + `?`    
+      "text": `You've given a rating of ` + received_message.text + `. Could you summarize you're experience at ` + place + `?`    
     }
     currentQuestion = handleResponse["text"]
   }
-  else if((received_message.text === "2") && (received_message.text !== currentQuestion) && (currentQuestion === "Great Title! Now for a rating, how would you rate the disabled access overall?")){
-    handleResponse = {
-      "text": `oh dear! Could you summarize why you gave ` + place + ` a rating of ` + received_message.text + `?` 
-    }
-    currentQuestion = handleResponse["text"]
-  }
+  
+
   // Send the response message
   callSendAPI(sender_psid, handleResponse);
 
