@@ -187,7 +187,13 @@ function handleMessage(sender_psid, received_message) {
 
   } else if((received_message.text === "1") && (received_message.text !== currentQuestion) && (currentQuestion === "Great Title! Now for a rating, how would you rate the disabled access overall?")){
     handleResponse = {
-      "text": `Oh Shit! ` + place + ` sounds terrible? now for an acutal review of the place` 
+      "text": `Thats's not good! Could you summarize why you gave ` + place + ` a rating of ` + received_message.text + `?`    
+    }
+    currentQuestion = handleResponse["text"]
+  }
+  else if((received_message.text === "2") && (received_message.text !== currentQuestion) && (currentQuestion === "Great Title! Now for a rating, how would you rate the disabled access overall?")){
+    handleResponse = {
+      "text": `oh dear! ` + place + ` doesn't sound great? now for an acutal review of the place` 
     }
     currentQuestion = handleResponse["text"]
   }
