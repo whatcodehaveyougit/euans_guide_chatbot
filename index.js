@@ -10,6 +10,7 @@ const
 let currentQuestion;
 let handleResponse;
 let place;
+let overallRating;
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
@@ -186,11 +187,12 @@ function handleMessage(sender_psid, received_message) {
     currentQuestion = handleResponse["text"]
 
   } else if((received_message.text === "1" || "2" || "3" || "4" || "5") && (received_message.text !== currentQuestion) && (currentQuestion === "Great Title! Now for a rating, how would you rate the disabled access overall?")){
+    overallRating = received_message.text
     handleResponse = {
-      "text": `You've given a rating of ` + received_message.text + `. Could you summarize your experience at ` + place + `?`    
+      "text": `You've given a rating of ` + overallRating + `. Could you summarize your experience at ` + place + `?`    
     }
     currentQuestion = handleResponse["text"]
-  } else if((received_message.text !== currentQuestion) && (currentQuestion === `You've given a rating of ` + received_message.text + `. Could you summarize your experience at ` + place + `?`)){
+  } else if((received_message.text !== currentQuestion) && (currentQuestion === `You've given a rating of ` + overallRating + `. Could you summarize your experience at ` + place + `?`)){
     handleResponse = {
       "text": `Thanks very much that's your review submitted! `    
     }
