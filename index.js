@@ -160,31 +160,26 @@ function handleMessage(sender_psid, received_message) {
           "content_type": "text",
           "title": "1",
           "payload": "one"
-          // "image_url": "./STAR.png"
         },
         {
           "content_type": "text",
           "title": "2",
           "payload": "two"
-          // "image_url": "./STAR.png"
         },
         {
           "content_type": "text",
           "title": "3",
           "payload": "three"
-          // "image_url": "./STAR.png"
         },
         {
           "content_type": "text",
           "title": "4",
           "payload": "four"
-          // "image_url": "./STAR.png"
         },
         {
           "content_type": "text",
           "title": "5",
           "payload": "five"
-          // "image_url": "./STAR.png"
         }
       ]
     }
