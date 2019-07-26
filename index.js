@@ -81,10 +81,6 @@ app.get('/webhook', (req, res) => {
   }
 });
 
-// function setCurrentQuestion(text){
-//    currentQuestion = text;
-// }
-
 function handleMessage(sender_psid, received_message) {
 
   if ((received_message.text !== currentQuestion) && (currentQuestion === "Can you confirm the name of the place you visited?")) {
@@ -118,7 +114,7 @@ function handleMessage(sender_psid, received_message) {
     }
     currentQuestion = handleResponse["text"]
 
-  } else if ((received_message.text === "Yes!") && (received_message.text !== currentQuestion) && (currentQuestion === `Do you have any       photos or images you'd like to upload?`)) {
+  } else if ((received_message.text === "Yes!") && (received_message.text !== currentQuestion) && (currentQuestion === `Do you have any photos or images you'd like to upload?`)) {
     handleResponse = {
       "text": "Great, send it!"
     }
@@ -152,7 +148,7 @@ function handleMessage(sender_psid, received_message) {
         }
       }
     }
-    
+
   } else if ((received_message.text !== currentQuestion) && (currentQuestion === "Great! Now, what would you like to title your review?")) {
     handleResponse = {
       "text": "Great Title! Now for a rating, how would you rate the disabled access overall?",
