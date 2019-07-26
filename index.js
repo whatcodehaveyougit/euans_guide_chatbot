@@ -35,7 +35,7 @@ app.post('/webhook', (req, res) => {
 
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
-      if ((webhook_event.message) || (webhook_event.attachments)) {
+      if ((webhook_event.message) || (webhook_event.attachment)) {
         handleMessage(sender_psid, webhook_event.message);
       } else if (webhook_event.postback) {
         handlePostback(sender_psid, webhook_event.postback);
@@ -125,7 +125,7 @@ function handleMessage(sender_psid, received_message) {
     }
     currentQuestion = handleResponse["text"]
 
-  } else if ((received_message.attachments) && (currentQuestion === "Great, send it!") && (received_message.text !== currentQuestion)) {
+  } else if ((received_message.attachment) && (currentQuestion === "Great, send it!") && (received_message.text !== currentQuestion)) {
     // Get the URL of the message attachment
     let attachment_url = received_message.attachments[0].payload.url;
     response = {
