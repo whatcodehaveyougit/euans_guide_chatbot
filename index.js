@@ -121,38 +121,38 @@ function handleMessage(sender_psid, received_message) {
   }
   else if ((received_message.text === "Yes!") && (received_message.text !== currentQuestion) && (currentQuestion === `Do you have any photos or images you'd like to upload?`)) {
     handleResponse = {
-      "text": "Great, lets do this later lol"
+      "text": "Great, send it!"
     }
     currentQuestion = handleResponse["text"]
 
-  // } else if (received_message.attachments) {
-  //   // Get the URL of the message attachment
-  //   let attachment_url = received_message.attachments[0].payload.url;
-  //   response = {
-  //     "attachment": {
-  //       "type": "template",
-  //       "payload": {
-  //         "template_type": "generic",
-  //         "elements": [{
-  //           "title": "Is this the right picture?",
-  //           "subtitle": "Tap a button to answer.",
-  //           "image_url": attachment_url,
-  //           "buttons": [
-  //             {
-  //               "type": "postback",
-  //               "title": "Yes!",
-  //               "payload": "yes",
-  //             },
-  //             {
-  //               "type": "postback",
-  //               "title": "No!",
-  //               "payload": "no",
-  //             }
-  //           ],
-  //         }]
-  //       }
-  //     }
-  //   }
+  } else if ((received_message.attachments) && (currentQuestion === "Great, send it!")) {
+    // Get the URL of the message attachment
+    let attachment_url = received_message.attachments[0].payload.url;
+    response = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": "Is this the right picture?",
+            "subtitle": "Tap a button to answer.",
+            "image_url": attachment_url,
+            "buttons": [
+              {
+                "type": "postback",
+                "title": "Yes!",
+                "payload": "yes",
+              },
+              {
+                "type": "postback",
+                "title": "No!",
+                "payload": "no",
+              }
+            ],
+          }]
+        }
+      }
+    }
   } else if ((received_message.text !== currentQuestion) && (currentQuestion === "Great! Now, what would you like to title your review?")) {
     handleResponse = {
       "text": "Great Title! Now for a rating, how would you rate the disabled access overall?",
@@ -189,16 +189,16 @@ function handleMessage(sender_psid, received_message) {
   } else if((received_message.text === "1" || "2" || "3" || "4" || "5") && (received_message.text !== currentQuestion) && (currentQuestion === "Great Title! Now for a rating, how would you rate the disabled access overall?")){
     overallRating = received_message.text
     handleResponse = {
-      "text": `You've given a rating of ` + overallRating + `. Could you summarize your experience at ` + place + `?`    
+      "text": `You've given a rating of ` + overallRating + `. Could you summarize your experience at ` + place + `?`
     }
     currentQuestion = handleResponse["text"]
   } else if((received_message.text !== currentQuestion) && (currentQuestion === `You've given a rating of ` + overallRating + `. Could you summarize your experience at ` + place + `?`)){
     handleResponse = {
-      "text": `Thanks very much that's your review submitted! `    
+      "text": `Thanks very much that's your review submitted! `
     }
     currentQuestion = handleResponse["text"]
   }
-  
+
 
   // Send the response message
   callSendAPI(sender_psid, handleResponse);
