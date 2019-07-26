@@ -192,6 +192,12 @@ function handleMessage(sender_psid, received_message) {
 
 }
 
+function handleRating(sender_psid, rating){
+  if (rating === 1){
+    console.log("a stupid message of some sort")
+  }
+}
+
 function handlePostback(sender_psid, received_postback) {
   console.log('ok')
   let response;
