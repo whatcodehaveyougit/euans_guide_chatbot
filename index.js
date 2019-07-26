@@ -184,19 +184,17 @@ function handleMessage(sender_psid, received_message) {
       ]
     }
 
-  } else if((received_message.text === "1" || "2" || "3" || "4" || "5") && (currentQuestion === "Great Title! Now for a rating, how would you rate the disabled access overall?")){
-    handleRating(sender_psid, received_message.text)
+  } else if((received_message.text === "1") && (currentQuestion === "Great Title! Now for a rating, how would you rate the disabled access overall?")){
+    handleResponse = {
+      "text": `Oh Shit! ` + place + ` sounds terrible? now for an acutal review of the place` 
+    }
+    currentQuestion = handleResponse["text"]
   }
   // Send the response message
   callSendAPI(sender_psid, handleResponse);
 
 }
 
-function handleRating(sender_psid, rating){
-  if (rating === "1"){
-    console.log("a stupid message of some sort")
-  }
-}
 
 function handlePostback(sender_psid, received_postback) {
   console.log('ok')
