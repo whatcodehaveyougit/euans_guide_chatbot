@@ -215,7 +215,7 @@ function handlePostback(sender_psid, received_postback) {
     response = { "text": "Can you confirm the name of the place you visited?" }
     currentQuestion = response["text"]
   } else if (payload === 'yes') {
-      response = {"text": "wooo"}
+      response = {"text": "Great! Would you like to send another?"}
   } else if (payload === 'no') {
     response = { "text": "Oops, try sending another image." }
   }
