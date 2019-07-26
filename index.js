@@ -184,6 +184,8 @@ function handleMessage(sender_psid, received_message) {
       ]
     }
 
+  } else if((received_message.text === 1 || 2 || 3 || 4 || 5) && (currentQuestion === "Great Title! Now for a rating, how would you rate the disabled access overall?")){
+    handleRating(sender_psid, received_message.text)
   }
   // Send the response message
   callSendAPI(sender_psid, handleResponse);
