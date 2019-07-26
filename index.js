@@ -187,7 +187,12 @@ function handleMessage(sender_psid, received_message) {
 
   } else if((received_message.text === "1" || "2" || "3" || "4" || "5") && (received_message.text !== currentQuestion) && (currentQuestion === "Great Title! Now for a rating, how would you rate the disabled access overall?")){
     handleResponse = {
-      "text": `You've given a rating of ` + received_message.text + `. Could you summarize you're experience at ` + place + `?`    
+      "text": `You've given a rating of ` + received_message.text + `. Could you summarize your experience at ` + place + `?`    
+    }
+    currentQuestion = handleResponse["text"]
+  } else if((received_message.text !== currentQuestion) && (currentQuestion === `You've given a rating of ` + received_message.text + `. Could you summarize your experience at ` + place + `?`)){
+    handleResponse = {
+      "text": `Thanks very much that's your review submitted! `    
     }
     currentQuestion = handleResponse["text"]
   }
