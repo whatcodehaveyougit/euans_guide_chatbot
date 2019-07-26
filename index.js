@@ -118,8 +118,7 @@ function handleMessage(sender_psid, received_message) {
     }
     currentQuestion = handleResponse["text"]
 
-  }
-  else if ((received_message.text === "Yes!") && (received_message.text !== currentQuestion) && (currentQuestion === `Do you have any photos or images you'd like to upload?`)) {
+  } else if ((received_message.text === "Yes!") && (received_message.text !== currentQuestion) && (currentQuestion === `Do you have any       photos or images you'd like to upload?`)) {
     handleResponse = {
       "text": "Great, send it!"
     }
@@ -153,6 +152,7 @@ function handleMessage(sender_psid, received_message) {
         }
       }
     }
+    
   } else if ((received_message.text !== currentQuestion) && (currentQuestion === "Great! Now, what would you like to title your review?")) {
     handleResponse = {
       "text": "Great Title! Now for a rating, how would you rate the disabled access overall?",
@@ -192,6 +192,7 @@ function handleMessage(sender_psid, received_message) {
       "text": `You've given a rating of ` + overallRating + `. Could you summarize your experience at ` + place + `?`
     }
     currentQuestion = handleResponse["text"]
+
   } else if((received_message.text !== currentQuestion) && (currentQuestion === `You've given a rating of ` + overallRating + `. Could you summarize your experience at ` + place + `?`)){
     handleResponse = {
       "text": `Thanks very much that's your review submitted! `
