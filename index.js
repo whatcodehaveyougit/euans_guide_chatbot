@@ -108,7 +108,7 @@ function handleMessage(sender_psid, received_message) {
     }
     currentQuestion = handleResponse["text"]
 
-  } else if ((received_message.text === "No!") && (received_message.text !== currentQuestion) && (currentQuestion === (`Do you have any photos or images you'd like to upload?` || `Do you have any more photos or images you'd like to upload?`))) {
+  } else if ((received_message.text === "No!") && (received_message.text !== currentQuestion) && ((currentQuestion === `Do you have any photos or images you'd like to upload?`) || ( currentQuestion === `Do you have any more photos or images you'd like to upload?`))) {
     handleResponse = {
       "text": "Great! Now, what would you like to title your review?"
     }
@@ -214,7 +214,7 @@ function handlePostback(sender_psid, received_postback) {
   if (payload === 'GET_STARTED') {
     response = { "text": "Can you confirm the name of the place you visited?" }
     currentQuestion = response["text"]
-    
+
   } else if (payload === 'yes') {
       response = {
         "text": `Do you have any more photos or images you'd like to upload?`,
