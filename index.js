@@ -184,7 +184,7 @@ function handleMessage(sender_psid, received_message) {
       ]
     }
 
-  } else if((received_message.text === 1 || 2 || 3 || 4 || 5) && (currentQuestion === "Great Title! Now for a rating, how would you rate the disabled access overall?")){
+  } else if((received_message.text === "1" || "2" || "3" || "4" || "5") && (currentQuestion === "Great Title! Now for a rating, how would you rate the disabled access overall?")){
     handleRating(sender_psid, received_message.text)
   }
   // Send the response message
@@ -193,7 +193,7 @@ function handleMessage(sender_psid, received_message) {
 }
 
 function handleRating(sender_psid, rating){
-  if (rating === 1){
+  if (rating === "1"){
     console.log("a stupid message of some sort")
   }
 }
