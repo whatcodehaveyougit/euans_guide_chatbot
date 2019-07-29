@@ -1,8 +1,8 @@
-var place = require('./index')
+import {place} from ('./index')
 
 let questionData = [
     "Can you confirm the name of the place you visited?",
-    `Ok, great! Can you confirm which town or city ` + Object.values(place)[0] + ` is in?`
+    `Ok, great! Can you confirm which town or city ` + place + ` is in?`
 
 ]
 
