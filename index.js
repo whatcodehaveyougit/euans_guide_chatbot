@@ -59,7 +59,10 @@ function questions(questionNumber, place, overallRating) {
       `?`,
     `We'll start with Getting There. Would you like to add any information on parking or transport?`,
     `Ok, great! Let's start with a rating, again out of 5.`,
-    `Awesome! Could you give us some more information?`
+    `Awesome! Could you give us some more information?`,
+    `Thank You! Now onto getting in and around ` +
+      place +
+      `. Is there anything specific about Disabled Access you would like to add?`
   ];
   return questionsArray[questionNumber];
 }
@@ -285,14 +288,10 @@ function handleMessage(sender_psid, received_message) {
     (received_message.text || received_message.text === "Skip") &&
     received_message.text !== currentQuestion &&
     (currentQuestion === questions(10, place, overallRating) ||
-      currentQuestion ===
-        `We'll start with Getting There. Would you like to add any information on parking or transport?`)
+      currentQuestion === questions(8, place, overallRating))
   ) {
     handleResponse = {
-      text:
-        `Thank You! Now onto getting in and around ` +
-        place +
-        `. Is there anything specific about Disabled Access you would like to add?`,
+      text: questions(11, place, overallRating),
       quick_replies: [
         {
           content_type: "text",
@@ -310,10 +309,7 @@ function handleMessage(sender_psid, received_message) {
   } else if (
     received_message.text === "Yes" &&
     received_message.text !== currentQuestion &&
-    currentQuestion ===
-      `Thank You! Now onto getting in and around ` +
-        place +
-        `. Is there anything specific about Disabled Access you would like to add?`
+    currentQuestion === questions(11, place, overallRating)
   ) {
     handleResponse = {
       text: `Ok, great! Let's start with a rating, again out of 5 for getting in and around.`,
