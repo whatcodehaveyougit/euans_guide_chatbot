@@ -249,7 +249,30 @@ function handleMessage(sender_psid, received_message) {
           }
        ]
      }
-  }
+     currentQuestion = handleResponse["text"]
+  } else if((received_message.text === "1" || "2" || "3" || "4" || "5") && (received_message.text !== currentQuestion) && (currentQuestion === `Ok, great! Let's start with a rating, again out of 5.`)){
+    handleResponse = {
+      "text": `Awesome! Could you give us some more information?`
+    }
+    currentQuestion = handleResponse["text"]
+  } else if ((received_message.text || (received_message.text === "Skip to next question")) && (received_message.text !== currentQuestion) && ((currentQuestion === `Awesome! Could you give us some more information?`) || (currentQuestion === `We'll start with Getting There. Would you like to add any information on parking or transport?`))){
+     handleResponse = {
+       "text": `Thank You! Now onto getting in and around ` + place + `. Is there anything specific about Disabled Access you would like to add?`,
+       "quick_replies": [
+        {
+          "content_type": "text",
+          "title": "Yes",
+          "payload": "yes_disabled_access"
+        },
+        {
+          "content_type": "text",
+          "title": "Skip to next question",
+          "payload": "skip_disabled_access"
+        }
+       ]
+     }
+    currentQuestion = handleResponse["text"]
+  } 
 
 
   // Send the response message
