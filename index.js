@@ -205,7 +205,7 @@ function handleMessage(sender_psid, received_message) {
       ]
     }
     currentQuestion = handleResponse["text"]
-  } else if ((currentQuestion === `Thank you very much your review is nearly complete! 
+  } else if ((received_message.text === "Continue") && (received_message.text !== currentQuestion) && (currentQuestion === `Thank you very much your review is nearly complete! 
 
   Some of our users do like to know some additional information before they visit.
 
