@@ -62,7 +62,11 @@ function questions(questionNumber, place, overallRating) {
     `Awesome! Could you give us some more information?`,
     `Thank You! Now onto getting in and around ` +
       place +
-      `. Is there anything specific about Disabled Access you would like to add?`
+      `. Is there anything specific about Disabled Access you would like to add?`,
+    `Ok, great! Let's start with a rating, again out of 5 for getting in and around.`,
+    `Great! Could you give us some more information on what you noticed about ` +
+      place +
+      `?`
   ];
   return questionsArray[questionNumber];
 }
@@ -312,30 +316,23 @@ function handleMessage(sender_psid, received_message) {
     currentQuestion === questions(11, place, overallRating)
   ) {
     handleResponse = {
-      text: `Ok, great! Let's start with a rating, again out of 5 for getting in and around.`,
+      text: questions(12, place, overallRating),
       quick_replies: ratings
     };
     currentQuestion = handleResponse["text"];
   } else if (
     (received_message.text === "1" || "2" || "3" || "4" || "5") &&
     received_message.text !== currentQuestion &&
-    currentQuestion ===
-      `Ok, great! Let's start with a rating, again out of 5 for getting in and around.`
+    currentQuestion === questions(12, place, overallRating)
   ) {
     handleResponse = {
-      text:
-        `Great! Could you give us some more information on what you noticed about ` +
-        place +
-        `?`
+      text: questions(13, place, overallRating)
     };
     currentQuestion = handleResponse["text"];
   } else if (
     (received_message.text || received_message.text === "Skip") &&
     received_message.text !== currentQuestion &&
-    (currentQuestion ===
-      `Great! Could you give us some more information on what you noticed about ` +
-        place +
-        `?` ||
+    (currentQuestion === questions(13, place, overallRating) ||
       currentQuestion ===
         `Thank You! Now onto getting in and around ` +
           place +
