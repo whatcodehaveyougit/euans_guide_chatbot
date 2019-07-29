@@ -551,10 +551,9 @@ function handleMessage(sender_psid, received_message) {
       text: `Thank you for your review - it's great. We'll send you a message when it has gone live! :)`
     };
     currentQuestion = handleResponse["text"];
-
-    // Send the response message
-    callSendAPI(sender_psid, handleResponse);
   }
+  // Send the response message
+  callSendAPI(sender_psid, handleResponse);
 }
 
 function handlePostback(sender_psid, received_postback) {
