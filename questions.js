@@ -1,5 +1,5 @@
 var place = require('./index')
-console.log(place)
+console.log("hello", place)
 
 let questionData = [
     "Can you confirm the name of the place you visited?",
