@@ -528,9 +528,10 @@ function handleMessage(sender_psid, received_message) {
   } else if (
     (received_message.text === "1" || "2" || "3" || "4" || "5") &&
     received_message.text !== currentQuestion &&
-    currentQuestion === {
-      text: `Ok, wonderful! Let's start with a rating, again out of 5 for staff.`
-    }
+    currentQuestion ===
+      {
+        text: `Ok, wonderful! Let's start with a rating, again out of 5 for staff.`
+      }
   ) {
     handleResponse = {
       text: `Would you be able to provide some more details about the staff?`
@@ -544,16 +545,16 @@ function handleMessage(sender_psid, received_message) {
         place +
         `?` ||
       currentQuestion ===
-      `Would you be able to provide some more details about the staff?`)
+        `Would you be able to provide some more details about the staff?`)
   ) {
     handleResponse = {
-      text:
-        `Thank you for your review - it's great. We'll send you a message when it has gone live! :)`
+      text: `Thank you for your review - it's great. We'll send you a message when it has gone live! :)`
     };
     currentQuestion = handleResponse["text"];
 
-  // Send the response message
-  callSendAPI(sender_psid, handleResponse);
+    // Send the response message
+    callSendAPI(sender_psid, handleResponse);
+  }
 }
 
 function handlePostback(sender_psid, received_postback) {
