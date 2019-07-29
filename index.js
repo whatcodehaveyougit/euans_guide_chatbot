@@ -620,8 +620,9 @@ function callSendAPI(sender_psid, response) {
   );
 }
 
-
-module.exports = place;
+module.exports = {
+  "place": place
+}
 // curl -X POST -H "Content-Type: application/json" -d '{
 //   "get_started": {"payload": "GET_STARTED"}
 // }' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAEZBxZBsDMYYBAJPLwYYBncuKhIZCnAVq9GrZAhkD9EwKbISZBS30D2xmmqMqKzMnFx6UE80KFFmnZAkWuy832RoWAOLCHJnivAjcggKZAO3JYmjg9Va4nng6mi0Coz8ZCyW0W8qWN4DrCFtgrjB1PxjdZC0nURiBnZBFcOcfwDOeJBvZAsqzEMFbFBWiE7MAuVP0ZD"
