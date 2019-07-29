@@ -192,9 +192,10 @@ function handleMessage(sender_psid, received_message) {
   } else if((received_message.text !== currentQuestion) && (currentQuestion === `You've given a rating of ` + overallRating + `. Could you summarize your experience at ` + place + `?`)){
     handleResponse = {
       "text": `Thank you very much your review is nearly complete! 
+
       Some of our users do like to know some additional information before they visit.
-      These are all optional questions so if you don't have anything else to add then no problem! 
-      We'll start eith Getting There. Would you like to add any information on parking or transport?`,
+
+      These are all optional questions so if you don't have anything else to add then no problem!`,
       "quick_replies": [
         {
           "content_type": "text",
@@ -209,7 +210,47 @@ function handleMessage(sender_psid, received_message) {
       ]
     }
     currentQuestion = handleResponse["text"]
-  } 
+  } else if ((currentQuestion === `Thank you very much your review is nearly complete! 
+
+  Some of our users do like to know some additional information before they visit.
+
+  These are all optional questions so if you don't have anything else to add then no problem!`)){
+    handleResponse = {
+      "text": `We'll start with Getting There. Would you like to add any information on parking or transport?`
+    }
+    currentQuestion = handleResponse["text"]
+  } else if ((received_message.text === "Yes") && (received_message.text !== currentQuestion) && (currentQuestion === `We'll start with Getting There. Would you like to add any information on parking or transport?`)){
+     handleResponse = {
+       "text": `Ok, great! Let's start with a rating, again out of 5.`,
+       "quick_replies": [
+          {
+            "content_type": "text",
+            "title": "1",
+            "payload": "one"
+          },
+          {
+            "content_type": "text",
+            "title": "2",
+            "payload": "two"
+          },
+          {
+            "content_type": "text",
+            "title": "3",
+            "payload": "three"
+          },
+          {
+            "content_type": "text",
+            "title": "4",
+            "payload": "four"
+          },
+          {
+            "content_type": "text",
+            "title": "5",
+            "payload": "five"
+          }
+       ]
+     }
+  }
 
 
   // Send the response message
