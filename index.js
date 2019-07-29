@@ -11,7 +11,7 @@ const request = require("request"),
 
 let currentQuestion;
 let handleResponse;
-let place = ["code"]
+let place;
 let overallRating;
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log("webhook is listening"));
