@@ -163,7 +163,7 @@ function handleMessage(sender_psid, received_message) {
       currentQuestion === questions(3, place, overallRating))
   ) {
     handleResponse = {
-      text: questions(4, place, overallRating)
+      text: questions(5, place, overallRating)
     };
     currentQuestion = handleResponse["text"];
   } else if (
