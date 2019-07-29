@@ -43,6 +43,11 @@ const ratings = [
   }
 ];
 
+const questionsArray = [
+  "Can you confirm the name of the place you visited?",
+  `Ok, great! Can you confirm which town or city ` + place + ` is in?`
+];
+
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log("webhook is listening"));
 
@@ -103,11 +108,6 @@ app.get("/webhook", (req, res) => {
 });
 
 function handleMessage(sender_psid, received_message) {
-  const questionsArray = [
-    "Can you confirm the name of the place you visited?",
-    `Ok, great! Can you confirm which town or city ` + place + ` is in?`
-  ];
-
   if (
     received_message.text !== currentQuestion &&
     currentQuestion === questionsArray[0]
