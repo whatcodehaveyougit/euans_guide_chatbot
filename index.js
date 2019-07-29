@@ -529,9 +529,7 @@ function handleMessage(sender_psid, received_message) {
     (received_message.text === "1" || "2" || "3" || "4" || "5") &&
     received_message.text !== currentQuestion &&
     currentQuestion ===
-      {
-        text: `Ok, wonderful! Let's start with a rating, again out of 5 for staff.`
-      }
+      `Ok, wonderful! Let's start with a rating, again out of 5 for staff.`
   ) {
     handleResponse = {
       text: `Would you be able to provide some more details about the staff?`
