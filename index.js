@@ -191,11 +191,7 @@ function handleMessage(sender_psid, received_message) {
 
   } else if((received_message.text !== currentQuestion) && (currentQuestion === `You've given a rating of ` + overallRating + `. Could you summarize your experience at ` + place + `?`)){
     handleResponse = {
-      "text": `Thank you very much your review is nearly complete! 
-
-      Some of our users do like to know some additional information before they visit.
-
-      These are all optional questions so if you don't have anything else to add then no problem!`,
+      "text": `Thank you very much your review is nearly complete!`,
       "quick_replies": [
         {
           "content_type": "text",
@@ -205,11 +201,7 @@ function handleMessage(sender_psid, received_message) {
       ]
     }
     currentQuestion = handleResponse["text"]
-  } else if ((received_message.text === "Continue") && (received_message.text !== currentQuestion) && (currentQuestion === `Thank you very much your review is nearly complete! 
-
-  Some of our users do like to know some additional information before they visit.
-
-  These are all optional questions so if you don't have anything else to add then no problem!`)){
+  } else if ((received_message.text === "Continue") && (received_message.text !== currentQuestion) && (currentQuestion === `Thank you very much your review is nearly complete!`)){
     handleResponse = {
       "text": `We'll start with Getting There. Would you like to add any information on parking or transport?`,
       "quick_replies": [
