@@ -75,17 +75,17 @@ app.get("/webhook", (req, res) => {
 function handleMessage(sender_psid, received_message) {
   if (
     received_message.text !== currentQuestion &&
-    currentQuestion === "Can you confirm the name of the place you visited?"
+    currentQuestion === questionData[0]
   ) {
     place = received_message.text;
     handleResponse = {
-      text: questionData[0]
+      text: questionData[1]
     };
     currentQuestion = handleResponse["text"];
   } else if (
     received_message.text !== currentQuestion &&
     currentQuestion ===
-      questionData[0]
+      questionData[1]
   ) {
     handleResponse = {
       text: `Do you have any photos or images you'd like to upload?`,
@@ -566,7 +566,7 @@ function handlePostback(sender_psid, received_postback) {
   // Set the response based on the postback payload
 
   if (payload === "GET_STARTED") {
-    response = { text: "Can you confirm the name of the place you visited?" };
+    response = { text: questionData[0] };
     currentQuestion = response["text"];
   } else if (payload === "yes") {
     response = {
