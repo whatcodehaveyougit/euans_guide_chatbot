@@ -195,7 +195,16 @@ function handleMessage(sender_psid, received_message) {
 
       Some of our users do like to know some additional information before they visit.
 
-      These are all optional questions so if you don't have anything else to add then no problem!`,
+      These are all optional questions so if you don't have anything else to add then no problem!`
+    }
+    currentQuestion = handleResponse["text"]
+  } else if ((currentQuestion === `Thank you very much your review is nearly complete! 
+
+  Some of our users do like to know some additional information before they visit.
+
+  These are all optional questions so if you don't have anything else to add then no problem!`)){
+    handleResponse = {
+      "text": `We'll start with Getting There. Would you like to add any information on parking or transport?`,
       "quick_replies": [
         {
           "content_type": "text",
@@ -208,15 +217,6 @@ function handleMessage(sender_psid, received_message) {
           "payload": "skip_get_there"
         }
       ]
-    }
-    currentQuestion = handleResponse["text"]
-  } else if ((currentQuestion === `Thank you very much your review is nearly complete! 
-
-  Some of our users do like to know some additional information before they visit.
-
-  These are all optional questions so if you don't have anything else to add then no problem!`)){
-    handleResponse = {
-      "text": `We'll start with Getting There. Would you like to add any information on parking or transport?`
     }
     currentQuestion = handleResponse["text"]
   } else if ((received_message.text === "Yes") && (received_message.text !== currentQuestion) && (currentQuestion === `We'll start with Getting There. Would you like to add any information on parking or transport?`)){
