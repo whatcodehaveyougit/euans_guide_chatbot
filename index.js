@@ -460,10 +460,11 @@ function handleMessage(sender_psid, received_message) {
   } else if (
     (received_message.text || received_message.text === "Skip") &&
     received_message.text !== currentQuestion &&
-    currentQuestion ===
-      (`Now, onto toilets. Our users consistently tell us how important both accessible toilets and information about toilets is. Are you able to tell us anything about the toilets at ` +
+    (currentQuestion ===
+      `Now, onto toilets. Our users consistently tell us how important both accessible toilets and information about toilets is. Are you able to tell us anything about the toilets at ` +
         place +
         `?` ||
+      currentQuestion ===
         `Would you be able to provide some more details about the toilets?`)
   ) {
     handleResponse = {
