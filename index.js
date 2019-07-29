@@ -417,7 +417,7 @@ function handleMessage(sender_psid, received_message) {
         `?`
   ) {
     handleResponse = {
-      text: `Ok, great! Let's start with a rating, again out of 5 for getting in and around.`,
+      text: `Ok, great! Let's start with a rating, again out of 5 for toilet accessiblity.`,
       quick_replies: [
         {
           content_type: "text",
@@ -445,6 +445,16 @@ function handleMessage(sender_psid, received_message) {
           payload: "five"
         }
       ]
+    };
+    currentQuestion = handleResponse["text"];
+  } else if (
+    (received_message.text === "1" || "2" || "3" || "4" || "5") &&
+    received_message.text !== currentQuestion &&
+    currentQuestion ===
+      `Ok, great! Let's start with a rating, again out of 5 for toilet accessiblity.`
+  ) {
+    handleResponse = {
+      text: `Would you be able to provide some more details about the toilets?`
     };
     currentQuestion = handleResponse["text"];
   }
