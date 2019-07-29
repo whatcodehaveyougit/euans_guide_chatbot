@@ -457,6 +457,33 @@ function handleMessage(sender_psid, received_message) {
       text: `Would you be able to provide some more details about the toilets?`
     };
     currentQuestion = handleResponse["text"];
+  } else if (
+    (received_message.text || received_message.text === "Skip") &&
+    received_message.text !== currentQuestion &&
+    currentQuestion ===
+      `Now, onto toilets. Our users consistently tell us how important both accessible toilets and information about toilets is. Are you able to tell us anything about the toilets at ` +
+        place +
+        `?`
+  ) {
+    handleResponse = {
+      text:
+        `Now we come onto staff. Would you like to add any further information about the people you came across at ` +
+        place +
+        `?`,
+      quick_replies: [
+        {
+          content_type: "text",
+          title: "Yes",
+          payload: "yes_disabled_access"
+        },
+        {
+          content_type: "text",
+          title: "Skip",
+          payload: "skip_disabled_access"
+        }
+      ]
+    };
+    currentQuestion = handleResponse["text"];
   }
 
   // Send the response message
