@@ -469,7 +469,7 @@ function handleMessage(sender_psid, received_message) {
   ) {
     handleResponse = {
       text:
-        `Now we come onto staff. Would you like to add any further information about the people you came across at ` +
+        `Now we come to staff. Would you like to add any further information about the people you came across at ` +
         place +
         `?`,
       quick_replies: [
@@ -486,7 +486,71 @@ function handleMessage(sender_psid, received_message) {
       ]
     };
     currentQuestion = handleResponse["text"];
-  }
+  } else if (
+    received_message.text === "Yes" &&
+    received_message.text !== currentQuestion &&
+    currentQuestion ===
+      `Now we come to staff. Would you like to add any further information about the people you came across at ` +
+        place +
+        `?`
+  ) {
+    handleResponse = {
+      text: `Ok, wonderful! Let's start with a rating, again out of 5 for staff.`,
+      quick_replies: [
+        {
+          content_type: "text",
+          title: "1",
+          payload: "one"
+        },
+        {
+          content_type: "text",
+          title: "2",
+          payload: "two"
+        },
+        {
+          content_type: "text",
+          title: "3",
+          payload: "three"
+        },
+        {
+          content_type: "text",
+          title: "4",
+          payload: "four"
+        },
+        {
+          content_type: "text",
+          title: "5",
+          payload: "five"
+        }
+      ]
+    };
+    currentQuestion = handleResponse["text"];
+  } else if (
+    (received_message.text === "1" || "2" || "3" || "4" || "5") &&
+    received_message.text !== currentQuestion &&
+    currentQuestion === {
+      text: `Ok, wonderful! Let's start with a rating, again out of 5 for staff.`
+    }
+  ) {
+    handleResponse = {
+      text: `Would you be able to provide some more details about the staff?`
+    };
+    currentQuestion = handleResponse["text"];
+  } else if (
+    (received_message.text || received_message.text === "Skip") &&
+    received_message.text !== currentQuestion &&
+    (currentQuestion ===
+      `Now we come to staff. Would you like to add any further information about the people you came across at ` +
+        place +
+        `?` ||
+      currentQuestion ===
+      `Would you be able to provide some more details about the staff?`)
+  ) {
+    handleResponse = {
+      text:
+        `Thank you for your review - it's great. We'll send you a message when it has gone live! :)`
+    };
+    currentQuestion = handleResponse["text"];
 
   // Send the response message
   callSendAPI(sender_psid, handleResponse);
