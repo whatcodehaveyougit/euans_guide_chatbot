@@ -408,6 +408,45 @@ function handleMessage(sender_psid, received_message) {
       };
       currentQuestion = handleResponse["text"];
     }
+  } else if (
+    received_message.text === "Yes" &&
+    received_message.text !== currentQuestion &&
+    currentQuestion ===
+      `Now, onto toilets. Our users consistently tell us how important both accessible toilets and information about toilets is. Are you able to tell us anything about the toilets at ` +
+        place +
+        `?`
+  ) {
+    handleResponse = {
+      text: `Ok, great! Let's start with a rating, again out of 5 for getting in and around.`,
+      quick_replies: [
+        {
+          content_type: "text",
+          title: "1",
+          payload: "one"
+        },
+        {
+          content_type: "text",
+          title: "2",
+          payload: "two"
+        },
+        {
+          content_type: "text",
+          title: "3",
+          payload: "three"
+        },
+        {
+          content_type: "text",
+          title: "4",
+          payload: "four"
+        },
+        {
+          content_type: "text",
+          title: "5",
+          payload: "five"
+        }
+      ]
+    };
+    currentQuestion = handleResponse["text"];
   }
 
   // Send the response message
