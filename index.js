@@ -43,11 +43,6 @@ const ratings = [
   }
 ];
 
-const questionsArray = [
-  "Can you confirm the name of the place you visited?",
-  `Ok, great! Can you confirm which town or city ` + place + ` is in?`
-];
-
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log("webhook is listening"));
 
@@ -457,10 +452,14 @@ function handleMessage(sender_psid, received_message) {
     };
     currentQuestion = handleResponse["text"];
   }
+
+  const questionsArray = [
+    "Can you confirm the name of the place you visited?",
+    `Ok, great! Can you confirm which town or city ` + place + ` is in?`
+  ];
   // Send the response message
   callSendAPI(sender_psid, handleResponse);
 }
-
 function handlePostback(sender_psid, received_postback) {
   console.log("ok");
   let response;
