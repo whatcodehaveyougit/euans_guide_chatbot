@@ -49,8 +49,17 @@ function questions(questionNumber, place, overallRating) {
     `Ok, great! Can you confirm which town or city ` + place + ` is in?`,
     `Do you have any photos or images you'd like to upload?`,
     `Do you have any more photos or images you'd like to upload?`,
+    "Great, send it!",
     "Great! Now, what would you like to title your review?",
-    "Great Title! Now for a rating, how would you rate the disabled access overall?"
+    "Great Title! Now for a rating, how would you rate the disabled access overall?",
+    `You've given a rating of ` +
+      overallRating +
+      `. Could you summarize your experience at ` +
+      place +
+      `?`,
+    `We'll start with Getting There. Would you like to add any information on parking or transport?`,
+    `Ok, great! Let's start with a rating, again out of 5.`,
+    `Awesome! Could you give us some more information?`
   ];
   return questionsArray[questionNumber];
 }
@@ -161,12 +170,12 @@ function handleMessage(sender_psid, received_message) {
       currentQuestion === questions(3, place, overallRating))
   ) {
     handleResponse = {
-      text: "Great, send it!"
+      text: questions(4, place, overallRating)
     };
     currentQuestion = handleResponse["text"];
   } else if (
     received_message.attachments &&
-    currentQuestion === "Great, send it!" &&
+    currentQuestion === questions(4, place, overallRating) &&
     received_message.text !== currentQuestion
   ) {
     // Get the URL of the message attachment
@@ -200,36 +209,26 @@ function handleMessage(sender_psid, received_message) {
     };
   } else if (
     received_message.text !== currentQuestion &&
-    currentQuestion === questions(4, place, overallRating)
+    currentQuestion === questions(5, place, overallRating)
   ) {
     handleResponse = {
-      text: questions(5, place, overallRating),
+      text: questions(6, place, overallRating),
       quick_replies: ratings
     };
     currentQuestion = handleResponse["text"];
   } else if (
     (received_message.text === "1" || "2" || "3" || "4" || "5") &&
     received_message.text !== currentQuestion &&
-    currentQuestion === questions(5, place, overallRating)
+    currentQuestion === questions(6, place, overallRating)
   ) {
     overallRating = received_message.text;
     handleResponse = {
-      text:
-        `You've given a rating of ` +
-        overallRating +
-        `. Could you summarize your experience at ` +
-        place +
-        `?`
+      text: questions(7, place, overallRating)
     };
     currentQuestion = handleResponse["text"];
   } else if (
     received_message.text !== currentQuestion &&
-    currentQuestion ===
-      `You've given a rating of ` +
-        overallRating +
-        `. Could you summarize your experience at ` +
-        place +
-        `?`
+    currentQuestion === questions(7, place, overallRating)
   ) {
     handleResponse = {
       text: `Thank you very much your review is nearly complete!`,
@@ -248,7 +247,7 @@ function handleMessage(sender_psid, received_message) {
     currentQuestion === `Thank you very much your review is nearly complete!`
   ) {
     handleResponse = {
-      text: `We'll start with Getting There. Would you like to add any information on parking or transport?`,
+      text: questions(8, place, overallRating),
       quick_replies: [
         {
           content_type: "text",
@@ -266,27 +265,26 @@ function handleMessage(sender_psid, received_message) {
   } else if (
     received_message.text === "Yes" &&
     received_message.text !== currentQuestion &&
-    currentQuestion ===
-      `We'll start with Getting There. Would you like to add any information on parking or transport?`
+    currentQuestion === questions(8, place, overallRating)
   ) {
     handleResponse = {
-      text: `Ok, great! Let's start with a rating, again out of 5.`,
+      text: questions(9, place, overallRating),
       quick_replies: ratings
     };
     currentQuestion = handleResponse["text"];
   } else if (
     (received_message.text === "1" || "2" || "3" || "4" || "5") &&
     received_message.text !== currentQuestion &&
-    currentQuestion === `Ok, great! Let's start with a rating, again out of 5.`
+    currentQuestion === questions(9, place, overallRating)
   ) {
     handleResponse = {
-      text: `Awesome! Could you give us some more information?`
+      text: questions(10, place, overallRating)
     };
     currentQuestion = handleResponse["text"];
   } else if (
     (received_message.text || received_message.text === "Skip") &&
     received_message.text !== currentQuestion &&
-    (currentQuestion === `Awesome! Could you give us some more information?` ||
+    (currentQuestion === questions(10, place, overallRating) ||
       currentQuestion ===
         `We'll start with Getting There. Would you like to add any information on parking or transport?`)
   ) {
