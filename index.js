@@ -1,4 +1,7 @@
 "use strict";
+
+var questionData = require('./questions');
+
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 // Imports dependencies and set up http server
 const request = require("request"),
@@ -76,13 +79,13 @@ function handleMessage(sender_psid, received_message) {
   ) {
     place = received_message.text;
     handleResponse = {
-      text: `Ok, great! Can you confirm which town or city ` + place + ` is in?`
+      text: questionData[0]
     };
     currentQuestion = handleResponse["text"];
   } else if (
     received_message.text !== currentQuestion &&
     currentQuestion ===
-      `Ok, great! Can you confirm which town or city ` + place + ` is in?`
+      questionData[0]
   ) {
     handleResponse = {
       text: `Do you have any photos or images you'd like to upload?`,
