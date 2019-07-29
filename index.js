@@ -1,7 +1,7 @@
 "use strict";
 
-var questionData = require('./questions');
-console.log("QUESTIONS", questionData)
+var questionData = require("./questions");
+console.log("QUESTIONS", questionData);
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 // Imports dependencies and set up http server
@@ -41,6 +41,11 @@ const ratings = [
     title: "5",
     payload: "five"
   }
+];
+
+const questionsArray = [
+  "Can you confirm the name of the place you visited?",
+  `Ok, great! Can you confirm which town or city ` + place + ` is in?`
 ];
 
 // Sets server port and logs message on success
@@ -105,17 +110,16 @@ app.get("/webhook", (req, res) => {
 function handleMessage(sender_psid, received_message) {
   if (
     received_message.text !== currentQuestion &&
-    currentQuestion === questionData[0]
+    currentQuestion === questionsArray[0]
   ) {
     place = received_message.text;
     handleResponse = {
-      text: questionData[1]
+      text: questionsArray[1]
     };
     currentQuestion = handleResponse["text"];
   } else if (
     received_message.text !== currentQuestion &&
-    currentQuestion ===
-      questionData[1]
+    currentQuestion === questionsArray[1]
   ) {
     handleResponse = {
       text: `Do you have any photos or images you'd like to upload?`,
@@ -520,7 +524,7 @@ function callSendAPI(sender_psid, response) {
   );
 }
 
-module.exports = place
+module.exports = place;
 // curl -X POST -H "Content-Type: application/json" -d '{
 //   "get_started": {"payload": "GET_STARTED"}
 // }' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAEZBxZBsDMYYBAJPLwYYBncuKhIZCnAVq9GrZAhkD9EwKbISZBS30D2xmmqMqKzMnFx6UE80KFFmnZAkWuy832RoWAOLCHJnivAjcggKZAO3JYmjg9Va4nng6mi0Coz8ZCyW0W8qWN4DrCFtgrjB1PxjdZC0nURiBnZBFcOcfwDOeJBvZAsqzEMFbFBWiE7MAuVP0ZD"
