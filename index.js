@@ -77,7 +77,7 @@ function handleMessage(sender_psid, received_message) {
     received_message.text !== currentQuestion &&
     currentQuestion === questionData[0]
   ) {
-    place.push(received_message.text);
+    place = received_message.text;
     handleResponse = {
       text: questionData[1]
     };
