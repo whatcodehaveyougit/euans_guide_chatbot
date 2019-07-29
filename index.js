@@ -66,7 +66,17 @@ function questions(questionNumber, place, overallRating) {
     `Ok, great! Let's start with a rating, again out of 5 for getting in and around.`,
     `Great! Could you give us some more information on what you noticed about ` +
       place +
-      `?`
+      `?`,
+    `Now, onto toilets. Our users consistently tell us how important both accessible toilets and information about toilets is. Are you able to tell us anything about the toilets at ` +
+      place +
+      `?`,
+    `Ok, great! Let's start with a rating, again out of 5 for toilet accessiblity.`,
+    `Would you be able to provide some more details about the toilets?`,
+    `Now we come to staff. Would you like to add any further information about the people you came across at ` +
+      place +
+      `?`,
+    `Ok, great! Let's start with a rating, again out of 5 for staff.`,
+    `Would you be able to provide some more details about the staff?`
   ];
   return questionsArray[questionNumber];
 }
@@ -333,17 +343,11 @@ function handleMessage(sender_psid, received_message) {
     (received_message.text || received_message.text === "Skip") &&
     received_message.text !== currentQuestion &&
     (currentQuestion === questions(13, place, overallRating) ||
-      currentQuestion ===
-        `Thank You! Now onto getting in and around ` +
-          place +
-          `. Is there anything specific about Disabled Access you would like to add?`)
+      currentQuestion === questions(11, place, overallRating))
   ) {
     {
       handleResponse = {
-        text:
-          `Now, onto toilets. Our users consistently tell us how important both accessible toilets and information about toilets is. Are you able to tell us anything about the toilets at ` +
-          place +
-          `?`,
+        text: questions(14, place, overallRating),
         quick_replies: [
           {
             content_type: "text",
@@ -362,41 +366,30 @@ function handleMessage(sender_psid, received_message) {
   } else if (
     received_message.text === "Yes" &&
     received_message.text !== currentQuestion &&
-    currentQuestion ===
-      `Now, onto toilets. Our users consistently tell us how important both accessible toilets and information about toilets is. Are you able to tell us anything about the toilets at ` +
-        place +
-        `?`
+    currentQuestion === questions(14, place, overallRating)
   ) {
     handleResponse = {
-      text: `Ok, great! Let's start with a rating, again out of 5 for toilet accessiblity.`,
+      text: questions(15, place, overallRating),
       quick_replies: ratings
     };
     currentQuestion = handleResponse["text"];
   } else if (
     (received_message.text === "1" || "2" || "3" || "4" || "5") &&
     received_message.text !== currentQuestion &&
-    currentQuestion ===
-      `Ok, great! Let's start with a rating, again out of 5 for toilet accessiblity.`
+    currentQuestion === questions(15, place, overallRating)
   ) {
     handleResponse = {
-      text: `Would you be able to provide some more details about the toilets?`
+      text: questions(16, place, overallRating)
     };
     currentQuestion = handleResponse["text"];
   } else if (
     (received_message.text || received_message.text === "Skip") &&
     received_message.text !== currentQuestion &&
-    (currentQuestion ===
-      `Now, onto toilets. Our users consistently tell us how important both accessible toilets and information about toilets is. Are you able to tell us anything about the toilets at ` +
-        place +
-        `?` ||
-      currentQuestion ===
-        `Would you be able to provide some more details about the toilets?`)
+    (currentQuestion === questions(14, place, overallRating) ||
+      currentQuestion === questions(16, place, overallRating))
   ) {
     handleResponse = {
-      text:
-        `Now we come to staff. Would you like to add any further information about the people you came across at ` +
-        place +
-        `?`,
+      text: questions(17, place, overallRating),
       quick_replies: [
         {
           content_type: "text",
@@ -414,35 +407,27 @@ function handleMessage(sender_psid, received_message) {
   } else if (
     received_message.text === "Yes" &&
     received_message.text !== currentQuestion &&
-    currentQuestion ===
-      `Now we come to staff. Would you like to add any further information about the people you came across at ` +
-        place +
-        `?`
+    currentQuestion === questions(17, place, overallRating)
   ) {
     handleResponse = {
-      text: `Ok, wonderful! Let's start with a rating, again out of 5 for staff.`,
+      text: questions(18, place, overallRating),
       quick_replies: ratings
     };
     currentQuestion = handleResponse["text"];
   } else if (
     (received_message.text === "1" || "2" || "3" || "4" || "5") &&
     received_message.text !== currentQuestion &&
-    currentQuestion ===
-      `Ok, wonderful! Let's start with a rating, again out of 5 for staff.`
+    currentQuestion === questions(18, place, overallRating)
   ) {
     handleResponse = {
-      text: `Would you be able to provide some more details about the staff?`
+      text: questions(19, place, overallRating)
     };
     currentQuestion = handleResponse["text"];
   } else if (
     (received_message.text || received_message.text === "Skip") &&
     received_message.text !== currentQuestion &&
-    (currentQuestion ===
-      `Now we come to staff. Would you like to add any further information about the people you came across at ` +
-        place +
-        `?` ||
-      currentQuestion ===
-        `Would you be able to provide some more details about the staff?`)
+    (currentQuestion === questions(17, place, overallRating) ||
+      currentQuestion === questions(19, place, overallRating))
   ) {
     handleResponse = {
       text: `Thank you for your review - it's great. We'll send you a message when it has gone live! :)`
@@ -466,7 +451,7 @@ function handlePostback(sender_psid, received_postback) {
     currentQuestion = response["text"];
   } else if (payload === "yes") {
     response = {
-      text: `Do you have any more photos or images you'd like to upload?`,
+      text: questions(3, place, overallRating),
       quick_replies: [
         {
           content_type: "text",
