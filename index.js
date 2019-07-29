@@ -44,11 +44,13 @@ const ratings = [
 ];
 
 function questions(questionNumber, place, overallRating) {
-  const questionsArray = [
-    "Can you confirm the name of the place you visited?",
-    `Ok, great! Can you confirm which town or city ` + place + ` is in?`
-  ];
-  return questionsArray[questionNumber];
+  const questionsHash = {
+    Question1: "Can you confirm the name of the place you visited?",
+    Question2:
+      `Ok, great! Can you confirm which town or city ` + place + ` is in?`,
+    Question3: `Do you have any photos or images you'd like to upload?`
+  };
+  return questionsHash.questionNumber;
 }
 
 // Sets server port and logs message on success
@@ -113,19 +115,19 @@ app.get("/webhook", (req, res) => {
 function handleMessage(sender_psid, received_message) {
   if (
     received_message.text !== currentQuestion &&
-    currentQuestion === questions(0, place, 1)
+    currentQuestion === questions(Question1, place, overallRating)
   ) {
     place = received_message.text;
     handleResponse = {
-      text: questions(1, place, 1)
+      text: questions(Question2, place, 1)
     };
     currentQuestion = handleResponse["text"];
   } else if (
     received_message.text !== currentQuestion &&
-    currentQuestion === questions(1, place, 1)
+    currentQuestion === questions(Question2, place, overallRating)
   ) {
     handleResponse = {
-      text: `Do you have any photos or images you'd like to upload?`,
+      text: questions(Question3, place, overallRating),
       quick_replies: [
         {
           content_type: "text",
