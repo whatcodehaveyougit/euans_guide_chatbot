@@ -14,6 +14,35 @@ let currentQuestion;
 let handleResponse;
 let place;
 let overallRating;
+
+const ratings = [
+  {
+    content_type: "text",
+    title: "1",
+    payload: "one"
+  },
+  {
+    content_type: "text",
+    title: "2",
+    payload: "two"
+  },
+  {
+    content_type: "text",
+    title: "3",
+    payload: "three"
+  },
+  {
+    content_type: "text",
+    title: "4",
+    payload: "four"
+  },
+  {
+    content_type: "text",
+    title: "5",
+    payload: "five"
+  }
+];
+
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log("webhook is listening"));
 
@@ -169,33 +198,7 @@ function handleMessage(sender_psid, received_message) {
     handleResponse = {
       text:
         "Great Title! Now for a rating, how would you rate the disabled access overall?",
-      quick_replies: [
-        {
-          content_type: "text",
-          title: "1",
-          payload: "one"
-        },
-        {
-          content_type: "text",
-          title: "2",
-          payload: "two"
-        },
-        {
-          content_type: "text",
-          title: "3",
-          payload: "three"
-        },
-        {
-          content_type: "text",
-          title: "4",
-          payload: "four"
-        },
-        {
-          content_type: "text",
-          title: "5",
-          payload: "five"
-        }
-      ]
+      quick_replies: ratings
     };
     currentQuestion = handleResponse["text"];
   } else if (
@@ -263,33 +266,7 @@ function handleMessage(sender_psid, received_message) {
   ) {
     handleResponse = {
       text: `Ok, great! Let's start with a rating, again out of 5.`,
-      quick_replies: [
-        {
-          content_type: "text",
-          title: "1",
-          payload: "one"
-        },
-        {
-          content_type: "text",
-          title: "2",
-          payload: "two"
-        },
-        {
-          content_type: "text",
-          title: "3",
-          payload: "three"
-        },
-        {
-          content_type: "text",
-          title: "4",
-          payload: "four"
-        },
-        {
-          content_type: "text",
-          title: "5",
-          payload: "five"
-        }
-      ]
+      quick_replies: ratings
     };
     currentQuestion = handleResponse["text"];
   } else if (
@@ -337,33 +314,7 @@ function handleMessage(sender_psid, received_message) {
   ) {
     handleResponse = {
       text: `Ok, great! Let's start with a rating, again out of 5 for getting in and around.`,
-      quick_replies: [
-        {
-          content_type: "text",
-          title: "1",
-          payload: "one"
-        },
-        {
-          content_type: "text",
-          title: "2",
-          payload: "two"
-        },
-        {
-          content_type: "text",
-          title: "3",
-          payload: "three"
-        },
-        {
-          content_type: "text",
-          title: "4",
-          payload: "four"
-        },
-        {
-          content_type: "text",
-          title: "5",
-          payload: "five"
-        }
-      ]
+      quick_replies: ratings
     };
     currentQuestion = handleResponse["text"];
   } else if (
@@ -422,33 +373,7 @@ function handleMessage(sender_psid, received_message) {
   ) {
     handleResponse = {
       text: `Ok, great! Let's start with a rating, again out of 5 for toilet accessiblity.`,
-      quick_replies: [
-        {
-          content_type: "text",
-          title: "1",
-          payload: "one"
-        },
-        {
-          content_type: "text",
-          title: "2",
-          payload: "two"
-        },
-        {
-          content_type: "text",
-          title: "3",
-          payload: "three"
-        },
-        {
-          content_type: "text",
-          title: "4",
-          payload: "four"
-        },
-        {
-          content_type: "text",
-          title: "5",
-          payload: "five"
-        }
-      ]
+      quick_replies: ratings
     };
     currentQuestion = handleResponse["text"];
   } else if (
@@ -500,33 +425,7 @@ function handleMessage(sender_psid, received_message) {
   ) {
     handleResponse = {
       text: `Ok, wonderful! Let's start with a rating, again out of 5 for staff.`,
-      quick_replies: [
-        {
-          content_type: "text",
-          title: "1",
-          payload: "one"
-        },
-        {
-          content_type: "text",
-          title: "2",
-          payload: "two"
-        },
-        {
-          content_type: "text",
-          title: "3",
-          payload: "three"
-        },
-        {
-          content_type: "text",
-          title: "4",
-          payload: "four"
-        },
-        {
-          content_type: "text",
-          title: "5",
-          payload: "five"
-        }
-      ]
+      quick_replies: ratings
     };
     currentQuestion = handleResponse["text"];
   } else if (
