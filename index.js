@@ -43,6 +43,14 @@ const ratings = [
   }
 ];
 
+function questions(questionNumber, place, overallRating) {
+  const questionsArray = [
+    "Can you confirm the name of the place you visited?",
+    `Ok, great! Can you confirm which town or city ` + place + ` is in?`
+  ];
+  return questionsArray[questionNumber];
+}
+
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log("webhook is listening"));
 
@@ -105,16 +113,16 @@ app.get("/webhook", (req, res) => {
 function handleMessage(sender_psid, received_message) {
   if (
     received_message.text !== currentQuestion &&
-    currentQuestion === questionsArray[0]
+    currentQuestion === questions(0, place, 1)
   ) {
     place = received_message.text;
     handleResponse = {
-      text: questionsArray[1]
+      text: questions(1, place, 1)
     };
     currentQuestion = handleResponse["text"];
   } else if (
     received_message.text !== currentQuestion &&
-    currentQuestion === questionsArray[1]
+    currentQuestion === questions(1, place, 1)
   ) {
     handleResponse = {
       text: `Do you have any photos or images you'd like to upload?`,
@@ -453,10 +461,6 @@ function handleMessage(sender_psid, received_message) {
     currentQuestion = handleResponse["text"];
   }
 
-  const questionsArray = [
-    "Can you confirm the name of the place you visited?",
-    `Ok, great! Can you confirm which town or city ` + place + ` is in?`
-  ];
   // Send the response message
   callSendAPI(sender_psid, handleResponse);
 }
