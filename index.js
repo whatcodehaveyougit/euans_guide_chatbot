@@ -1,7 +1,7 @@
 "use strict";
 
 var questionData = require('./questions');
-consolelog("QUESTIONS", questionData)
+console.log("QUESTIONS", questionData)
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 // Imports dependencies and set up http server
