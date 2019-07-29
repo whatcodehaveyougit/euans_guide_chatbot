@@ -44,13 +44,15 @@ const ratings = [
 ];
 
 function questions(questionNumber, place, overallRating) {
-  const questionsHash = {
-    Question1: "Can you confirm the name of the place you visited?",
-    Question2:
-      `Ok, great! Can you confirm which town or city ` + place + ` is in?`,
-    Question3: `Do you have any photos or images you'd like to upload?`
-  };
-  return questionsHash.questionNumber;
+  const questionsArray = [
+    "Can you confirm the name of the place you visited?",
+    `Ok, great! Can you confirm which town or city ` + place + ` is in?`,
+    `Do you have any photos or images you'd like to upload?`,
+    `Do you have any more photos or images you'd like to upload?`,
+    "Great! Now, what would you like to title your review?",
+    "Great Title! Now for a rating, how would you rate the disabled access overall?"
+  ];
+  return questionsArray[questionNumber];
 }
 
 // Sets server port and logs message on success
@@ -115,19 +117,19 @@ app.get("/webhook", (req, res) => {
 function handleMessage(sender_psid, received_message) {
   if (
     received_message.text !== currentQuestion &&
-    currentQuestion === questions(Question1, place, overallRating)
+    currentQuestion === questions(0, place, overallRating)
   ) {
     place = received_message.text;
     handleResponse = {
-      text: questions(Question2, place, 1)
+      text: questions(1, place, overallRating)
     };
     currentQuestion = handleResponse["text"];
   } else if (
     received_message.text !== currentQuestion &&
-    currentQuestion === questions(Question2, place, overallRating)
+    currentQuestion === questions(1, place, overallRating)
   ) {
     handleResponse = {
-      text: questions(Question3, place, overallRating),
+      text: questions(2, place, overallRating),
       quick_replies: [
         {
           content_type: "text",
@@ -145,22 +147,18 @@ function handleMessage(sender_psid, received_message) {
   } else if (
     received_message.text === "No!" &&
     received_message.text !== currentQuestion &&
-    (currentQuestion ===
-      `Do you have any photos or images you'd like to upload?` ||
-      currentQuestion ===
-        `Do you have any more photos or images you'd like to upload?`)
+    (currentQuestion === questions(2, place, overallRating) ||
+      currentQuestion === questions(3, place, overallRating))
   ) {
     handleResponse = {
-      text: "Great! Now, what would you like to title your review?"
+      text: questions(4, place, overallRating)
     };
     currentQuestion = handleResponse["text"];
   } else if (
     received_message.text === "Yes!" &&
     received_message.text !== currentQuestion &&
-    (currentQuestion ===
-      `Do you have any photos or images you'd like to upload?` ||
-      currentQuestion ===
-        `Do you have any more photos or images you'd like to upload?`)
+    (currentQuestion === questions(2, place, overallRating) ||
+      currentQuestion === questions(3, place, overallRating))
   ) {
     handleResponse = {
       text: "Great, send it!"
@@ -202,19 +200,17 @@ function handleMessage(sender_psid, received_message) {
     };
   } else if (
     received_message.text !== currentQuestion &&
-    currentQuestion === "Great! Now, what would you like to title your review?"
+    currentQuestion === questions(4, place, overallRating)
   ) {
     handleResponse = {
-      text:
-        "Great Title! Now for a rating, how would you rate the disabled access overall?",
+      text: questions(5, place, overallRating),
       quick_replies: ratings
     };
     currentQuestion = handleResponse["text"];
   } else if (
     (received_message.text === "1" || "2" || "3" || "4" || "5") &&
     received_message.text !== currentQuestion &&
-    currentQuestion ===
-      "Great Title! Now for a rating, how would you rate the disabled access overall?"
+    currentQuestion === questions(5, place, overallRating)
   ) {
     overallRating = received_message.text;
     handleResponse = {
