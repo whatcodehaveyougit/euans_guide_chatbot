@@ -195,7 +195,14 @@ function handleMessage(sender_psid, received_message) {
 
       Some of our users do like to know some additional information before they visit.
 
-      These are all optional questions so if you don't have anything else to add then no problem!`
+      These are all optional questions so if you don't have anything else to add then no problem!`,
+      "quick_replies": [
+        {
+          "content_type": "text",
+          "title": "Continue",
+          "payload": "continue_option_question"
+        }
+      ]
     }
     currentQuestion = handleResponse["text"]
   } else if ((currentQuestion === `Thank you very much your review is nearly complete! 
