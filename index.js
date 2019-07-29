@@ -274,7 +274,7 @@ function handleMessage(sender_psid, received_message) {
     currentQuestion = handleResponse["text"]
   } else if ((received_message.text === "Yes") && (received_message.text !== currentQuestion) && (currentQuestion === `Thank You! Now onto getting in and around ` + place + `. Is there anything specific about Disabled Access you would like to add?`)){
     handleResponse = {
-      "text": `Ok, great! Let's start with a rating, again out of 5.`,
+      "text": `Ok, great! Let's start with a rating, again out of 5 for getting in and around.`,
       "quick_replies": [
          {
            "content_type": "text",
@@ -304,8 +304,30 @@ function handleMessage(sender_psid, received_message) {
       ]
     }
     currentQuestion = handleResponse["text"]
+  } else if((received_message.text === "1" || "2" || "3" || "4" || "5") && (received_message.text !== currentQuestion) && (currentQuestion === `Ok, great! Let's start with a rating, again out of 5 for getting in and around.`)){
+    handleResponse = {
+      "text": `Great! Could you give us some more information on what you noticed about ` + place + `?`
+    }
+    currentQuestion = handleResponse["text"]
+  } else if ((received_message.text || (received_message.text === "Skip to next question")) && (received_message.text !== currentQuestion) && ((currentQuestion === `Great! Could you give us some more information on what you noticed about ` + place + `?`) || (currentQuestion === `Thank You! Now onto getting in and around ` + place + `. Is there anything specific about Disabled Access you would like to add?`))){{
+    handleResponse = {
+      "text": `Now, onto toilets. Our users consistently tell us how important both accessible toilets and information about toilets is. Are you able to tell us anything about the toilets at ` + place + `?`,
+      "quick_replies": [
+        {
+          "content_type": "text",
+          "title": "Yes",
+          "payload": "yes_disabled_access"
+        },
+        {
+          "content_type": "text",
+          "title": "Skip to next question",
+          "payload": "skip_disabled_access"
+        }
+       ]
+     }
+    currentQuestion = handleResponse["text"]
+    }
   }
-
 
   // Send the response message
   callSendAPI(sender_psid, handleResponse);
