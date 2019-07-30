@@ -2,6 +2,7 @@
 
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+var questionData = require('./questions')
 // Imports dependencies and set up http server
 const request = require("request"),
   express = require("express"),
@@ -445,7 +446,7 @@ function handlePostback(sender_psid, received_postback) {
   // Set the response based on the postback payload
 
   if (payload === "GET_STARTED") {
-    response = { text: questions(1, place, overallRating) };
+    response = { text: questionData[0] };
     currentQuestion = response["text"];
   } else if (payload === "yes") {
     response = {
@@ -474,7 +475,7 @@ function handlePostback(sender_psid, received_postback) {
 
 function callSendAPI(sender_psid, response) {
   if (currentQuestion === `Thank you for your review - it's great. We'll send you a message when it has gone live! :)`) {
-    return null 
+    return null
   }
   // Construct the message body
   let request_body = {
