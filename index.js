@@ -43,6 +43,7 @@ const ratings = [
 
 function questions(questionNumber, place, overallRating) {
   const questionsArray = [
+    `Hello! Thanks for clicking get started. Would you like to leave a review or chat to us?`,
     "Can you confirm the name of the place you visited?",
     `Ok, great! Can you confirm which town or city ` + place + ` is in?`,
     `Do you have any photos or images you'd like to upload?`,
@@ -139,21 +140,18 @@ app.get("/webhook", (req, res) => {
 });
 
 function handleMessage(sender_psid, received_message) {
-  if (
-    received_message.text !== currentQuestion &&
-    currentQuestion === questions(0, place, overallRating)
-  ) {
+  if ((received_message.text !== currentQuestion) && currentQuestion === questions(1, place, overallRating) && (received_message.text === `Review!`)) {
     place = received_message.text;
     handleResponse = {
-      text: questions(1, place, overallRating)
+      text: questions(2, place, overallRating)
     };
     currentQuestion = handleResponse["text"];
   } else if (
     received_message.text !== currentQuestion &&
-    currentQuestion === questions(1, place, overallRating)
+    currentQuestion === questions(2, place, overallRating)
   ) {
     handleResponse = {
-      text: questions(2, place, overallRating),
+      text: questions(3, place, overallRating),
       quick_replies: [
         {
           content_type: "text",
@@ -171,26 +169,26 @@ function handleMessage(sender_psid, received_message) {
   } else if (
     received_message.text === "No!" &&
     received_message.text !== currentQuestion &&
-    (currentQuestion === questions(2, place, overallRating) ||
-      currentQuestion === questions(3, place, overallRating))
+    (currentQuestion === questions(3, place, overallRating) ||
+      currentQuestion === questions(4, place, overallRating))
+  ) {
+    handleResponse = {
+      text: questions(6, place, overallRating)
+    };
+    currentQuestion = handleResponse["text"];
+  } else if (
+    received_message.text === "Yes!" &&
+    received_message.text !== currentQuestion &&
+    (currentQuestion === questions(3, place, overallRating) ||
+      currentQuestion === questions(4, place, overallRating))
   ) {
     handleResponse = {
       text: questions(5, place, overallRating)
     };
     currentQuestion = handleResponse["text"];
   } else if (
-    received_message.text === "Yes!" &&
-    received_message.text !== currentQuestion &&
-    (currentQuestion === questions(2, place, overallRating) ||
-      currentQuestion === questions(3, place, overallRating))
-  ) {
-    handleResponse = {
-      text: questions(4, place, overallRating)
-    };
-    currentQuestion = handleResponse["text"];
-  } else if (
     received_message.attachments &&
-    currentQuestion === questions(4, place, overallRating) &&
+    currentQuestion === questions(5, place, overallRating) &&
     received_message.text !== currentQuestion
   ) {
     // Get the URL of the message attachment
@@ -224,26 +222,26 @@ function handleMessage(sender_psid, received_message) {
     };
   } else if (
     received_message.text !== currentQuestion &&
-    currentQuestion === questions(5, place, overallRating)
+    currentQuestion === questions(6, place, overallRating)
   ) {
     handleResponse = {
-      text: questions(6, place, overallRating),
+      text: questions(7, place, overallRating),
       quick_replies: ratings
     };
     currentQuestion = handleResponse["text"];
   } else if (
     (received_message.text === "1" || "2" || "3" || "4" || "5") &&
     received_message.text !== currentQuestion &&
-    currentQuestion === questions(6, place, overallRating)
+    currentQuestion === questions(7, place, overallRating)
   ) {
     overallRating = received_message.text;
     handleResponse = {
-      text: questions(7, place, overallRating)
+      text: questions(8, place, overallRating)
     };
     currentQuestion = handleResponse["text"];
   } else if (
     received_message.text !== currentQuestion &&
-    currentQuestion === questions(7, place, overallRating)
+    currentQuestion === questions(8, place, overallRating)
   ) {
     handleResponse = {
       text: `Thank you very much your review is nearly complete!`,
@@ -262,7 +260,7 @@ function handleMessage(sender_psid, received_message) {
     currentQuestion === `Thank you very much your review is nearly complete!`
   ) {
     handleResponse = {
-      text: questions(8, place, overallRating),
+      text: questions(9, place, overallRating),
       quick_replies: [
         {
           content_type: "text",
@@ -280,30 +278,30 @@ function handleMessage(sender_psid, received_message) {
   } else if (
     received_message.text === "Yes" &&
     received_message.text !== currentQuestion &&
-    currentQuestion === questions(8, place, overallRating)
+    currentQuestion === questions(9, place, overallRating)
   ) {
     handleResponse = {
-      text: questions(9, place, overallRating),
+      text: questions(10, place, overallRating),
       quick_replies: ratings
     };
     currentQuestion = handleResponse["text"];
   } else if (
     (received_message.text === "1" || "2" || "3" || "4" || "5") &&
     received_message.text !== currentQuestion &&
-    currentQuestion === questions(9, place, overallRating)
+    currentQuestion === questions(10, place, overallRating)
   ) {
     handleResponse = {
-      text: questions(10, place, overallRating)
+      text: questions(11, place, overallRating)
     };
     currentQuestion = handleResponse["text"];
   } else if (
     (received_message.text || received_message.text === "Skip") &&
     received_message.text !== currentQuestion &&
-    (currentQuestion === questions(10, place, overallRating) ||
-      currentQuestion === questions(8, place, overallRating))
+    (currentQuestion === questions(11, place, overallRating) ||
+      currentQuestion === questions(9, place, overallRating))
   ) {
     handleResponse = {
-      text: questions(11, place, overallRating),
+      text: questions(12, place, overallRating),
       quick_replies: [
         {
           content_type: "text",
@@ -321,31 +319,31 @@ function handleMessage(sender_psid, received_message) {
   } else if (
     received_message.text === "Yes" &&
     received_message.text !== currentQuestion &&
-    currentQuestion === questions(11, place, overallRating)
+    currentQuestion === questions(12, place, overallRating)
   ) {
     handleResponse = {
-      text: questions(12, place, overallRating),
+      text: questions(13, place, overallRating),
       quick_replies: ratings
     };
     currentQuestion = handleResponse["text"];
   } else if (
     (received_message.text === "1" || "2" || "3" || "4" || "5") &&
     received_message.text !== currentQuestion &&
-    currentQuestion === questions(12, place, overallRating)
+    currentQuestion === questions(13, place, overallRating)
   ) {
     handleResponse = {
-      text: questions(13, place, overallRating)
+      text: questions(14, place, overallRating)
     };
     currentQuestion = handleResponse["text"];
   } else if (
     (received_message.text || received_message.text === "Skip") &&
     received_message.text !== currentQuestion &&
-    (currentQuestion === questions(13, place, overallRating) ||
-      currentQuestion === questions(11, place, overallRating))
+    (currentQuestion === questions(14, place, overallRating) ||
+      currentQuestion === questions(12, place, overallRating))
   ) {
     {
       handleResponse = {
-        text: questions(14, place, overallRating),
+        text: questions(15, place, overallRating),
         quick_replies: [
           {
             content_type: "text",
@@ -364,30 +362,30 @@ function handleMessage(sender_psid, received_message) {
   } else if (
     received_message.text === "Yes" &&
     received_message.text !== currentQuestion &&
-    currentQuestion === questions(14, place, overallRating)
+    currentQuestion === questions(15, place, overallRating)
   ) {
     handleResponse = {
-      text: questions(15, place, overallRating),
+      text: questions(16, place, overallRating),
       quick_replies: ratings
     };
     currentQuestion = handleResponse["text"];
   } else if (
     (received_message.text === "1" || "2" || "3" || "4" || "5") &&
     received_message.text !== currentQuestion &&
-    currentQuestion === questions(15, place, overallRating)
+    currentQuestion === questions(16, place, overallRating)
   ) {
     handleResponse = {
-      text: questions(16, place, overallRating)
+      text: questions(17, place, overallRating)
     };
     currentQuestion = handleResponse["text"];
   } else if (
     (received_message.text || received_message.text === "Skip") &&
     received_message.text !== currentQuestion &&
-    (currentQuestion === questions(14, place, overallRating) ||
-      currentQuestion === questions(16, place, overallRating))
+    (currentQuestion === questions(15, place, overallRating) ||
+      currentQuestion === questions(17, place, overallRating))
   ) {
     handleResponse = {
-      text: questions(17, place, overallRating),
+      text: questions(18, place, overallRating),
       quick_replies: [
         {
           content_type: "text",
@@ -405,27 +403,27 @@ function handleMessage(sender_psid, received_message) {
   } else if (
     received_message.text === "Yes" &&
     received_message.text !== currentQuestion &&
-    currentQuestion === questions(17, place, overallRating)
+    currentQuestion === questions(18, place, overallRating)
   ) {
     handleResponse = {
-      text: questions(18, place, overallRating),
+      text: questions(19, place, overallRating),
       quick_replies: ratings
     };
     currentQuestion = handleResponse["text"];
   } else if (
     (received_message.text === "1" || "2" || "3" || "4" || "5") &&
     received_message.text !== currentQuestion &&
-    currentQuestion === questions(18, place, overallRating)
+    currentQuestion === questions(19, place, overallRating)
   ) {
     handleResponse = {
-      text: questions(19, place, overallRating)
+      text: questions(20, place, overallRating)
     };
     currentQuestion = handleResponse["text"];
   } else if (
     (received_message.text || received_message.text === "Skip") &&
     received_message.text !== currentQuestion &&
-    (currentQuestion === questions(17, place, overallRating) ||
-      currentQuestion === questions(19, place, overallRating))
+    (currentQuestion === questions(18, place, overallRating) ||
+      currentQuestion === questions(20, place, overallRating))
   ) {
     handleResponse = {
       text: `Thank you for your review - it's great. We'll send you a message when it has gone live! :)`
