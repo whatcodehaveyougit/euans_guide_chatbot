@@ -434,7 +434,12 @@ function handleMessage(sender_psid, received_message) {
       text: `Thank you for your review - it's great. We'll send you a message when it has gone live! :)`
     };
     currentQuestion = handleResponse["text"];
-  } else if ((received_message.text !== currentQuestion) && ((currentQuestion === `Thank you for your review - it's great. We'll send you a message when it has gone live! :)`) || (received_message.text === "Chat!"))) {
+  } else if ((received_message.text !== currentQuestion) && (currentQuestion === questions(0, place, overallRating)) && (received_message.text === "Chat!")) {
+    handleResponse = {
+      text: `No problem! Leave us a message and we will get back to you as soon as possible!`
+    };
+    currentQuestion = handleResponse["text"];
+  } else if ((received_message.text !== currentQuestion) && ((currentQuestion === `Thank you for your review - it's great. We'll send you a message when it has gone live! :)`) || (currentQuestion === `No problem! Leave us a message and we will get back to you as soon as possible!`))) {
     handleResponse = {
       text: `hello!!!!!!!!!`
   }
