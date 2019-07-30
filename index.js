@@ -2,7 +2,6 @@
 
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
-var questionData = require('./questions')
 // Imports dependencies and set up http server
 const request = require("request"),
   express = require("express"),
@@ -446,7 +445,7 @@ function handlePostback(sender_psid, received_postback) {
   // Set the response based on the postback payload
 
   if (payload === "GET_STARTED") {
-    response = { text: questionData[0] };
+    response = { text: questions(0, place, overallRating) };
     currentQuestion = response["text"];
   } else if (payload === "yes") {
     response = {
