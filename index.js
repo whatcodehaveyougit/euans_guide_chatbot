@@ -434,7 +434,7 @@ function handleMessage(sender_psid, received_message) {
       text: `Thank you for your review - it's great. We'll send you a message when it has gone live! :)`
     };
     currentQuestion = handleResponse["text"];
-  } else if ((received_message.text !== currentQuestion) && (currentQuestion === `Thank you for your review - it's great. We'll send you a message when it has gone live! :)`)) {
+  } else if ((received_message.text !== currentQuestion) && ((currentQuestion === `Thank you for your review - it's great. We'll send you a message when it has gone live! :)`) || (received_message.text === "Chat!"))) {
     handleResponse = {
       text: `hello!!!!!!!!!`
   }
