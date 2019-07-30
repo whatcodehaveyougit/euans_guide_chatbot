@@ -435,6 +435,7 @@ function handleMessage(sender_psid, received_message) {
     handleResponse = {
       text: `hello!!!!!!!!!`
   }
+  currentQuestion = handleResponse["text"];
 }
 
   // Send the response message
