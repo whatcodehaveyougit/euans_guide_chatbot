@@ -445,7 +445,7 @@ function handlePostback(sender_psid, received_postback) {
   // Set the response based on the postback payload
 
   if (payload === "GET_STARTED") {
-    response = { text: questionData[0] };
+    response = { text: questions(1, place, overallRating) };
     currentQuestion = response["text"];
   } else if (payload === "yes") {
     response = {
