@@ -140,7 +140,7 @@ app.get("/webhook", (req, res) => {
 });
 
 function handleMessage(sender_psid, received_message) {
-  if ((received_message.text !== currentQuestion) && currentQuestion === questions(1, place, overallRating) && (received_message.text === `Review!`)) {
+  if ((received_message.text !== currentQuestion) && currentQuestion === questions(0, place, overallRating) && (received_message.text === `Review!`)) {
     place = received_message.text;
     handleResponse = {
       text: questions(2, place, overallRating)
