@@ -146,6 +146,7 @@ function handleMessage(sender_psid, received_message) {
     };
     currentQuestion = handleResponse["text"];
   } else if ((received_message.text !== currentQuestion) && currentQuestion === questions(1, place, overallRating)) {
+    place = received_message.text
     handleResponse = {
       text: questions(2, place, overallRating)
     };
