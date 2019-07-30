@@ -255,9 +255,22 @@ function handleMessage(sender_psid, received_message) {
           content_type: "text",
           title: "Continue",
           payload: "continue_option_question"
+        },
+        {
+          content_type: "text",
+          title: "Finish",
+          payload: "finish_option_question"
         }
       ]
     };
+    currentQuestion = handleResponse["text"];
+  } else if (received_message.text === "Finish" &&
+  received_message.text !== currentQuestion &&
+  currentQuestion === `Thank you very much your review is nearly complete!`
+  ) {
+    handleResponse = {
+      text: `Thank you for your review - it's great. We'll send you a message when it has gone live! :)` 
+    }
     currentQuestion = handleResponse["text"];
   } else if (
     received_message.text === "Continue" &&
