@@ -473,6 +473,9 @@ function handlePostback(sender_psid, received_postback) {
 }
 
 function callSendAPI(sender_psid, response) {
+  if (currentQuestion === `Thank you for your review - it's great. We'll send you a message when it has gone live! :)`) {
+    return null 
+  }
   // Construct the message body
   let request_body = {
     recipient: {
