@@ -435,6 +435,7 @@ function handleMessage(sender_psid, received_message) {
     handleResponse = {
       text: `hello!!!!!!!!!`
   }
+}
 
   // Send the response message
   callSendAPI(sender_psid, handleResponse);
