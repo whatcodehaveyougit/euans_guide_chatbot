@@ -431,6 +431,9 @@ function handleMessage(sender_psid, received_message) {
       text: `Thank you for your review - it's great. We'll send you a message when it has gone live! :)`
     };
     currentQuestion = handleResponse["text"];
+  } else {
+    handleResponse = {
+      text: `hello!!!!!!!!!`
   }
 
   // Send the response message
@@ -473,7 +476,7 @@ function handlePostback(sender_psid, received_postback) {
 }
 
 function callSendAPI(sender_psid, response) {
-  if (currentQuestion === `Thank you for your review - it's great. We'll send you a message when it has gone live! :)`) {
+  if (currentQuestion === `hello!!!!!!!!!`) {
     return null
   }
   // Construct the message body
