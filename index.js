@@ -450,17 +450,17 @@ function handlePostback(sender_psid, received_postback) {
   // Set the response based on the postback payload
 
   if (payload === "GET_STARTED") {
-    response = { text: `take review?`,
+    response = { text: `Hello! Thanks for clicking get started. Would you like to leave a review or chat to us?`,
     quick_replies: [
       {
         content_type: "text",
-        title: "Yes!",
-        payload: "yes"
+        title: "Review!",
+        payload: "review"
       },
       {
         content_type: "text",
-        title: "No!",
-        payload: "yes"
+        title: "Chat!",
+        payload: "chat"
       }
     ] };
     currentQuestion = response["text"];
