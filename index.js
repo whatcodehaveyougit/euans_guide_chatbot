@@ -48,7 +48,7 @@ function questions(questionNumber, place, overallRating) {
     `Ok, great! Can you confirm which town or city ` + place + ` is in?`,
     `Do you have any photos or images you'd like to upload?`,
     `Do you have any more photos or images you'd like to upload?`,
-    "Great, to select image to attach, click on the picture icon in the bottom left corner of the messenger and send it.",
+    "Great, to select an image to attach, click on the picture icon in the bottom left corner of the messenger and send it.",
     "Great! Now, what would you like to title your review?",
     "Great Title! Now for a rating, how would you rate the disabled access overall?",
     `You've given a rating of ` +
@@ -255,9 +255,22 @@ function handleMessage(sender_psid, received_message) {
           content_type: "text",
           title: "Continue",
           payload: "continue_option_question"
+        },
+        {
+          content_type: "text",
+          title: "Finish",
+          payload: "finish_option_question"
         }
       ]
     };
+    currentQuestion = handleResponse["text"];
+  } else if (received_message.text === "Finish" &&
+  received_message.text !== currentQuestion &&
+  currentQuestion === `Thank you very much your review is nearly complete!`
+  ) {
+    handleResponse = {
+      text: `Thank you for your review - it's great. We'll send you a message when it has gone live! :)` 
+    }
     currentQuestion = handleResponse["text"];
   } else if (
     received_message.text === "Continue" &&
