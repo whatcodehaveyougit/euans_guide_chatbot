@@ -1,5 +1,7 @@
 "use strict";
 
+var questionData = require("./questions");
+console.log("QUESTIONS", questionData);
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 // Imports dependencies and set up http server
@@ -43,12 +45,11 @@ const ratings = [
 
 function questions(questionNumber, place, overallRating) {
   const questionsArray = [
-    `Hello! Thanks for clicking get started. Would you like to leave a review or chat to us?`,
     "Can you confirm the name of the place you visited?",
     `Ok, great! Can you confirm which town or city ` + place + ` is in?`,
     `Do you have any photos or images you'd like to upload?`,
     `Do you have any more photos or images you'd like to upload?`,
-    "Great, send it!",
+    "Great, to select an image to attach, click on the picture icon at the bottom left corner of the messenger and send it.",
     "Great! Now, what would you like to title your review?",
     "Great Title! Now for a rating, how would you rate the disabled access overall?",
     `You've given a rating of ` +
@@ -140,23 +141,21 @@ app.get("/webhook", (req, res) => {
 });
 
 function handleMessage(sender_psid, received_message) {
-  if ((received_message.text !== currentQuestion) && currentQuestion === questions(0, place, overallRating) && (received_message.text === `Review!`)) {
+  if (
+    received_message.text !== currentQuestion &&
+    currentQuestion === questions(0, place, overallRating)
+  ) {
+    place = received_message.text;
     handleResponse = {
       text: questions(1, place, overallRating)
     };
     currentQuestion = handleResponse["text"];
-  } else if ((received_message.text !== currentQuestion) && currentQuestion === questions(1, place, overallRating)) {
-    place = received_message.text
-    handleResponse = {
-      text: questions(2, place, overallRating)
-    };
-    currentQuestion = handleResponse["text"];
   } else if (
     received_message.text !== currentQuestion &&
-    currentQuestion === questions(2, place, overallRating)
+    currentQuestion === questions(1, place, overallRating)
   ) {
     handleResponse = {
-      text: questions(3, place, overallRating),
+      text: questions(2, place, overallRating),
       quick_replies: [
         {
           content_type: "text",
@@ -174,26 +173,26 @@ function handleMessage(sender_psid, received_message) {
   } else if (
     received_message.text === "No!" &&
     received_message.text !== currentQuestion &&
-    (currentQuestion === questions(3, place, overallRating) ||
-      currentQuestion === questions(4, place, overallRating))
-  ) {
-    handleResponse = {
-      text: questions(6, place, overallRating)
-    };
-    currentQuestion = handleResponse["text"];
-  } else if (
-    received_message.text === "Yes!" &&
-    received_message.text !== currentQuestion &&
-    (currentQuestion === questions(3, place, overallRating) ||
-      currentQuestion === questions(4, place, overallRating))
+    (currentQuestion === questions(2, place, overallRating) ||
+      currentQuestion === questions(3, place, overallRating))
   ) {
     handleResponse = {
       text: questions(5, place, overallRating)
     };
     currentQuestion = handleResponse["text"];
   } else if (
+    received_message.text === "Yes!" &&
+    received_message.text !== currentQuestion &&
+    (currentQuestion === questions(2, place, overallRating) ||
+      currentQuestion === questions(3, place, overallRating))
+  ) {
+    handleResponse = {
+      text: questions(4, place, overallRating)
+    };
+    currentQuestion = handleResponse["text"];
+  } else if (
     received_message.attachments &&
-    currentQuestion === questions(5, place, overallRating) &&
+    currentQuestion === questions(4, place, overallRating) &&
     received_message.text !== currentQuestion
   ) {
     // Get the URL of the message attachment
@@ -227,26 +226,26 @@ function handleMessage(sender_psid, received_message) {
     };
   } else if (
     received_message.text !== currentQuestion &&
-    currentQuestion === questions(6, place, overallRating)
+    currentQuestion === questions(5, place, overallRating)
   ) {
     handleResponse = {
-      text: questions(7, place, overallRating),
+      text: questions(6, place, overallRating),
       quick_replies: ratings
     };
     currentQuestion = handleResponse["text"];
   } else if (
     (received_message.text === "1" || "2" || "3" || "4" || "5") &&
     received_message.text !== currentQuestion &&
-    currentQuestion === questions(7, place, overallRating)
+    currentQuestion === questions(6, place, overallRating)
   ) {
     overallRating = received_message.text;
     handleResponse = {
-      text: questions(8, place, overallRating)
+      text: questions(7, place, overallRating)
     };
     currentQuestion = handleResponse["text"];
   } else if (
     received_message.text !== currentQuestion &&
-    currentQuestion === questions(8, place, overallRating)
+    currentQuestion === questions(7, place, overallRating)
   ) {
     handleResponse = {
       text: `Thank you very much your review is nearly complete!`,
@@ -255,22 +254,9 @@ function handleMessage(sender_psid, received_message) {
           content_type: "text",
           title: "Continue",
           payload: "continue_option_question"
-        },
-        {
-          content_type: "text",
-          title: "Finish",
-          payload: "finish_option_question"
         }
       ]
     };
-    currentQuestion = handleResponse["text"];
-  } else if (received_message.text === "Finish" &&
-  received_message.text !== currentQuestion &&
-  currentQuestion === `Thank you very much your review is nearly complete!`
-  ) {
-    handleResponse = {
-      text: `Thank you for your review - it's great. We'll send you a message when it has gone live! :)` 
-    }
     currentQuestion = handleResponse["text"];
   } else if (
     received_message.text === "Continue" &&
@@ -278,7 +264,7 @@ function handleMessage(sender_psid, received_message) {
     currentQuestion === `Thank you very much your review is nearly complete!`
   ) {
     handleResponse = {
-      text: questions(9, place, overallRating),
+      text: questions(8, place, overallRating),
       quick_replies: [
         {
           content_type: "text",
@@ -296,30 +282,30 @@ function handleMessage(sender_psid, received_message) {
   } else if (
     received_message.text === "Yes" &&
     received_message.text !== currentQuestion &&
-    currentQuestion === questions(9, place, overallRating)
+    currentQuestion === questions(8, place, overallRating)
   ) {
     handleResponse = {
-      text: questions(10, place, overallRating),
+      text: questions(9, place, overallRating),
       quick_replies: ratings
     };
     currentQuestion = handleResponse["text"];
   } else if (
     (received_message.text === "1" || "2" || "3" || "4" || "5") &&
     received_message.text !== currentQuestion &&
-    currentQuestion === questions(10, place, overallRating)
+    currentQuestion === questions(9, place, overallRating)
   ) {
     handleResponse = {
-      text: questions(11, place, overallRating)
+      text: questions(10, place, overallRating)
     };
     currentQuestion = handleResponse["text"];
   } else if (
     (received_message.text || received_message.text === "Skip") &&
     received_message.text !== currentQuestion &&
-    (currentQuestion === questions(11, place, overallRating) ||
-      currentQuestion === questions(9, place, overallRating))
+    (currentQuestion === questions(10, place, overallRating) ||
+      currentQuestion === questions(8, place, overallRating))
   ) {
     handleResponse = {
-      text: questions(12, place, overallRating),
+      text: questions(11, place, overallRating),
       quick_replies: [
         {
           content_type: "text",
@@ -337,31 +323,31 @@ function handleMessage(sender_psid, received_message) {
   } else if (
     received_message.text === "Yes" &&
     received_message.text !== currentQuestion &&
-    currentQuestion === questions(12, place, overallRating)
+    currentQuestion === questions(11, place, overallRating)
   ) {
     handleResponse = {
-      text: questions(13, place, overallRating),
+      text: questions(12, place, overallRating),
       quick_replies: ratings
     };
     currentQuestion = handleResponse["text"];
   } else if (
     (received_message.text === "1" || "2" || "3" || "4" || "5") &&
     received_message.text !== currentQuestion &&
-    currentQuestion === questions(13, place, overallRating)
+    currentQuestion === questions(12, place, overallRating)
   ) {
     handleResponse = {
-      text: questions(14, place, overallRating)
+      text: questions(13, place, overallRating)
     };
     currentQuestion = handleResponse["text"];
   } else if (
     (received_message.text || received_message.text === "Skip") &&
     received_message.text !== currentQuestion &&
-    (currentQuestion === questions(14, place, overallRating) ||
-      currentQuestion === questions(12, place, overallRating))
+    (currentQuestion === questions(13, place, overallRating) ||
+      currentQuestion === questions(11, place, overallRating))
   ) {
     {
       handleResponse = {
-        text: questions(15, place, overallRating),
+        text: questions(14, place, overallRating),
         quick_replies: [
           {
             content_type: "text",
@@ -380,30 +366,30 @@ function handleMessage(sender_psid, received_message) {
   } else if (
     received_message.text === "Yes" &&
     received_message.text !== currentQuestion &&
-    currentQuestion === questions(15, place, overallRating)
+    currentQuestion === questions(14, place, overallRating)
   ) {
     handleResponse = {
-      text: questions(16, place, overallRating),
+      text: questions(15, place, overallRating),
       quick_replies: ratings
     };
     currentQuestion = handleResponse["text"];
   } else if (
     (received_message.text === "1" || "2" || "3" || "4" || "5") &&
     received_message.text !== currentQuestion &&
-    currentQuestion === questions(16, place, overallRating)
+    currentQuestion === questions(15, place, overallRating)
   ) {
     handleResponse = {
-      text: questions(17, place, overallRating)
+      text: questions(16, place, overallRating)
     };
     currentQuestion = handleResponse["text"];
   } else if (
     (received_message.text || received_message.text === "Skip") &&
     received_message.text !== currentQuestion &&
-    (currentQuestion === questions(15, place, overallRating) ||
-      currentQuestion === questions(17, place, overallRating))
+    (currentQuestion === questions(14, place, overallRating) ||
+      currentQuestion === questions(16, place, overallRating))
   ) {
     handleResponse = {
-      text: questions(18, place, overallRating),
+      text: questions(17, place, overallRating),
       quick_replies: [
         {
           content_type: "text",
@@ -421,43 +407,33 @@ function handleMessage(sender_psid, received_message) {
   } else if (
     received_message.text === "Yes" &&
     received_message.text !== currentQuestion &&
-    currentQuestion === questions(18, place, overallRating)
+    currentQuestion === questions(17, place, overallRating)
   ) {
     handleResponse = {
-      text: questions(19, place, overallRating),
+      text: questions(18, place, overallRating),
       quick_replies: ratings
     };
     currentQuestion = handleResponse["text"];
   } else if (
     (received_message.text === "1" || "2" || "3" || "4" || "5") &&
     received_message.text !== currentQuestion &&
-    currentQuestion === questions(19, place, overallRating)
+    currentQuestion === questions(18, place, overallRating)
   ) {
     handleResponse = {
-      text: questions(20, place, overallRating)
+      text: questions(19, place, overallRating)
     };
     currentQuestion = handleResponse["text"];
   } else if (
     (received_message.text || received_message.text === "Skip") &&
     received_message.text !== currentQuestion &&
-    (currentQuestion === questions(18, place, overallRating) ||
-      currentQuestion === questions(20, place, overallRating))
+    (currentQuestion === questions(17, place, overallRating) ||
+      currentQuestion === questions(19, place, overallRating))
   ) {
     handleResponse = {
       text: `Thank you for your review - it's great. We'll send you a message when it has gone live! :)`
     };
     currentQuestion = handleResponse["text"];
-  } else if ((received_message.text !== currentQuestion) && (currentQuestion === questions(0, place, overallRating)) && (received_message.text === "Chat!")) {
-    handleResponse = {
-      text: `No problem! Leave us a message and we will get back to you as soon as possible!`
-    };
-    currentQuestion = handleResponse["text"];
-  } else if ((received_message.text !== currentQuestion) && ((currentQuestion === `Thank you for your review - it's great. We'll send you a message when it has gone live! :)`) || (currentQuestion === `No problem! Leave us a message and we will get back to you as soon as possible!`))) {
-    handleResponse = {
-      text: `hello!!!!!!!!!`
   }
-  currentQuestion = handleResponse["text"]; 
-}
 
   // Send the response message
   callSendAPI(sender_psid, handleResponse);
@@ -471,19 +447,7 @@ function handlePostback(sender_psid, received_postback) {
   // Set the response based on the postback payload
 
   if (payload === "GET_STARTED") {
-    response = { text: `Hello! Thanks for clicking get started. Would you like to leave a review or chat to us?`,
-    quick_replies: [
-      {
-        content_type: "text",
-        title: "Review!",
-        payload: "review"
-      },
-      {
-        content_type: "text",
-        title: "Chat!",
-        payload: "chat"
-      }
-    ] };
+    response = { text: questionData[0] };
     currentQuestion = response["text"];
   } else if (payload === "yes") {
     response = {
@@ -511,9 +475,6 @@ function handlePostback(sender_psid, received_postback) {
 }
 
 function callSendAPI(sender_psid, response) {
-  if (currentQuestion === `hello!!!!!!!!!`) {
-    return null
-  }
   // Construct the message body
   let request_body = {
     recipient: {
@@ -539,3 +500,17 @@ function callSendAPI(sender_psid, response) {
     }
   );
 }
+
+// module.exports = place;
+// curl -X POST -H "Content-Type: application/json" -d '{
+//   "get_started": {"payload": "GET_STARTED"}
+// }' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAEZBxZBsDMYYBAJPLwYYBncuKhIZCnAVq9GrZAhkD9EwKbISZBS30D2xmmqMqKzMnFx6UE80KFFmnZAkWuy832RoWAOLCHJnivAjcggKZAO3JYmjg9Va4nng6mi0Coz8ZCyW0W8qWN4DrCFtgrjB1PxjdZC0nURiBnZBFcOcfwDOeJBvZAsqzEMFbFBWiE7MAuVP0ZD"
+
+// curl -X POST -H "Content-Type: application/json" -d '{
+//   "greeting": [
+//     {
+//       "locale":"default",
+//       "text":"Hello {{user_first_name}}! Click on Get Started to leave your review"
+//     }
+//   ]
+// }' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAEZBxZBsDMYYBAJPLwYYBncuKhIZCnAVq9GrZAhkD9EwKbISZBS30D2xmmqMqKzMnFx6UE80KFFmnZAkWuy832RoWAOLCHJnivAjcggKZAO3JYmjg9Va4nng6mi0Coz8ZCyW0W8qWN4DrCFtgrjB1PxjdZC0nURiBnZBFcOcfwDOeJBvZAsqzEMFbFBWiE7MAuVP0ZD"
