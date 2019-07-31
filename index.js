@@ -48,7 +48,7 @@ function questions(questionNumber, place, overallRating) {
     `Ok, great! Can you confirm which town or city ` + place + ` is in?`,
     `Do you have any photos or images you'd like to upload?`,
     `Do you have any more photos or images you'd like to upload?`,
-    "Great, send it!",
+    "Great, to select image to attach, click on the picture icon in the bottom left corner of the messenger and send it.",
     "Great! Now, what would you like to title your review?",
     "Great Title! Now for a rating, how would you rate the disabled access overall?",
     `You've given a rating of ` +
