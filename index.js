@@ -487,7 +487,7 @@ function handlePostback(sender_psid, received_postback) {
     currentQuestion = response["text"];
   } else if (payload === "yes") {
     response = {
-      text: questions(3, place, overallRating),
+      text: questions(4, place, overallRating),
       quick_replies: [
         {
           content_type: "text",
