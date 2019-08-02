@@ -530,7 +530,10 @@ function handlePostback(sender_psid, received_postback) {
 }
 
 function callSendAPI(sender_psid, response) {
-  if (currentQuestion === `hello!!!!!!!!!`) {
+  if (
+    currentQuestion ===
+    `Uh oh. Something's went wrong. Try deleting the chat and starting again. Sorry!`
+  ) {
     return null;
   }
   // Construct the message body
