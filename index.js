@@ -1,6 +1,5 @@
 "use strict";
 
-
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 // Imports dependencies and set up http server
 const request = require("request"),
@@ -140,13 +139,20 @@ app.get("/webhook", (req, res) => {
 });
 
 function handleMessage(sender_psid, received_message) {
-  if ((received_message.text !== currentQuestion) && currentQuestion === questions(0, place, overallRating) && (received_message.text === `Review!`)) {
+  if (
+    received_message.text !== currentQuestion &&
+    currentQuestion === questions(0, place, overallRating) &&
+    received_message.text === `Review!`
+  ) {
     handleResponse = {
       text: questions(1, place, overallRating)
     };
     currentQuestion = handleResponse["text"];
-  } else if ((received_message.text !== currentQuestion) && currentQuestion === questions(1, place, overallRating)) {
-    place = received_message.text
+  } else if (
+    received_message.text !== currentQuestion &&
+    currentQuestion === questions(1, place, overallRating)
+  ) {
+    place = received_message.text;
     handleResponse = {
       text: questions(2, place, overallRating)
     };
@@ -264,13 +270,14 @@ function handleMessage(sender_psid, received_message) {
       ]
     };
     currentQuestion = handleResponse["text"];
-  } else if (received_message.text === "Finish" &&
-  received_message.text !== currentQuestion &&
-  currentQuestion === `Thank you very much your review is nearly complete!`
+  } else if (
+    received_message.text === "Finish" &&
+    received_message.text !== currentQuestion &&
+    currentQuestion === `Thank you very much your review is nearly complete!`
   ) {
     handleResponse = {
-      text: `Thank you for your review - it's great. We'll send you a message when it has gone live! :)` 
-    }
+      text: `Thank you for your review - it's great. We'll send you a message when it has gone live! :)`
+    };
     currentQuestion = handleResponse["text"];
   } else if (
     received_message.text === "Continue" &&
@@ -447,17 +454,27 @@ function handleMessage(sender_psid, received_message) {
       text: `Thank you for your review - it's great. We'll send you a message when it has gone live! :)`
     };
     currentQuestion = handleResponse["text"];
-  } else if ((received_message.text !== currentQuestion) && (currentQuestion === questions(0, place, overallRating)) && (received_message.text === "Chat!")) {
+  } else if (
+    received_message.text !== currentQuestion &&
+    currentQuestion === questions(0, place, overallRating) &&
+    received_message.text === "Chat!"
+  ) {
     handleResponse = {
       text: `No problem! Leave us a message and we will get back to you as soon as possible!`
     };
     currentQuestion = handleResponse["text"];
-  } else if ((received_message.text !== currentQuestion) && ((currentQuestion === `Thank you for your review - it's great. We'll send you a message when it has gone live! :)`) || (currentQuestion === `No problem! Leave us a message and we will get back to you as soon as possible!`))) {
+  } else if (
+    received_message.text !== currentQuestion &&
+    (currentQuestion ===
+      `Thank you for your review - it's great. We'll send you a message when it has gone live! :)` ||
+      currentQuestion ===
+        `No problem! Leave us a message and we will get back to you as soon as possible!`)
+  ) {
     handleResponse = {
-      text: `hello!!!!!!!!!`
+      text: `Uh oh. Something's went wrong. Try deleting the chat and starting again. Sorry!`
+    };
+    currentQuestion = handleResponse["text"];
   }
-  currentQuestion = handleResponse["text"]; 
-}
 
   // Send the response message
   callSendAPI(sender_psid, handleResponse);
@@ -471,19 +488,21 @@ function handlePostback(sender_psid, received_postback) {
   // Set the response based on the postback payload
 
   if (payload === "GET_STARTED") {
-    response = { text: `Hello! Thanks for clicking get started. Would you like to leave a review or chat to us?`,
-    quick_replies: [
-      {
-        content_type: "text",
-        title: "Review!",
-        payload: "review"
-      },
-      {
-        content_type: "text",
-        title: "Chat!",
-        payload: "chat"
-      }
-    ] };
+    response = {
+      text: `Hello! Thanks for clicking get started. Would you like to leave a review or chat to us?`,
+      quick_replies: [
+        {
+          content_type: "text",
+          title: "Review!",
+          payload: "review"
+        },
+        {
+          content_type: "text",
+          title: "Chat!",
+          payload: "chat"
+        }
+      ]
+    };
     currentQuestion = response["text"];
   } else if (payload === "yes") {
     response = {
@@ -512,7 +531,7 @@ function handlePostback(sender_psid, received_postback) {
 
 function callSendAPI(sender_psid, response) {
   if (currentQuestion === `hello!!!!!!!!!`) {
-    return null
+    return null;
   }
   // Construct the message body
   let request_body = {
