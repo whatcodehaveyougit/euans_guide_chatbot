@@ -146,6 +146,7 @@ app.get("/webhook", (req, res) => {
 // }
 
 function handleMessage(sender_psid, received_message) {
+  console.log("Message Recieved: ", sender_psid, received_message);
   if (
     received_message.text !== currentQuestion &&
     currentQuestion === questions(0, place, overallRating) &&
@@ -486,6 +487,7 @@ function handleMessage(sender_psid, received_message) {
   // Send the response message
   callSendAPI(sender_psid, handleResponse);
 }
+
 function handlePostback(sender_psid, received_postback) {
   console.log("ok");
   let response;
