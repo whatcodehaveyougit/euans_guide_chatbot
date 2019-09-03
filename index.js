@@ -104,11 +104,11 @@ app.post("/webhook", (req, res) => {
       // pass the event to the appropriate handler function
       if (webhook_event.message || webhook_event.attachments) {
         console.log("Question: ", currentQuestion);
-        console.log("Answer: ", webhook_event.message);
+        console.log("Answer: ", webhook_event.message.text);
         handleMessage(sender_psid, webhook_event.message);
       } else if (webhook_event.postback) {
         console.log("Question: ", currentQuestion);
-        console.log("Answer: ", webhook_event.postback);
+        console.log("Answer: ", webhook_event.postback.text);
         handlePostback(sender_psid, webhook_event.postback);
       }
     });
