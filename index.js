@@ -5,6 +5,7 @@ const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const request = require("request"),
   express = require("express"),
   body_parser = require("body-parser"),
+  fs = require("fs"),
   app = express().use(body_parser.json()); // creates express http server
 
 const nodemailer = require('nodemailer');
@@ -13,6 +14,7 @@ let currentQuestion;
 let handleResponse;
 let place;
 let overallRating;
+let userAnswers;
 
 const ratings = [
   {
@@ -101,8 +103,12 @@ app.post("/webhook", (req, res) => {
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
       if (webhook_event.message || webhook_event.attachments) {
+        console.log("Question: ", currentQuestion);
+        console.log("Answer: ", webhook_event.message);
         handleMessage(sender_psid, webhook_event.message);
       } else if (webhook_event.postback) {
+        console.log("Question: ", currentQuestion);
+        console.log("Answer: ", webhook_event.postback);
         handlePostback(sender_psid, webhook_event.postback);
       }
     });
