@@ -282,6 +282,7 @@ function handleMessage(sender_psid, received_message) {
       text: `Thank you for your review - it's great. We'll send you a message when it has gone live! :)`
     };
     currentQuestion = handleResponse["text"];
+    finish(sender_psid)
     // sendEmail(received_message);
   } else if (
     received_message.text === "Continue" &&
@@ -458,6 +459,7 @@ function handleMessage(sender_psid, received_message) {
       text: `Thank you for your review - it's great. We'll send you a message when it has gone live! :)`
     };
     currentQuestion = handleResponse["text"];
+    finish(sender_psid)
     // sendEmail(received_message);
   } else if (
     received_message.text !== currentQuestion &&
@@ -593,6 +595,14 @@ function sendEmail(response) {
   });
 }
 
-function f() {
-  
+function finish(sender_psid) {
+  let today = new Date();
+  let dd = String(today.getDate()).padStart(2, '0');
+  let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  let yyyy = today.getFullYear();
+  let hour = String(today.getHours()).padStart(2, '0');
+  let minute = String(today.getMinutes()).padStart(2, '0');
+  let date = dd + "-" + mm + "-" + yyyy + "-" + hour + ":" + minute;
+
+  fs.writeFile(`${sender_psid}_${date}.JSON`, userAnswers, err => {console.error()});
 }
