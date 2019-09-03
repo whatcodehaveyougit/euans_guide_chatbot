@@ -540,6 +540,7 @@ function handlePostback(sender_psid, received_postback) {
 }
 
 function callSendAPI(sender_psid, response) {
+  console.log("Responce: ", response);
   if (
     currentQuestion ===
     `Uh oh. Something's went wrong. Try deleting the chat and starting again. Sorry!`
@@ -551,7 +552,7 @@ function callSendAPI(sender_psid, response) {
     recipient: {
       id: sender_psid
     },
-    message: {text: "Hello there"}
+    message: response
   };
 
   // Send the HTTP request to the Messenger Platform
