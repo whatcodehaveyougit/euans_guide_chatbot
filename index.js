@@ -555,8 +555,8 @@ function callSendAPI(sender_psid, response) {
       headers: { 'Content-Type': 'application/json'}
     },
     (err, res, body) => {
-      if (!err) {
-        console.log("message sent!", body.recipient_id);
+      if (!err && "recipient_id" in body) {
+        console.log("message sent!", body);
       } else {
         console.error("Unable to send message:" + err);
       }
@@ -576,7 +576,7 @@ function sendEmail(response) {
   const mailOptions = {
     from: process.env.EMAIL_ACCOUNT,
     to: process.env.EMAIL_ACCOUNT,
-    subject: 'Sending Email using Node.js',
+    subject: 'Sending Review from Facebook bot',
     text: response
   };
 
