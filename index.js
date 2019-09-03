@@ -548,10 +548,10 @@ function callSendAPI(sender_psid, response) {
   }
   // Construct the message body
   let request_body = {
-    recipient: {
+    recipient: JSON.stringify({
       id: sender_psid
-    },
-    message: response
+    }),
+    message: JSON.stringify(response)
   };
 
   // Send the HTTP request to the Messenger Platform
@@ -560,7 +560,7 @@ function callSendAPI(sender_psid, response) {
       uri: `https://graph.facebook.com/v4.0/me/messages?access_token=${PAGE_ACCESS_TOKEN}`,
       // qs: { access_token: PAGE_ACCESS_TOKEN },
       method: "POST",
-      json: JSON.stringify(request_body)
+      json: request_body
     },
     (err, res, body) => {
       if (!err) {
