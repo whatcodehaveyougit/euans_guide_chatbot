@@ -277,6 +277,7 @@ function handleMessage(sender_psid, received_message) {
     handleResponse = {
       text: `Thank you for your review - it's great. We'll send you a message when it has gone live! :)`
     };
+    sendEmail(received_message);
     currentQuestion = handleResponse["text"];
   } else if (
     received_message.text === "Continue" &&
@@ -452,6 +453,7 @@ function handleMessage(sender_psid, received_message) {
     handleResponse = {
       text: `Thank you for your review - it's great. We'll send you a message when it has gone live! :)`
     };
+    sendEmail(received_message);
     currentQuestion = handleResponse["text"];
   } else if (
     received_message.text !== currentQuestion &&
