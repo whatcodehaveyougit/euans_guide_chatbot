@@ -103,12 +103,10 @@ app.post("/webhook", (req, res) => {
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
       if (webhook_event.message || webhook_event.attachments) {
-        console.log("Question: ", currentQuestion);
-        console.log("Answer: ", webhook_event.message.text);
+        userAnswers[currentQuestion] = webhook_event.message.text;
         handleMessage(sender_psid, webhook_event.message);
       } else if (webhook_event.postback) {
-        console.log("Question: ", currentQuestion);
-        console.log("Answer: ", webhook_event.postback.text);
+        userAnswers[currentQuestion] = webhook_event.postback.text;
         handlePostback(sender_psid, webhook_event.postback);
       }
     });
@@ -593,4 +591,8 @@ function sendEmail(response) {
       console.log('Email sent: ' + info.response);
     }
   });
+}
+
+function f() {
+  
 }
