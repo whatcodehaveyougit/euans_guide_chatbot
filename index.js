@@ -277,8 +277,8 @@ function handleMessage(sender_psid, received_message) {
     handleResponse = {
       text: `Thank you for your review - it's great. We'll send you a message when it has gone live! :)`
     };
-    sendEmail(received_message);
     currentQuestion = handleResponse["text"];
+    // sendEmail(received_message);
   } else if (
     received_message.text === "Continue" &&
     received_message.text !== currentQuestion &&
@@ -453,8 +453,8 @@ function handleMessage(sender_psid, received_message) {
     handleResponse = {
       text: `Thank you for your review - it's great. We'll send you a message when it has gone live! :)`
     };
-    sendEmail(received_message);
     currentQuestion = handleResponse["text"];
+    // sendEmail(received_message);
   } else if (
     received_message.text !== currentQuestion &&
     currentQuestion === questions(0, place, overallRating) &&
@@ -557,6 +557,7 @@ function callSendAPI(sender_psid, response) {
     (err, res, body) => {
       if (!err) {
         console.log("message sent!", body);
+        sendEmail(response);
       } else {
         console.error("Unable to send message:" + err);
       }
