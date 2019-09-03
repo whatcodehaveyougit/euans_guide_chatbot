@@ -560,10 +560,8 @@ function callSendAPI(sender_psid, response) {
       uri: `https://graph.facebook.com/v4.0/me/messages?access_token=${PAGE_ACCESS_TOKEN}`,
       // qs: { access_token: PAGE_ACCESS_TOKEN },
       method: "POST",
-      recipient: {
-        id: sender_psid
-      },
-      json: JSON.stringify(request_body)
+      body: JSON.stringify(request_body),
+      headers: { 'Content-Type': 'application/json'}
     },
     (err, res, body) => {
       if (!err) {
