@@ -7,6 +7,23 @@ const request = require("request"),
   body_parser = require("body-parser"),
   app = express().use(body_parser.json()); // creates express http server
 
+const nodemailer = require('nodemailer');
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_ACCOUNT,
+    pass: process.env.EMAIL_PASSWORD
+  }
+});
+
+const mailOptions = {
+  from: process.env.EMAIL_ACCOUNT,
+  to: process.env.EMAIL_ACCOUNT,
+  subject: 'Sending Email using Node.js',
+  text: 'That was easy!'
+};
+
 let currentQuestion;
 let handleResponse;
 let place;
@@ -553,6 +570,13 @@ function callSendAPI(sender_psid, response) {
     (err, res, body) => {
       if (!err) {
         console.log("message sent!", body);
+        transporter.sendMail(mailOptions, function(error, info){
+          if (error) {
+            console.log(error);
+          } else {
+            console.log('Email sent: ' + info.response);
+          }
+        });
       } else {
         console.error("Unable to send message:" + err);
       }
