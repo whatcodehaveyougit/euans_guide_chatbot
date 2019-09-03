@@ -497,7 +497,7 @@ function handlePostback(sender_psid, received_postback) {
 
   // Set the response based on the postback payload
 
-  if (payload === "GET_STARTED") {
+  if (payload === "Get Started") {
     response = {
       text: `Hello! Thanks for clicking get started. Would you like to leave a review or chat to us?`,
       quick_replies: [
