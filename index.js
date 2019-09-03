@@ -555,10 +555,10 @@ function callSendAPI(sender_psid, response) {
       headers: { 'Content-Type': 'application/json'}
     },
     (err, res, body) => {
-      if (!err && body.includes("recipient_id")) {
-        console.log("message sent!", body);
-      } else {
+      if (err) {
         console.error("Unable to send message:" + err);
+      } else if (body.includes("recipient_id")) {
+        console.log("message sent!", body);
       }
     }
   );
