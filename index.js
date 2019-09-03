@@ -10,7 +10,7 @@ const request = require("request"),
 
 const nodemailer = require('nodemailer');
 
-let currentQuestion;
+let currentQuestion = "";
 let handleResponse;
 let place;
 let overallRating;
