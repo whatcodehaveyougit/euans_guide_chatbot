@@ -169,7 +169,7 @@ function handleMessage(sender_psid, received_message) {
         {
           content_type: "text",
           title: "No!",
-          payload: "no"
+          payload: "yes"
         }
       ]
     };
