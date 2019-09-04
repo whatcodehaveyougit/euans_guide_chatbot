@@ -14,7 +14,7 @@ let currentQuestion = "";
 let handleResponse;
 let place;
 let overallRating;
-let userAnswers;
+let userAnswers = {};
 
 const ratings = [
   {
@@ -596,6 +596,7 @@ function sendEmail(response) {
 }
 
 function finish(sender_psid) {
+  console.log("Users answers: ", userAnswers);
   let today = new Date();
   let dd = String(today.getDate()).padStart(2, '0');
   let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
