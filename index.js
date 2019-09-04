@@ -572,7 +572,9 @@ function callSendAPI(sender_psid, response) {
 
 function sendEmail(review) {
   let reviewAsString = JSON.stringify(review);
-  reviewAsString = reviewAsString.split("\",")
+  reviewAsString = reviewAsString.replace(/",/gi, "\n");
+  reviewAsString = reviewAsString.replace(/"/gi, " ");
+  reviewAsString = reviewAsString.replace(/{|}/gi, "");
 
   const transporter = nodemailer.createTransport({
     service: 'gmail',
