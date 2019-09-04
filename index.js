@@ -571,6 +571,9 @@ function callSendAPI(sender_psid, response) {
 }
 
 function sendEmail(review) {
+  let reviewAsString = JSON.stringify(review);
+  reviewAsString = reviewAsString.split("\",")
+
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -583,7 +586,7 @@ function sendEmail(review) {
     from: process.env.EMAIL_ACCOUNT,
     to: process.env.EMAIL_RECIPIENT,
     subject: 'Sending Review from Facebook bot',
-    text: JSON.stringify(review)
+    text: reviewAsString
   };
 
   transporter.sendMail(mailOptions, function(error, info){
