@@ -208,7 +208,7 @@ function handleMessage(sender_psid, received_message) {
   ) {
     // Get the URL of the message attachment
     let attachment_url = received_message.attachments[0].payload.url;
-    images.push({filePath: attachment_url});
+    images.push({path: attachment_url});
     handleResponse = {
       attachment: {
         type: "template",
