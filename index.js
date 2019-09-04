@@ -15,6 +15,7 @@ let handleResponse;
 let place;
 let overallRating;
 let userAnswers = {};
+let images = [];
 
 const ratings = [
   {
@@ -207,6 +208,7 @@ function handleMessage(sender_psid, received_message) {
   ) {
     // Get the URL of the message attachment
     let attachment_url = received_message.attachments[0].payload.url;
+    images.push({filePath: attachment_url});
     handleResponse = {
       attachment: {
         type: "template",
@@ -588,7 +590,8 @@ function sendEmail(review) {
     from: process.env.EMAIL_ACCOUNT,
     to: process.env.EMAIL_RECIPIENT,
     subject: 'Sending Review from Facebook bot',
-    text: reviewAsString
+    text: reviewAsString,
+    attachments: images
   };
 
   transporter.sendMail(mailOptions, function(error, info){
