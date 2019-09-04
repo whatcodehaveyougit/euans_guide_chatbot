@@ -583,7 +583,7 @@ function sendEmail(review) {
     from: process.env.EMAIL_ACCOUNT,
     to: process.env.EMAIL_RECIPIENT,
     subject: 'Sending Review from Facebook bot',
-    text: JSON.stringify(review)
+    text: JSON.parse(review)
   };
 
   transporter.sendMail(mailOptions, function(error, info){
