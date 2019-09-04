@@ -283,7 +283,7 @@ function handleMessage(sender_psid, received_message) {
     };
     currentQuestion = handleResponse["text"];
     finish(sender_psid)
-    // sendEmail(received_message);
+    sendEmail(userAnswers);
   } else if (
     received_message.text === "Continue" &&
     received_message.text !== currentQuestion &&
@@ -460,7 +460,7 @@ function handleMessage(sender_psid, received_message) {
     };
     currentQuestion = handleResponse["text"];
     finish(sender_psid)
-    // sendEmail(received_message);
+    sendEmail(userAnswers);
   } else if (
     received_message.text !== currentQuestion &&
     currentQuestion === questions(0, place, overallRating) &&
@@ -570,7 +570,7 @@ function callSendAPI(sender_psid, response) {
   );
 }
 
-function sendEmail(response) {
+function sendEmail(review) {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -581,9 +581,9 @@ function sendEmail(response) {
 
   const mailOptions = {
     from: process.env.EMAIL_ACCOUNT,
-    to: process.env.EMAIL_ACCOUNT,
+    to: process.env.EMAIL_RECIPIENT,
     subject: 'Sending Review from Facebook bot',
-    text: response
+    text: review
   };
 
   transporter.sendMail(mailOptions, function(error, info){
