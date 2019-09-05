@@ -655,6 +655,7 @@ function handlePostback(sender_psid, received_postback) {
   // Get the payload for the postback
   let payload = received_postback.payload;
 
+  console.log("Postback payload:",payload)
   // Set the response based on the postback payload
 
   if (payload === "Get Started") {
@@ -676,7 +677,8 @@ function handlePostback(sender_psid, received_postback) {
     currentQuestion = "hello";
   } else if (payload === "yes") {
     response = getQuestionData("images2")
-    currentQuestion = "images2"
+	currentQuestion = "images2"
+	console.log("Payload = yes, currentQuestion = `images2`")
   } else if (payload === "no") {
     response = { text: "Oops, try sending another image." };
   }
