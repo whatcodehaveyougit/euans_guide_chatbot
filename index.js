@@ -278,13 +278,21 @@ function handleMessage(sender_psid,received_message){
 			else
 				currentQuestion="end";
 			break;
-		case "transport": currentQuestion="transport-rating"
+		case "transport": 
+			if (received_message.text === "Skip")
+				currentQuestion="access"
+			else
+				currentQuestion="transport-rating"
 			break;
 		case "transport-rating": currentQuestion="transport-summary"
 			break;
 		case "transport-summary": currentQuestion="access"
 			break;
-		case "access": currentQuestion="access-rating"
+		case "access":
+			if (received_message.text === "Skip")
+				currentQuestion="toilet"
+			else
+				currentQuestion="access-rating"
 			break;
 		case "access-rating": currentQuestion="view"
 			break;
@@ -294,7 +302,11 @@ function handleMessage(sender_psid,received_message){
 			break;
 		case "toilet-summary": currentQuestion="staff"
 			break;
-		case "staff": currentQuestion="staff-rating"
+		case "staff": 
+			if (received_message.text === "Skip")
+				currentQuestion="end"
+			else
+				currentQuestion="staff-rating"
 			break;
 		case "staff-rating": currentQuestion="staff-summary"
 			break;
