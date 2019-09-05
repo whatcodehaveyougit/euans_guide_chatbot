@@ -582,7 +582,7 @@ function sendEmail(reviewObject) {
 
   const review = formatBody(reviewAsString);
 
-  const title = review["Great! Now, what would you like to title your review"];
+  const title = reviewObject["Great! Now, what would you like to title your review?"];
 
   const transporter = nodemailer.createTransport({
     service: 'gmail',
