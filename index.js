@@ -625,7 +625,7 @@ function finish(sender_psid) {
 function formatBody(string) {
   let formattedString = string.split("\n");
   formattedString.shift();
-  formattedString.pop();
+  // formattedString.pop();
 
   formattedString = formattedString.filter(str => !(str.includes("photo") || str.includes("Great Title") || str.includes("complete") || str.includes("skip") || str.includes("Yes")));
 
@@ -641,6 +641,8 @@ function formatBody(string) {
   formattedString = formattedString.replace("Great! Could you give us some more information on what you noticed about", "Access summary of");
   formattedString = formattedString.replace("Ok, great! Let's start with a rating, again out of 5 for toilet accessiblity.", "Toilet rating");
   formattedString = formattedString.replace("Would you be able to provide some more details about the toilets", "Toilet summary");
+  formattedString = formattedString.replace("Ok, great! Let's start with a rating, again out of 5 for staff.", "Staff rating");
+  formattedString = formattedString.replace("Would you be able to provide some more details about the staff", "Staff summary");
 
   return formattedString;
 }
