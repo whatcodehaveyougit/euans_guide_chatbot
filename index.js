@@ -576,7 +576,7 @@ function callSendAPI(sender_psid, response) {
 
 function sendEmail(reviewObject) {
   let reviewAsString = JSON.stringify(reviewObject);
-  reviewAsString = reviewAsString.replace(/",/g, "\n");
+  reviewAsString = reviewAsString.replace(/", /g, "\n");
   reviewAsString = reviewAsString.replace(/"/g, " ");
   reviewAsString = reviewAsString.replace(/{|}|\?/g, "");
 
