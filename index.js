@@ -45,10 +45,10 @@ const ratings = [
   }
 ];
 
-function getQuestionData(questionKey, place, overallRating) {
+function getQuestionData(questionKey, place, attachment_url) {
     const questionsData = {
         "hello": {text: `Hello! Thanks for clicking get started. Would you like to leave a review or chat to us?`,
-            response: {quick_replies: [
+            quick_replies: [
                     {
                         content_type: "text",
                         title: "Review!",
@@ -59,7 +59,7 @@ function getQuestionData(questionKey, place, overallRating) {
                         title: "Chat!",
                         payload: "chat"
                     }
-                ]}},
+                ]},
         "visited": {text: "Can you confirm the name of the place you visited?"},
         "city": {text: "Ok, great! Can you confirm which town or city " + place + "is in?"},
 		"image": {text: "Do you have any photos or images you'd like to upload?",
@@ -114,12 +114,12 @@ function getQuestionData(questionKey, place, overallRating) {
 			  ]
 			}
 		  }	
-	
 		},
         "title": {text: "Great! Now, what would you like to title your review?"},
-        "disabled-rating": {text: "Great Title! Now for a rating, how would you rate the disabled access overall?", quick_replies: ratings},
-		"disabled-summary": {text: "You've given a rating of ` + overallRating + `. Could you summarize your experience at" + place + "?"
-		,quick_replies: [
+		"disabled-rating": {text: "Great Title! Now for a rating, how would you rate the disabled access overall?", 
+		quick_replies: ratings},
+		"disabled-summary": {text: "You've given a rating of ` + overallRating + `. Could you summarize your experience at" + place + "?",
+		quick_replies: [
 			{
 			  content_type: "text",
 			  title: "Continue",
@@ -147,7 +147,8 @@ function getQuestionData(questionKey, place, overallRating) {
 		"transport-rating": {text:"Ok, great! Let's start with a rating, again out of 5.", 
 		quick_replies: ratings},
 		"transport-summary": {text: "Awesome! Could you give us some more information?"},
-        "access": {text: "Thank You! Now onto getting in and around` + place + `. Is there anything specific about Disabled Access you would like to add?", quick_replies: [
+		"access": {text: "Thank You! Now onto getting in and around` + place + `. Is there anything specific about Disabled Access you would like to add?",
+		quick_replies: [
 			{
 			  content_type: "text",
 			  title: "Yes",
@@ -162,7 +163,8 @@ function getQuestionData(questionKey, place, overallRating) {
 		"access-rating": {text: "Ok, great! Let's start with a rating, again out of 5 for getting in and around.", 
 		quick_replies: ratings},
         "view": {text: "Great! Could you give us some more information on what you noticed about" + place + "?"}, 
-        "toilet": {text: "Now, onto toilets. Our users consistently tell us how important both accessible toilets and information about toilets is. Are you able to tell us anything about the toilets at" + place + "?", quick_replies: [
+		"toilet": {text: "Now, onto toilets. Our users consistently tell us how important both accessible toilets and information about toilets is. Are you able to tell us anything about the toilets at" + place + "?",
+		quick_replies: [
 			{
 			  content_type: "text",
 			  title: "Yes",
@@ -174,7 +176,8 @@ function getQuestionData(questionKey, place, overallRating) {
 			  payload: "skip_disabled_access"
 			}
 		  ]},
-        "toilet-rating": {text: "Ok, great! Let's start with a rating, again out of 5 for toilet accessibility.", quick_replies: ratings},
+		"toilet-rating": {text: "Ok, great! Let's start with a rating, again out of 5 for toilet accessibility.",
+		quick_replies: ratings},
         "toilet-summary": {text: "Would you be able to provide some more details about the toilets?"},
         "staff": {text: "Now we come to staff. " +
 				"Would you like to add any further information about the people you came across at" + place + "?",       
@@ -190,7 +193,7 @@ function getQuestionData(questionKey, place, overallRating) {
 					  payload: "skip_disabled_access"
 					}
 				  ]},
-            "staff-rating":  {text: "Ok, great! Let's start with a rating, again out of 5 for staff.", quick_replies: ratings},
+		"staff-rating":  {text: "Ok, great! Let's start with a rating, again out of 5 for staff.", quick_replies: ratings},
         "staff-summary": {text: "Would you be able to provide some more details about the staff?"}
     };
     return questionsData[questionKey];
