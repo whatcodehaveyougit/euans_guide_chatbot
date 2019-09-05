@@ -88,32 +88,7 @@ function getQuestionData(questionKey, place, attachment_url) {
                         payload: "no"
                     }
                 ]},
-		"upload-image": {text: "Great, to select an image to attach, click on the picture icon in the bottom left corner of the messenger and send it.",
-		attachment: {
-			type: "template",
-			payload: {
-			  template_type: "generic",
-			  elements: [
-				{
-				  title: "Is this the right picture?",
-				  subtitle: "Tap a button to answer.",
-				  image_url: attachment_url,
-				  buttons: [
-					{
-					  type: "postback",
-					  title: "Yes!",
-					  payload: "yes"
-					},
-					{
-					  type: "postback",
-					  title: "No!",
-					  payload: "no"
-					}
-				  ]
-				}
-			  ]
-			}
-		  }	
+		"upload-image": {text: "Great, to select an image to attach, click on the picture icon in the bottom left corner of the messenger and send it."
 		},
         "title": {text: "Great! Now, what would you like to title your review?"},
 		"disabled-rating": {text: "Great Title! Now for a rating, how would you rate the disabled access overall?", 
