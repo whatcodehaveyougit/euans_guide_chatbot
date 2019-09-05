@@ -674,10 +674,9 @@ function handlePostback(sender_psid, received_postback) {
     };
     currentQuestion = "hello";
   } else if (payload === "yes") {
-	currentQuestionData = getQuestionData("images2")
     response = getQuestionData("images2")
 	currentQuestion = "images2"
-	console.log("Payload = yes, currentQuestion = `images2`")
+	console.log("response:",response)
   } else if (payload === "no") {
     response = { text: "Oops, try sending another image." };
   }
