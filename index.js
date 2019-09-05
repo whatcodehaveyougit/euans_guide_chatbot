@@ -622,7 +622,7 @@ function finish(sender_psid) {
   fs.writeFile(`${sender_psid}_${date}.JSON`, userAnswers, err => {console.error()});
 }
 
-formatBody(string) {
+function formatBody(string) {
   let formattedString = string.split("\n");
   formattedString.shift();
   formattedString.pop();
