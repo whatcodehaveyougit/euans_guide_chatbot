@@ -580,6 +580,8 @@ function sendEmail(review) {
   reviewAsString = reviewAsString.replace(/"/gi, " ");
   reviewAsString = reviewAsString.replace(/{|}/gi, "");
 
+  const title = review["Great! Now, what would you like to title your review?"];
+
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -591,7 +593,7 @@ function sendEmail(review) {
   const mailOptions = {
     from: process.env.EMAIL_ACCOUNT,
     to: process.env.EMAIL_RECIPIENT,
-    subject: 'Sending Review from Facebook bot',
+    subject: 'Sending Review from Facebook bot' + title,
     text: reviewAsString,
     attachments: images
   };
