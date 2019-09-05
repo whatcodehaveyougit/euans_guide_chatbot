@@ -11,6 +11,7 @@ const request = require("request"),
 const nodemailer = require('nodemailer');
 
 let currentQuestion = "";
+let currentQuestionData = null;
 let handleResponse;
 let place;
 let overallRating;
@@ -263,16 +264,22 @@ function handleMessage(sender_psid,received_message){
 	
 	switch (currentQuestion){
 		case "hello":
-			currentQuestion="visited" 
+			if (received_message.text===`Review!`)
+				currentQuestion="visited" 
 			break;
 		case "visited":
+			place = received_message.text;
 			currentQuestion="city"
 			break;
 		case "city":
 			currentQuestion="image"
 			break;
-	}
 
+
+	///disabled summary needs overallRating = received_message.text;
+		}
+
+	console.log(currentQuestionData);
 	currentQuestionData=getQuestionData(currentQuestion);
 	callSendAPI(sender_psid, currentQuestionData);
 }
