@@ -274,6 +274,16 @@ function handleMessage(sender_psid,received_message){
 		case "city":
 			currentQuestion="image"
 			break;
+		case "image":
+		case "image2":
+			if (received_message.text === "Yes!" )
+				currentQuestion="upload-image"
+			else 
+				currentQuestion="title"
+		break;
+		case "upload-image":
+
+		break;
 
 
 	///disabled summary needs overallRating = received_message.text;
@@ -656,22 +666,8 @@ function handlePostback(sender_psid, received_postback) {
     };
     currentQuestion = "hello";
   } else if (payload === "yes") {
-    response = {
-      text: questions(4, place, overallRating),
-      quick_replies: [
-        {
-          content_type: "text",
-          title: "Yes!",
-          payload: "yes"
-        },
-        {
-          content_type: "text",
-          title: "No!",
-          payload: "yes"
-        }
-      ]
-    };
-    currentQuestion = response["text"];
+    response = getQuestionData("images2")
+    currentQuestion = "images2"
   } else if (payload === "no") {
     response = { text: "Oops, try sending another image." };
   }
