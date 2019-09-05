@@ -268,6 +268,7 @@ function handleMessage(sender_psid,received_message){
 			break;
 		case "disabled-rating":	
 			overallRating = received_message.text;	
+			console.log("overallRating:",overallRating);
 			currentQuestion="disabled-summary"	
 			break;
 		case "disabled-summary": currentQuestion="transport"
