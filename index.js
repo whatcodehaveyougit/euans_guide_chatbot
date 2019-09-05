@@ -259,36 +259,37 @@ function handleMessage(sender_psid,received_message){
 				currentQuestion="title"
 		break;
 		case "upload-image":
-			if (received_message.attachments)
+			if (received_message.attachments){
 				attachment_url = received_message.attachments[0].payload.url;
 				images.push({path: attachment_url});
 				attachment_response = {   
-				attachment: {
-					type: "template",
-					payload: {
-					template_type: "generic",
-					elements: [
-						{
-						title: "Is this the right picture?",
-						subtitle: "Tap a button to answer.",
-						image_url: attachment_url,
-						buttons: [
+					attachment: {
+						type: "template",
+						payload: {
+						template_type: "generic",
+						elements: [
 							{
-							type: "postback",
-							title: "Yes!",
-							payload: "yes"
-							},
-							{
-							type: "postback",
-							title: "No!",
-							payload: "no"
+							title: "Is this the right picture?",
+							subtitle: "Tap a button to answer.",
+							image_url: attachment_url,
+							buttons: [
+								{
+								type: "postback",
+								title: "Yes!",
+								payload: "yes"
+								},
+								{
+								type: "postback",
+								title: "No!",
+								payload: "no"
+								}
+							]
 							}
 						]
 						}
-					]
 					}
-				}
 				};
+			}
 		break;
 
 	///disabled summary needs overallRating = received_message.text;
@@ -652,11 +653,8 @@ function handleMessageOld(sender_psid, received_message) {
 
 function handlePostback(sender_psid, received_postback) {
   let response;
-  // Get the payload for the postback
   let payload = received_postback.payload;
-
   console.log("Postback payload:",payload)
-  // Set the response based on the postback payload
 
   if (payload === "Get Started") {
     response = {
@@ -676,6 +674,7 @@ function handlePostback(sender_psid, received_postback) {
     };
     currentQuestion = "hello";
   } else if (payload === "yes") {
+	currentQuestionData = getQuestionData("images2")
     response = getQuestionData("images2")
 	currentQuestion = "images2"
 	console.log("Payload = yes, currentQuestion = `images2`")
