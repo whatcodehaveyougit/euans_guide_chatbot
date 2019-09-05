@@ -627,7 +627,7 @@ function formatBody(string) {
   formattedString.shift();
   // formattedString.pop();
 
-  formattedString = formattedString.filter(str => !(str.includes("photo") || str.includes("Great Title") || str.includes("complete") || str.includes("skip") || str.includes("Yes")));
+  formattedString = formattedString.filter(str => !(str.includes("Do you have any") || str.includes("Great Title!") || str.includes("nearly complete!") || str.includes("Skip") || str.includes("Yes")));
 
   formattedString = formattedString.join("\n");
 
