@@ -143,7 +143,7 @@ app.get("/webhook", (req, res) => {
 });
 
 function handleMessage(sender_psid, received_message) {
-	console.log("receieved message:",receieved_message)
+	console.log("receieved message:",received_message)
 
   if (
     received_message.text !== currentQuestion &&
