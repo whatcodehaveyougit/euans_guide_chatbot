@@ -266,7 +266,9 @@ function handleMessage(sender_psid,received_message){
 			break;
 		case "title": currentQuestion="disabled-rating"
 			break;
-		case "disabled-rating":	currentQuestion="disabled-summary"
+		case "disabled-rating":	
+			overallRating = received_message.text;	
+			currentQuestion="disabled-summary"	
 			break;
 		case "disabled-summary": currentQuestion="transport"
 			break;
