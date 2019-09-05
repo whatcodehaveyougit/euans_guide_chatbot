@@ -12,7 +12,6 @@ const nodemailer = require('nodemailer');
 
 let currentQuestion = "";
 let currentQuestionData = null;
-let handleResponse;
 let place;
 let overallRating;
 let userAnswers = {};
@@ -262,6 +261,9 @@ function handleMessage(sender_psid,received_message){
 	if (received_message.is_echo===true)
 		return null;
 	
+	let attachment_url = null
+	let attachment_response = null
+
 	switch (currentQuestion){
 		case "hello":
 			if (received_message.text===`Review!`)
@@ -282,15 +284,47 @@ function handleMessage(sender_psid,received_message){
 				currentQuestion="title"
 		break;
 		case "upload-image":
-
+			if (received_message.attachments)
+				attachment_url = received_message.attachments[0].payload.url;
+				images.push({path: attachment_url});
+				attachment_response = {   
+				attachment: {
+					type: "template",
+					payload: {
+					template_type: "generic",
+					elements: [
+						{
+						title: "Is this the right picture?",
+						subtitle: "Tap a button to answer.",
+						image_url: attachment_url,
+						buttons: [
+							{
+							type: "postback",
+							title: "Yes!",
+							payload: "yes"
+							},
+							{
+							type: "postback",
+							title: "No!",
+							payload: "no"
+							}
+						]
+						}
+					]
+					}
+				}
+				};
 		break;
-
 
 	///disabled summary needs overallRating = received_message.text;
 		}
 
-	currentQuestionData=getQuestionData(currentQuestion,place);
-	console.log("currentQuestion:",currentQuestion,"currentQuestionData:",currentQuestionData);
+	if (attachment_response!=null)
+		currentQuestionData=attachment_response
+	else
+		currentQuestionData=getQuestionData(currentQuestion,place,);
+
+	console.log("currentQuestion:",currentQuestion,"currentQuestionData:",currentQuestionData,"attachment_url:",attachment_url);
 	callSendAPI(sender_psid, currentQuestionData);
 }
 
