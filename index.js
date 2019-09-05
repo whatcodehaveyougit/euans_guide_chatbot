@@ -627,12 +627,15 @@ function formatBody(string) {
   formattedString.shift();
   formattedString.pop();
 
-  formattedString = formattedString.filter(str => !str.includes("photo"));
+  formattedString = formattedString.filter(str => !(str.includes("photo") || str.includes("Great Title") || str.includes("complete") || str.includes("skip")));
 
   formattedString = formattedString.join("\n");
 
   formattedString = formattedString.replace("Can you confirm the name of the place you visited", "Name of place");
   formattedString = formattedString.replace("Ok, great! Can you confirm which town or city ", "");
+  formattedString = formattedString.replace("You've given a rating of", "Disabled access overall rating :");
+  formattedString = formattedString.replace("Could you summarize your experience at", "Overview of");
+  formattedString = formattedString.replace("Ok, great! Let's start with a rating, again out of 5.", "Transport & parking rating");
 
   return formattedString;
 }
