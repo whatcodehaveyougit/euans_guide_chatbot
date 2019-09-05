@@ -576,7 +576,7 @@ function callSendAPI(sender_psid, response) {
 
 function sendEmail(reviewObject) {
   let reviewAsString = JSON.stringify(reviewObject);
-  reviewAsString = reviewAsString.replace(/", /g, "\n");
+  reviewAsString = reviewAsString.replace(/",/g, "\n");
   reviewAsString = reviewAsString.replace(/"/g, " ");
   reviewAsString = reviewAsString.replace(/{|}|\?/g, "");
 
@@ -633,7 +633,7 @@ function formatBody(string) {
   formattedString = formattedString.replace("Can you confirm the name of the place you visited", "Name of place");
   formattedString = formattedString.replace("Ok, great! Can you confirm which town or city ", "");
   formattedString = formattedString.replace("You've given a rating of", "Disabled access overall rating :");
-  formattedString = formattedString.replace("Could you summarize your experience at", "\nOverview of");
+  formattedString = formattedString.replace("Could you summarize your experience at", "\n Overview of");
   formattedString = formattedString.replace("Ok, great! Let's start with a rating, again out of 5.", "Transport & parking rating");
   formattedString = formattedString.replace("Awesome! Could you give us some more information", "Transport & parking summary");
   formattedString = formattedString.replace("Ok, great! Let's start with a rating, again out of 5 for getting in and around.", "Access rating");
