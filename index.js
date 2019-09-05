@@ -57,7 +57,7 @@ function questions(questionNumber, place, overallRating) {
     "Great Title! Now for a rating, how would you rate the disabled access overall?",
     `You've given a rating of ` +
       overallRating +
-      `.\n Could you summarize your experience at ` +
+      ".\n Could you summarize your experience at " +
       place +
       `?`,
     `We'll start with Getting There. Would you like to add any information on parking or transport?`,
@@ -625,7 +625,6 @@ function finish(sender_psid) {
 function formatBody(string) {
   let formattedString = string.split("\n");
   formattedString.shift();
-  // formattedString.pop();
 
   formattedString = formattedString.filter(str => !(str.includes("Do you have any") || str.includes("Great!") || str.includes("Great Title!") || str.includes("nearly complete!") || str.includes("Skip") || str.includes("Yes")));
 
