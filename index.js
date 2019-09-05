@@ -582,7 +582,7 @@ function sendEmail(reviewObject) {
 
   const review = formatBody(reviewAsString);
 
-  const title = review["Great! Now, what would you like to title your review?"];
+  const title = review["Great! Now, what would you like to title your review"];
 
   const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -595,7 +595,7 @@ function sendEmail(reviewObject) {
   const mailOptions = {
     from: process.env.EMAIL_ACCOUNT,
     to: process.env.EMAIL_RECIPIENT,
-    subject: 'Sending review from Facebook bot ' + title,
+    subject: 'Facebook review title: ' + title,
     text: review,
     attachments: images
   };
@@ -627,12 +627,12 @@ function formatBody(string) {
   formattedString.shift();
   formattedString.pop();
 
-  formattedString.filter(str => !str.includes("photo"));
+  formattedString = formattedString.filter(str => !str.includes("photo"));
 
   formattedString = formattedString.join("\n");
 
-  formattedString = formattedString.replace("Can you confirm the name of the place you visited?", "Name of place");
-  formattedString = formattedString.replace("Ok, great! Can you confirm which town or city", "");
+  formattedString = formattedString.replace("Can you confirm the name of the place you visited", "Name of place");
+  formattedString = formattedString.replace("Ok, great! Can you confirm which town or city ", "");
 
   return formattedString;
 }
