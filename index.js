@@ -279,8 +279,8 @@ function handleMessage(sender_psid,received_message){
 	///disabled summary needs overallRating = received_message.text;
 		}
 
-	console.log(currentQuestionData);
 	currentQuestionData=getQuestionData(currentQuestion);
+	console.log(currentQuestionData);
 	callSendAPI(sender_psid, currentQuestionData);
 }
 
