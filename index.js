@@ -627,7 +627,7 @@ function formatBody(string) {
   formattedString.shift();
   formattedString.pop();
 
-  formattedString = formattedString.filter(str => !(str.includes("photo") || str.includes("Great Title") || str.includes("complete") || str.includes("skip")));
+  formattedString = formattedString.filter(str => !(str.includes("photo") || str.includes("Great Title") || str.includes("complete") || str.includes("skip") || str.includes("Yes")));
 
   formattedString = formattedString.join("\n");
 
@@ -636,6 +636,11 @@ function formatBody(string) {
   formattedString = formattedString.replace("You've given a rating of", "Disabled access overall rating :");
   formattedString = formattedString.replace("Could you summarize your experience at", "Overview of");
   formattedString = formattedString.replace("Ok, great! Let's start with a rating, again out of 5.", "Transport & parking rating");
+  formattedString = formattedString.replace("Awesome! Could you give us some more information", "Transport & parking summary");
+  formattedString = formattedString.replace("Ok, great! Let's start with a rating, again out of 5 for getting in and around.", "Access rating");
+  formattedString = formattedString.replace("Great! Could you give us some more information on what you noticed about", "Access summary of");
+  formattedString = formattedString.replace("Ok, great! Let's start with a rating, again out of 5 for toilet accessiblity.", "Toilet rating");
+  formattedString = formattedString.replace("Would you be able to provide some more details about the toilets", "Toilet summary");
 
   return formattedString;
 }
