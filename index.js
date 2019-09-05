@@ -576,9 +576,11 @@ function callSendAPI(sender_psid, response) {
 
 function sendEmail(review) {
   let reviewAsString = JSON.stringify(review);
-  reviewAsString = reviewAsString.replace(/",/gi, "\n");
-  reviewAsString = reviewAsString.replace(/"/gi, " ");
-  reviewAsString = reviewAsString.replace(/{|}/gi, "");
+  reviewAsString = reviewAsString.replace(/",/g, "\n");
+  reviewAsString = reviewAsString.replace(/"/g, " ");
+  reviewAsString = reviewAsString.replace(/{|}|\?/g, "");
+
+  formatBody(reviewAsString);
 
   const title = review["Great! Now, what would you like to title your review?"];
 
@@ -618,4 +620,17 @@ function finish(sender_psid) {
   let date = dd + "-" + mm + "-" + yyyy + "-" + hour + ":" + minute;
 
   fs.writeFile(`${sender_psid}_${date}.JSON`, userAnswers, err => {console.error()});
+}
+
+formatBody(string) {
+  let formattedString = string.split("\n");
+  formattedString.shift();
+  formattedString.pop();
+
+  formattedString.filter(str => !str.includes("photo"));
+
+  formattedString.join("\n");
+
+  formattedString = formattedString.replace("Can you confirm the name of the place you visited?", "Name of place");
+  formattedString = formattedString.replace("Ok, great! Can you confirm which town or city", "");
 }
