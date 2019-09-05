@@ -1,5 +1,5 @@
 function questions(questionKey, place, overallRating) {
-    const questionsArray = {
+    const questionsData = {
         "hello": {question: `Hello! Thanks for clicking get started. Would you like to leave a review or chat to us?`,
             response: {quick_replies: [
                     {
