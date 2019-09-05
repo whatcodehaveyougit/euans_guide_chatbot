@@ -45,7 +45,7 @@ const ratings = [
   }
 ];
 
-function questions(questionKey, place, overallRating) {
+function getQuestionData(questionKey, place, overallRating) {
     const questionsData = {
         "hello": {text: `Hello! Thanks for clicking get started. Would you like to leave a review or chat to us?`,
             response: {quick_replies: [
@@ -256,12 +256,11 @@ app.get("/webhook", (req, res) => {
 
 function handleMessage(sender_psid,received_message){
 	if (received_message.is_echo===true)
-		exit
+		return null;
 	
 	switch (currentQuestion){
 		case "hello":
 			currentQuestion="visited" 
-			
 			break;
 		case "visited":
 			currentQuestion="city"
@@ -271,8 +270,8 @@ function handleMessage(sender_psid,received_message){
 			break;
 	}
 
-
-	callSendAPI(sender_psid, response);
+	currentQuestionData=getQuestionData(currentQuestion);
+	callSendAPI(sender_psid, currentQuestionData);
 }
 
 function handleMessageOld(sender_psid, received_message) {
