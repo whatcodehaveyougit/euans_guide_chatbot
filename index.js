@@ -45,7 +45,7 @@ const ratings = [
   }
 ];
 
-function getQuestionData(questionKey, place, attachment_url) {
+function getQuestionData(questionKey, place, overallRating) {
     const questionsData = {
         "hello": {text: `Hello! Thanks for clicking get started. Would you like to leave a review or chat to us?`,
             quick_replies: [
@@ -93,7 +93,7 @@ function getQuestionData(questionKey, place, attachment_url) {
         "title": {text: "Great! Now, what would you like to title your review?"},
 		"disabled-rating": {text: "Great Title! Now for a rating, how would you rate the disabled access overall?", 
 		quick_replies: ratings},
-		"disabled-summary": {text: "You've given a rating of ` + overallRating + `. Could you summarize your experience at" + place + "?",
+		"disabled-summary": {text: "You've given a rating of " + overallRating + ". Could you summarize your experience at" + place + "?",
 		quick_replies: [
 			{
 			  content_type: "text",
@@ -122,7 +122,7 @@ function getQuestionData(questionKey, place, attachment_url) {
 		"transport-rating": {text:"Ok, great! Let's start with a rating, again out of 5.", 
 		quick_replies: ratings},
 		"transport-summary": {text: "Awesome! Could you give us some more information?"},
-		"access": {text: "Thank You! Now onto getting in and around` + place + `. Is there anything specific about Disabled Access you would like to add?",
+		"access": {text: "Thank You! Now onto getting in and around" + place + ". Is there anything specific about Disabled Access you would like to add?",
 		quick_replies: [
 			{
 			  content_type: "text",
@@ -170,7 +170,7 @@ function getQuestionData(questionKey, place, attachment_url) {
 				  ]},
 		"staff-rating":  {text: "Ok, great! Let's start with a rating, again out of 5 for staff.", quick_replies: ratings},
 		"staff-summary": {text: "Would you be able to provide some more details about the staff?"},
-		"end": {text:`Thank you for your review - it's great. We'll send you a message when it has gone live! :)`}
+		"end": {text:"Thank you for your review - it's great. We'll send you a message when it has gone live! :)"}
 		
     };
     return questionsData[questionKey];
@@ -305,7 +305,7 @@ function handleMessage(sender_psid,received_message){
 	if (attachment_response!=null)
 		currentQuestionData=attachment_response
 	else
-		currentQuestionData=getQuestionData(currentQuestion,place,);
+		currentQuestionData=getQuestionData(currentQuestion,place,overallRating);
 
 	console.log("currentQuestion:",currentQuestion,"currentQuestionData:",currentQuestionData,"attachment_url:",attachment_url);
 	callSendAPI(sender_psid, currentQuestionData);
