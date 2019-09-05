@@ -57,7 +57,7 @@ function questions(questionNumber, place, overallRating) {
     "Great Title! Now for a rating, how would you rate the disabled access overall?",
     `You've given a rating of ` +
       overallRating +
-      `. Could you summarize your experience at ` +
+      `.\n Could you summarize your experience at ` +
       place +
       `?`,
     `We'll start with Getting There. Would you like to add any information on parking or transport?`,
