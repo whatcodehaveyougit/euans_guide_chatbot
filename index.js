@@ -61,7 +61,7 @@ function getQuestionData(questionKey, place, attachment_url) {
                     }
                 ]},
         "visited": {text: "Can you confirm the name of the place you visited?"},
-        "city": {text: "Ok, great! Can you confirm which town or city " + place + "is in?"},
+        "city": {text: "Ok, great! Can you confirm which town or city " + place + " is in?"},
 		"image": {text: "Do you have any photos or images you'd like to upload?",
 		quick_replies: [
                     {
@@ -674,8 +674,8 @@ function handlePostback(sender_psid, received_postback) {
     };
     currentQuestion = "hello";
   } else if (payload === "yes") {
-    response = getQuestionData("images2")
-	currentQuestion = "images2"
+    response = getQuestionData("image2")
+	currentQuestion = "image2"
 	console.log("response:",response)
   } else if (payload === "no") {
     response = { text: "Oops, try sending another image." };
