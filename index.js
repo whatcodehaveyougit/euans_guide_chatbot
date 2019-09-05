@@ -296,7 +296,11 @@ function handleMessage(sender_psid,received_message){
 			break;
 		case "access-rating": currentQuestion="view"
 			break;
-		case "toilet":	currentQuestion="toilet-rating"
+		case "toilet":	
+			if (received_message.text === "Skip")
+				currentQuestion = "staff"
+			else
+				currentQuestion = "toilet-rating"
 			break;
 		case "toilet-rating": currentQuestion="toilet-summary"
 			break;
