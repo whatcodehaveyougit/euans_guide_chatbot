@@ -93,8 +93,8 @@ function getQuestionData(questionKey, place, overallRating) {
         "title": {text: "Great! Now, what would you like to title your review?"},
 		"disabled-rating": {text: "Great Title! Now for a rating, how would you rate the disabled access overall?", 
 		quick_replies: ratings},
-		"disabled-summary": {text: "You've given a rating of " + overallRating + ". Could you summarize your experience at" + place + "?",
-		quick_replies: [
+		"disabled-summary": {text: "You've given a rating of " + overallRating + ". Could you summarize your experience at " + place + "?"},
+		"continue-or-finish": {text:"Thank you very much, your review is nearly complete!",			quick_replies: [
 			{
 			  content_type: "text",
 			  title: "Continue",
@@ -122,7 +122,7 @@ function getQuestionData(questionKey, place, overallRating) {
 		"transport-rating": {text:"Ok, great! Let's start with a rating, again out of 5.", 
 		quick_replies: ratings},
 		"transport-summary": {text: "Awesome! Could you give us some more information?"},
-		"access": {text: "Thank You! Now onto getting in and around" + place + ". Is there anything specific about Disabled Access you would like to add?",
+		"access": {text: "Thank You! Now onto getting in and around " + place + ". Is there anything specific about Disabled Access you would like to add?",
 		quick_replies: [
 			{
 			  content_type: "text",
@@ -137,7 +137,7 @@ function getQuestionData(questionKey, place, overallRating) {
 		  ]},
 		"access-rating": {text: "Ok, great! Let's start with a rating, again out of 5 for getting in and around.", 
 		quick_replies: ratings},
-        "view": {text: "Great! Could you give us some more information on what you noticed about" + place + "?"}, 
+        "view": {text: "Great! Could you give us some more information on what you noticed about " + place + "?"}, 
 		"toilet": {text: "Now, onto toilets. Our users consistently tell us how important both accessible toilets and information about toilets is. Are you able to tell us anything about the toilets at" + place + "?",
 		quick_replies: [
 			{
@@ -268,10 +268,15 @@ function handleMessage(sender_psid,received_message){
 			break;
 		case "disabled-rating":	
 			overallRating = received_message.text;	
-			console.log("overallRating:",overallRating);
 			currentQuestion="disabled-summary"	
 			break;
-		case "disabled-summary": currentQuestion="transport"
+		case "disabled-summary": currentQuestion="continue-or-finish"
+			break;
+		case "continue-or-finish": 
+			if (received_message.text === "Continue")
+				currentQuestion="transport"
+			else
+				currentQuestion="end";
 			break;
 		case "transport": currentQuestion="transport-rating"
 			break;
