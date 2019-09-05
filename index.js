@@ -629,7 +629,7 @@ function formatBody(string) {
 
   formattedString.filter(str => !str.includes("photo"));
 
-  formattedString.join("\n");
+  formattedString = formattedString.join("\n");
 
   formattedString = formattedString.replace("Can you confirm the name of the place you visited?", "Name of place");
   formattedString = formattedString.replace("Ok, great! Can you confirm which town or city", "");
