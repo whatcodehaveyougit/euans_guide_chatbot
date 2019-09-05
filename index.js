@@ -280,7 +280,7 @@ function handleMessage(sender_psid,received_message){
 		}
 
 	currentQuestionData=getQuestionData(currentQuestion);
-	console.log(currentQuestionData);
+	console.log("currentQuestion:",currentQuestion,"currentQuestionData:",currentQuestionData);
 	callSendAPI(sender_psid, currentQuestionData);
 }
 
@@ -654,7 +654,7 @@ function handlePostback(sender_psid, received_postback) {
         }
       ]
     };
-    currentQuestion = response["text"];
+    currentQuestion = "hello";
   } else if (payload === "yes") {
     response = {
       text: questions(4, place, overallRating),
