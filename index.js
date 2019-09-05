@@ -169,7 +169,9 @@ function getQuestionData(questionKey, place, attachment_url) {
 					}
 				  ]},
 		"staff-rating":  {text: "Ok, great! Let's start with a rating, again out of 5 for staff.", quick_replies: ratings},
-        "staff-summary": {text: "Would you be able to provide some more details about the staff?"}
+		"staff-summary": {text: "Would you be able to provide some more details about the staff?"},
+		"end": {text:`Thank you for your review - it's great. We'll send you a message when it has gone live! :)`}
+		
     };
     return questionsData[questionKey];
 }
@@ -248,8 +250,7 @@ function handleMessage(sender_psid,received_message){
 			place = received_message.text;
 			currentQuestion="city"
 			break;
-		case "city":
-			currentQuestion="image"
+		case "city": currentQuestion="image"
 			break;
 		case "image":
 		case "image2":
@@ -260,36 +261,39 @@ function handleMessage(sender_psid,received_message){
 		break;
 		case "upload-image":
 			if (received_message.attachments){
-				attachment_url = received_message.attachments[0].payload.url;
-				images.push({path: attachment_url});
-				attachment_response = {   
-					attachment: {
-						type: "template",
-						payload: {
-						template_type: "generic",
-						elements: [
-							{
-							title: "Is this the right picture?",
-							subtitle: "Tap a button to answer.",
-							image_url: attachment_url,
-							buttons: [
-								{
-								type: "postback",
-								title: "Yes!",
-								payload: "yes"
-								},
-								{
-								type: "postback",
-								title: "No!",
-								payload: "no"
-								}
-							]
-							}
-						]
-						}
-					}
-				};
+				handleAttachment()
 			}
+			break;
+		case "title": currentQuestion="disabled-rating"
+			break;
+		case "disabled-rating":	currentQuestion="disabled-summary"
+			break;
+		case "disabled-summary": currentQuestion="transport"
+			break;
+		case "transport": currentQuestion="transport-rating"
+			break;
+		case "transport-rating": currentQuestion="transport-summary"
+			break;
+		case "transport-summary": currentQuestion="access"
+			break;
+		case "access": currentQuestion="access-rating"
+			break;
+		case "access-rating": currentQuestion="view"
+			break;
+		case "toilet":	currentQuestion="toilet-rating"
+			break;
+		case "toilet-rating": currentQuestion="toilet-summary"
+			break;
+		case "toilet-summary": currentQuestion="staff"
+			break;
+		case "staff": currentQuestion="staff-rating"
+			break;
+		case "staff-rating": currentQuestion="staff-summary"
+			break;
+		case "staff-summary":
+			currentQuestion="end"
+			finish(sender_psid)
+			sendEmail(userAnswers);
 		break;
 
 	///disabled summary needs overallRating = received_message.text;
@@ -683,6 +687,38 @@ function handlePostback(sender_psid, received_postback) {
   // Send the message to acknowledge the postback
   // setCurrentQuestion(response);
   callSendAPI(sender_psid, response);
+}
+
+function handleAttachment(){
+	attachment_url = received_message.attachments[0].payload.url;
+	images.push({path: attachment_url});
+	attachment_response = {   
+		attachment: {
+			type: "template",
+			payload: {
+			template_type: "generic",
+			elements: [
+				{
+				title: "Is this the right picture?",
+				subtitle: "Tap a button to answer.",
+				image_url: attachment_url,
+				buttons: [
+					{
+					type: "postback",
+					title: "Yes!",
+					payload: "yes"
+					},
+					{
+					type: "postback",
+					title: "No!",
+					payload: "no"
+					}
+				]
+				}
+			]
+			}
+		}
+	};
 }
 
 function callSendAPI(sender_psid, response) {
