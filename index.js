@@ -593,7 +593,7 @@ function sendEmail(review) {
   const mailOptions = {
     from: process.env.EMAIL_ACCOUNT,
     to: process.env.EMAIL_RECIPIENT,
-    subject: 'Sending Review from Facebook bot' + title,
+    subject: 'Sending review from Facebook bot ' + title,
     text: reviewAsString,
     attachments: images
   };
