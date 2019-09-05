@@ -574,13 +574,13 @@ function callSendAPI(sender_psid, response) {
   );
 }
 
-function sendEmail(review) {
-  let reviewAsString = JSON.stringify(review);
+function sendEmail(reviewObject) {
+  let reviewAsString = JSON.stringify(reviewObject);
   reviewAsString = reviewAsString.replace(/",/g, "\n");
   reviewAsString = reviewAsString.replace(/"/g, " ");
   reviewAsString = reviewAsString.replace(/{|}|\?/g, "");
 
-  formatBody(reviewAsString);
+  const review = formatBody(reviewAsString);
 
   const title = review["Great! Now, what would you like to title your review?"];
 
@@ -596,7 +596,7 @@ function sendEmail(review) {
     from: process.env.EMAIL_ACCOUNT,
     to: process.env.EMAIL_RECIPIENT,
     subject: 'Sending review from Facebook bot ' + title,
-    text: reviewAsString,
+    text: review,
     attachments: images
   };
 
@@ -633,4 +633,6 @@ function formatBody(string) {
 
   formattedString = formattedString.replace("Can you confirm the name of the place you visited?", "Name of place");
   formattedString = formattedString.replace("Ok, great! Can you confirm which town or city", "");
+
+  return formattedString;
 }
