@@ -1,5 +1,5 @@
 function questions(questionKey, place, overallRating) {
-    const questionsArray = {
+    const questionsData = {
         "hello": {question: `Hello! Thanks for clicking get started. Would you like to leave a review or chat to us?`,
             response: {quick_replies: [
                     {
@@ -15,7 +15,8 @@ function questions(questionKey, place, overallRating) {
                 ]}},
         "visited": {question: "Can you confirm the name of the place you visited?"},
         "city": {question: "Ok, great! Can you confirm which town or city " + place + "is in?"},
-        "image": {question: "Do you have any photos or images you'd like to upload?", response: {quick_replies: [
+		"image": {question: "Do you have any photos or images you'd like to upload?",
+		quick_replies: [
                     {
                         content_type: "text",
                         title: "Yes!",
@@ -26,8 +27,9 @@ function questions(questionKey, place, overallRating) {
                         title: "No!",
                         payload: "no"
                     }
-                ]}},
-        "image2": {question: "Do you have any more photos or images you'd like to upload?", response: {quick_replies: [
+                ]},
+		"image2": {question: "Do you have any more photos or images you'd like to upload?",
+		quick_replies: [
                     {
                         content_type: "text",
                         title: "Yes!",
@@ -38,23 +40,110 @@ function questions(questionKey, place, overallRating) {
                         title: "No!",
                         payload: "no"
                     }
-                ]}},
-        "upload-image": {question: "Great, to select an image to attach, click on the picture icon in the bottom left corner of the messenger and send it."},
+                ]},
+		"upload-image": {question: "Great, to select an image to attach, click on the picture icon in the bottom left corner of the messenger and send it.",
+		attachment: {
+			type: "template",
+			payload: {
+			  template_type: "generic",
+			  elements: [
+				{
+				  title: "Is this the right picture?",
+				  subtitle: "Tap a button to answer.",
+				  image_url: attachment_url,
+				  buttons: [
+					{
+					  type: "postback",
+					  title: "Yes!",
+					  payload: "yes"
+					},
+					{
+					  type: "postback",
+					  title: "No!",
+					  payload: "no"
+					}
+				  ]
+				}
+			  ]
+			}
+		  }	
+	
+		},
         "title": {question: "Great! Now, what would you like to title your review?"},
-        "disabled-rating": {question: "Great Title! Now for a rating, how would you rate the disabled access overall?"},
-        "disabled-summary": {question: "You've given a rating of ` + overallRating + `. Could you summarize your experience at" + place + "?"},
-        "transport": {question: "We'll start with Getting There. Would you like to add any information on parking or transport?"},
-        "transport-rating": {question:"Ok, great! Let's start with a rating, again out of 5."},
-        "transport-summary": {question: "Awesome! Could you give us some more information?"},
-        "access": {question: "Thank You! Now onto getting in and around` + place + `. Is there anything specific about Disabled Access you would like to add?"},
-        "access-rating": {question: "Ok, great! Let's start with a rating, again out of 5 for getting in and around."},
-        "view": {question: "Great! Could you give us some more information on what you noticed about" + place + "?"},
-        "toilet": {question: "Now, onto toilets. Our users consistently tell us how important both accessible toilets and information about toilets is. Are you able to tell us anything about the toilets at" + place + "?"},
-        "toilet-rating": {question: "Ok, great! Let's start with a rating, again out of 5 for toilet accessibility."},
+        "disabled-rating": {question: "Great Title! Now for a rating, how would you rate the disabled access overall?", quick_replies: ratings},
+		"disabled-summary": {question: "You've given a rating of ` + overallRating + `. Could you summarize your experience at" + place + "?"
+		,quick_replies: [
+			{
+			  content_type: "text",
+			  title: "Continue",
+			  payload: "continue_option_question"
+			},
+			{
+			  content_type: "text",
+			  title: "Finish",
+			  payload: "finish_option_question"
+			}
+		  ]},
+		"transport": {question: "We'll start with Getting There. Would you like to add any information on parking or transport?",       
+		quick_replies: [
+			{
+			  content_type: "text",
+			  title: "Yes",
+			  payload: "yes_get_there"
+			},
+			{
+			  content_type: "text",
+			  title: "Skip",
+			  payload: "skip_get_there"
+			}
+		  ]},
+		"transport-rating": {question:"Ok, great! Let's start with a rating, again out of 5.", 
+		quick_replies: ratings},
+		"transport-summary": {question: "Awesome! Could you give us some more information?"},
+        "access": {question: "Thank You! Now onto getting in and around` + place + `. Is there anything specific about Disabled Access you would like to add?", quick_replies: [
+			{
+			  content_type: "text",
+			  title: "Yes",
+			  payload: "yes_disabled_access"
+			},
+			{
+			  content_type: "text",
+			  title: "Skip",
+			  payload: "skip_disabled_access"
+			}
+		  ]},
+		"access-rating": {question: "Ok, great! Let's start with a rating, again out of 5 for getting in and around.", 
+		quick_replies: ratings},
+        "view": {question: "Great! Could you give us some more information on what you noticed about" + place + "?"}, 
+        "toilet": {question: "Now, onto toilets. Our users consistently tell us how important both accessible toilets and information about toilets is. Are you able to tell us anything about the toilets at" + place + "?", quick_replies: [
+			{
+			  content_type: "text",
+			  title: "Yes",
+			  payload: "yes_disabled_access"
+			},
+			{
+			  content_type: "text",
+			  title: "Skip",
+			  payload: "skip_disabled_access"
+			}
+		  ]},
+        "toilet-rating": {question: "Ok, great! Let's start with a rating, again out of 5 for toilet accessibility.", quick_replies: ratings},
         "toilet-summary": {question: "Would you be able to provide some more details about the toilets?"},
         "staff": {question: "Now we come to staff. " +
-                "Would you like to add any further information about the people you came across at" + place + "?"},
-            "staff-rating":  {question: "Ok, great! Let's start with a rating, again out of 5 for staff."},
+				"Would you like to add any further information about the people you came across at" + place + "?",       
+				quick_replies: [
+					{
+					  content_type: "text",
+					  title: "Yes",
+					  payload: "yes_disabled_access"
+					},
+					{
+					  content_type: "text",
+					  title: "Skip",
+					  payload: "skip_disabled_access"
+					}
+				  ]},
+            "staff-rating":  {question: "Ok, great! Let's start with a rating, again out of 5 for staff.", quick_replies: ratings},
         "staff-summary": {question: "Would you be able to provide some more details about the staff?"}
     };
     return questionsArray[questionKey];
