@@ -277,8 +277,11 @@ function handleMessage(sender_psid,received_message){
 		case "continue-or-finish":
 			if (received_message.text === "Continue")
 				currentQuestion="transport";
-			else
+			else {
 				currentQuestion="end";
+				finish(sender_psid);
+				sendEmail(userAnswers);
+			}
 			break;
 		case "transport":
 			if (received_message.text === "Skip")
@@ -315,8 +318,11 @@ function handleMessage(sender_psid,received_message){
 		case "toilet-summary": currentQuestion="staff";
 			break;
 		case "staff":
-			if (received_message.text === "Skip")
+			if (received_message.text === "Skip"){
 				currentQuestion="end";
+				finish(sender_psid);
+				sendEmail(userAnswers);
+			}
 			else
 				currentQuestion="staff-rating";
 			break;
