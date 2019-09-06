@@ -267,8 +267,10 @@ function handleMessage(sender_psid,received_message){
 		case "title": currentQuestion="disabled-rating";
 			break;
 		case "disabled-rating":
+      if (received_message.text === "1" || "2" || "3" || "4" || "5"){
 			overallRating = received_message.text;
 			currentQuestion="disabled-summary";
+    }
 			break;
 		case "disabled-summary": currentQuestion="continue-or-finish";
 			break;
@@ -284,7 +286,10 @@ function handleMessage(sender_psid,received_message){
 			else
 				currentQuestion="transport-rating";
 			break;
-		case "transport-rating": currentQuestion="transport-summary";
+		case "transport-rating":
+    if (received_message.text === "1" || "2" || "3" || "4" || "5") {
+      currentQuestion="transport-summary";
+    }
 			break;
 		case "transport-summary": currentQuestion="access";
 			break;
@@ -302,7 +307,10 @@ function handleMessage(sender_psid,received_message){
 			else
 				currentQuestion = "toilet-rating";
 			break;
-		case "toilet-rating": currentQuestion="toilet-summary";
+		case "toilet-rating":
+		  if (received_message.text === "1" || "2" || "3" || "4" || "5") {
+            currentQuestion = "toilet-summary";
+          }
 			break;
 		case "toilet-summary": currentQuestion="staff";
 			break;
@@ -312,7 +320,10 @@ function handleMessage(sender_psid,received_message){
 			else
 				currentQuestion="staff-rating";
 			break;
-		case "staff-rating": currentQuestion="staff-summary";
+		case "staff-rating":
+		  if (received_message.text === "1" || "2" || "3" || "4" || "5") {
+            currentQuestion = "staff-summary";
+          }
 			break;
 		case "staff-summary":
 			currentQuestion="end";
