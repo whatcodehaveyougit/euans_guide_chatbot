@@ -304,7 +304,8 @@ function handleMessage(sender_psid,received_message){
 			break;
 		case "access-rating": currentQuestion="view";
 			break;
-		case "view": currentQuestion="toilet"
+		case "view": currentQuestion="toilet";
+      console.log("in view case");
 			break;
 		case "toilet":
 			if (received_message.text === "Skip")
