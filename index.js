@@ -16,6 +16,7 @@ let place;
 let overallRating;
 let userAnswers = {};
 let images = [];
+let botInstances = [];
 
 const ratings = [
   {
@@ -233,6 +234,12 @@ app.get("/webhook", (req, res) => {
     }
   }
 });
+
+class chatBot {
+  constructor (userId) {
+    this.userId = userId;
+  }
+}
 
 function handleMessage(sender_psid,received_message){
 	if (received_message.is_echo===true)
