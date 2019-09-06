@@ -458,7 +458,7 @@ function sendEmail(reviewObject) {
 
   const review = formatBody(reviewAsString);
 
-  const title = reviewObject["Great! Now, what would you like to title your review?"];
+  const title = reviewObject["title"];
 
   const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -502,7 +502,7 @@ function formatBody(string) {
   let formattedString = string.split("\n");
   formattedString.shift();
 
-  // formattedString = formattedString.filter(str => !(str.includes("Do you have any") || str.includes("Great!") || str.includes("Great Title!") || str.includes("nearly complete!") || str.includes("Skip") || str.includes("Yes")));
+  formattedString = formattedString.filter(str => !(str.includes("image :") || str.includes("continue-or-finish :")));
 
   formattedString = formattedString.join("\n");
   //
