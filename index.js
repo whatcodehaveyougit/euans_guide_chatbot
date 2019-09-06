@@ -267,7 +267,7 @@ function handleMessage(sender_psid,received_message){
 		case "title": currentQuestion="disabled-rating";
 			break;
 		case "disabled-rating":
-          if ((!isNaN(received_message.text))&&(received_message.text >= 0)&&(received_message.text <= 6)) {
+          if (isARatingNumber(received_message.text)) {
 			overallRating = received_message.text;
 			currentQuestion="disabled-summary";
     }
@@ -290,7 +290,7 @@ function handleMessage(sender_psid,received_message){
 				currentQuestion="transport-rating";
 			break;
 		case "transport-rating":
-          if ((!isNaN(received_message.text))&&(received_message.text >= 0)&&(received_message.text <= 6)) {
+          if (isARatingNumber(received_message.text)) {
       currentQuestion="transport-summary";
     }
 			break;
@@ -311,7 +311,7 @@ function handleMessage(sender_psid,received_message){
 				currentQuestion = "toilet-rating";
 			break;
 		case "toilet-rating":
-          if ((!isNaN(received_message.text))&&(received_message.text >= 0)&&(received_message.text <= 6)) {
+          if (isARatingNumber(received_message.text)) {
             currentQuestion = "toilet-summary";
           }
 			break;
@@ -327,7 +327,7 @@ function handleMessage(sender_psid,received_message){
 				currentQuestion="staff-rating";
 			break;
 		case "staff-rating":
-		  if ((!isNaN(received_message.text))&&(received_message.text >= 0)&&(received_message.text <= 6)) {
+		  if (isARatingNumber(received_message.text)) {
             currentQuestion = "staff-summary";
           }
 			break;
@@ -483,6 +483,10 @@ function sendEmail(reviewObject) {
       console.log('Email sent: ' + info.response);
     }
   });
+}
+
+function isARatingNumber(text){
+	return (!isNaN(text))&&(text >= 0)&&(text <= 5)
 }
 
 function finish(sender_psid) {
