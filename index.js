@@ -200,10 +200,11 @@ app.post("/webhook", (req, res) => {
       // Get the sender PSID
       let sender_psid = webhook_event.sender.id;
 
-      let currentBot = botInstances.filter(bot => bot.userId === sender_psid);
+      let currentBot = botInstances.find(bot => bot.userId === sender_psid);
 
       if (!currentBot) {
         currentBot = new chatBot(sender_psid);
+        botInstances.push(currentBot)
       }
 
       // Check if the event is a message or postback and
