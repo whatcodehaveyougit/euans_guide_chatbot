@@ -57,7 +57,7 @@ function questions(questionNumber, place, overallRating) {
     "Great Title! Now for a rating, how would you rate the disabled access overall?",
     `You've given a rating of ` +
       overallRating +
-      `. Could you summarize your experience at ` +
+      ". Could you summarize your experience at " +
       place +
       `?`,
     `We'll start with Getting There. Would you like to add any information on parking or transport?`,
@@ -143,6 +143,8 @@ app.get("/webhook", (req, res) => {
 });
 
 function handleMessage(sender_psid, received_message) {
+	console.log("receieved message:",received_message)
+
   if (
     received_message.text !== currentQuestion &&
     currentQuestion === questions(0, place, overallRating) &&
@@ -572,11 +574,15 @@ function callSendAPI(sender_psid, response) {
   );
 }
 
-function sendEmail(review) {
-  let reviewAsString = JSON.stringify(review);
-  reviewAsString = reviewAsString.replace(/",/gi, "\n");
-  reviewAsString = reviewAsString.replace(/"/gi, " ");
-  reviewAsString = reviewAsString.replace(/{|}/gi, "");
+function sendEmail(reviewObject) {
+  let reviewAsString = JSON.stringify(reviewObject);
+  reviewAsString = reviewAsString.replace(/",/g, "\n");
+  reviewAsString = reviewAsString.replace(/"/g, " ");
+  reviewAsString = reviewAsString.replace(/{|}|\?/g, "");
+
+  const review = formatBody(reviewAsString);
+
+  const title = reviewObject["Great! Now, what would you like to title your review?"];
 
   const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -589,8 +595,8 @@ function sendEmail(review) {
   const mailOptions = {
     from: process.env.EMAIL_ACCOUNT,
     to: process.env.EMAIL_RECIPIENT,
-    subject: 'Sending Review from Facebook bot',
-    text: reviewAsString,
+    subject: 'Facebook review title: ' + title,
+    text: review,
     attachments: images
   };
 
@@ -614,4 +620,28 @@ function finish(sender_psid) {
   let date = dd + "-" + mm + "-" + yyyy + "-" + hour + ":" + minute;
 
   fs.writeFile(`${sender_psid}_${date}.JSON`, userAnswers, err => {console.error()});
+}
+
+function formatBody(string) {
+  let formattedString = string.split("\n");
+  formattedString.shift();
+
+  formattedString = formattedString.filter(str => !(str.includes("Do you have any") || str.includes("Great!") || str.includes("Great Title!") || str.includes("nearly complete!") || str.includes("Skip") || str.includes("Yes")));
+
+  formattedString = formattedString.join("\n");
+
+  formattedString = formattedString.replace("Can you confirm the name of the place you visited", "Name of place");
+  formattedString = formattedString.replace("Ok, great! Can you confirm which town or city ", "");
+  formattedString = formattedString.replace("You've given a rating of", "Disabled access overall rating :");
+  formattedString = formattedString.replace("Could you summarize your experience at", "\n Overview of");
+  formattedString = formattedString.replace("Ok, great! Let's start with a rating, again out of 5.", "Transport & parking rating");
+  formattedString = formattedString.replace("Awesome! Could you give us some more information", "Transport & parking summary");
+  formattedString = formattedString.replace("Ok, great! Let's start with a rating, again out of 5 for getting in and around.", "Access rating");
+  formattedString = formattedString.replace("Great! Could you give us some more information on what you noticed about", "Access summary of");
+  formattedString = formattedString.replace("Ok, great! Let's start with a rating, again out of 5 for toilet accessiblity.", "Toilet rating");
+  formattedString = formattedString.replace("Would you be able to provide some more details about the toilets", "Toilet summary");
+  formattedString = formattedString.replace("Ok, great! Let's start with a rating, again out of 5 for staff.", "Staff rating");
+  formattedString = formattedString.replace("Would you be able to provide some more details about the staff", "Staff summary");
+
+  return formattedString;
 }
