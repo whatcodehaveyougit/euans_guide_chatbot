@@ -278,7 +278,7 @@ function handleMessage(sender_psid,received_message){
     if (received_message.text === "Continue")
     currentQuestion="transport";
     else {
-      currentQuestion="end";;
+      currentQuestion="end";
       finish(sender_psid);
       sendEmail(userAnswers);
     }
