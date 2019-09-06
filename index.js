@@ -91,7 +91,7 @@ function getQuestionData(questionKey, place, overallRating) {
 		"upload-image": {text: "Great, to select an image to attach, click on the picture icon in the bottom left corner of the messenger and send it."
 		},
         "title": {text: "Great! Now, what would you like to title your review?"},
-		"disabled-rating": {text: "Great Title! Now for a rating, how would you rate the disabled access overall?",
+		"disabled-rating": {text: "Great Title! Now for a rating, how would you rate the disabled access overall? Please rate 1 - 5.",
 		quick_replies: ratings},
 		"disabled-summary": {text: "You've given a rating of " + overallRating + ". Could you summarize your experience at " + place + "?"},
 		"continue-or-finish": {text:"Thank you very much, your review is nearly complete!",			quick_replies: [
