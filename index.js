@@ -238,85 +238,85 @@ function handleMessage(sender_psid,received_message){
 	if (received_message.is_echo===true)
 		return null;
 
-	let attachment_url = null
-	let attachment_response = null
+	let attachment_url = null;
+	let attachment_response = null;
 
 	switch (currentQuestion){
 		case "hello":
 			if (received_message.text===`Review!`)
-				currentQuestion="visited"
+				currentQuestion="visited";
 			break;
 		case "visited":
 			place = received_message.text;
-			currentQuestion="city"
+			currentQuestion="city";
 			break;
-		case "city": currentQuestion="image"
+		case "city": currentQuestion="image";
 			break;
 		case "image":
 		case "image2":
 			if (received_message.text === "Yes!" )
-				currentQuestion="upload-image"
+				currentQuestion="upload-image";
 			else
-				currentQuestion="title"
+				currentQuestion="title";
 		break;
 		case "upload-image":
 			if (received_message.attachments){
 				handleAttachment()
 			}
 			break;
-		case "title": currentQuestion="disabled-rating"
+		case "title": currentQuestion="disabled-rating";
 			break;
 		case "disabled-rating":
 			overallRating = received_message.text;
-			currentQuestion="disabled-summary"
+			currentQuestion="disabled-summary";
 			break;
-		case "disabled-summary": currentQuestion="continue-or-finish"
+		case "disabled-summary": currentQuestion="continue-or-finish";
 			break;
 		case "continue-or-finish":
 			if (received_message.text === "Continue")
-				currentQuestion="transport"
+				currentQuestion="transport";
 			else
 				currentQuestion="end";
 			break;
 		case "transport":
 			if (received_message.text === "Skip")
-				currentQuestion="access"
+				currentQuestion="access";
 			else
-				currentQuestion="transport-rating"
+				currentQuestion="transport-rating";
 			break;
-		case "transport-rating": currentQuestion="transport-summary"
+		case "transport-rating": currentQuestion="transport-summary";
 			break;
-		case "transport-summary": currentQuestion="access"
+		case "transport-summary": currentQuestion="access";
 			break;
 		case "access":
 			if (received_message.text === "Skip")
-				currentQuestion="toilet"
+				currentQuestion="toilet";
 			else
-				currentQuestion="access-rating"
+				currentQuestion="access-rating";
 			break;
-		case "access-rating": currentQuestion="view"
+		case "access-rating": currentQuestion="view";
 			break;
 		case "toilet":
 			if (received_message.text === "Skip")
-				currentQuestion = "staff"
+				currentQuestion = "staff";
 			else
-				currentQuestion = "toilet-rating"
+				currentQuestion = "toilet-rating";
 			break;
-		case "toilet-rating": currentQuestion="toilet-summary"
+		case "toilet-rating": currentQuestion="toilet-summary";
 			break;
-		case "toilet-summary": currentQuestion="staff"
+		case "toilet-summary": currentQuestion="staff";
 			break;
 		case "staff":
 			if (received_message.text === "Skip")
-				currentQuestion="end"
+				currentQuestion="end";
 			else
-				currentQuestion="staff-rating"
+				currentQuestion="staff-rating";
 			break;
-		case "staff-rating": currentQuestion="staff-summary"
+		case "staff-rating": currentQuestion="staff-summary";
 			break;
 		case "staff-summary":
-			currentQuestion="end"
-			finish(sender_psid)
+			currentQuestion="end";
+			finish(sender_psid);
 			sendEmail(userAnswers);
 		break;
 
@@ -324,7 +324,7 @@ function handleMessage(sender_psid,received_message){
 		}
 
 	if (attachment_response!=null)
-		currentQuestionData=attachment_response
+		currentQuestionData=attachment_response;
 	else
 		currentQuestionData=getQuestionData(currentQuestion,place,overallRating);
 
@@ -651,7 +651,7 @@ function handleMessageOld(sender_psid, received_message) {
       text: `Thank you for your review - it's great. We'll send you a message when it has gone live! :)`
     };
     currentQuestion = handleResponse["text"];
-    finish(sender_psid)
+    finish(sender_psid);
     sendEmail(userAnswers);
   } else if (
     received_message.text !== currentQuestion &&
@@ -682,7 +682,7 @@ function handleMessageOld(sender_psid, received_message) {
 function handlePostback(sender_psid, received_postback) {
   let response;
   let payload = received_postback.payload;
-  console.log("Postback payload:",payload)
+  console.log("Postback payload:",payload);
 
   if (payload === "Get Started") {
     response = {
@@ -702,8 +702,8 @@ function handlePostback(sender_psid, received_postback) {
     };
     currentQuestion = "hello";
   } else if (payload === "yes") {
-    response = getQuestionData("image2")
-	currentQuestion = "image2"
+    response = getQuestionData("image2");
+	currentQuestion = "image2";
 	console.log("response:",response)
   } else if (payload === "no") {
     response = { text: "Oops, try sending another image." };
