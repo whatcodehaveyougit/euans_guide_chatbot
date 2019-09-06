@@ -46,6 +46,12 @@ const ratings = [
   }
 ];
 
+class chatBot {
+  constructor (userId) {
+    this.userId = userId;
+  }
+}
+
 function getQuestionData(questionKey, place, overallRating) {
     const questionsData = {
         "hello": {text: `Hello! Thanks for clicking get started. Would you like to leave a review or chat to us?`,
@@ -194,6 +200,12 @@ app.post("/webhook", (req, res) => {
       // Get the sender PSID
       let sender_psid = webhook_event.sender.id;
 
+      let currentBot = botInstances.filter(bot => bot.userId === sender_psid);
+
+      if (!currentBot) {
+        currentBot = new chatBot(sender_psid);
+      }
+
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
       if (webhook_event.message || webhook_event.attachments) {
@@ -235,11 +247,7 @@ app.get("/webhook", (req, res) => {
   }
 });
 
-class chatBot {
-  constructor (userId) {
-    this.userId = userId;
-  }
-}
+
 
 function handleMessage(sender_psid,received_message){
 	if (received_message.is_echo===true)
