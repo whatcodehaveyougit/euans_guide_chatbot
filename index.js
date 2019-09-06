@@ -137,7 +137,7 @@ function getQuestionData(questionKey, place, overallRating) {
 		  ]},
 		"access-rating": {text: "Ok, great! Let's start with a rating, again out of 5 for getting in and around.",
 		quick_replies: ratings},
-        "view": {text: "Great! Could you give us some more information on what you noticed about " + place + "?"},
+    "view": {text: "Great! Could you give us some more information on what you noticed about " + place + "?"},
 		"toilet": {text: "Now, onto toilets. Our users consistently tell us how important both accessible toilets and information about toilets is. Are you able to tell us anything about the toilets at" + place + "?",
 		quick_replies: [
 			{
@@ -305,7 +305,6 @@ function handleMessage(sender_psid,received_message){
 		case "access-rating": currentQuestion="view";
 			break;
 		case "view": currentQuestion="toilet";
-      console.log("in view case");
 			break;
 		case "toilet":
 			if (received_message.text === "Skip")
@@ -509,7 +508,7 @@ function formatBody(string) {
   let formattedString = string.split("\n");
   formattedString.shift();
 
-  formattedString = formattedString.filter(str => !(str.includes("image :") || str.includes("continue-or-finish :") || str.includes("transport :") || str.includes("access :")));
+  formattedString = formattedString.filter(str => !(str.includes("image :") || str.includes("image2 :") || str.includes("continue-or-finish :") || str.includes("transport :") || str.includes("access :") || str.includes("toilet :") || str.includes("staff :")));
 
   formattedString = formattedString.join("\n");
 
