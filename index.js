@@ -3,10 +3,10 @@
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 // Imports dependencies and set up http server
 const request = require("request"),
-  express = require("express"),
-  body_parser = require("body-parser"),
-  fs = require("fs"),
-  app = express().use(body_parser.json()); // creates express http server
+express = require("express"),
+body_parser = require("body-parser"),
+fs = require("fs"),
+app = express().use(body_parser.json()); // creates express http server
 
 const nodemailer = require('nodemailer');
 
@@ -46,134 +46,134 @@ const ratings = [
 ];
 
 function getQuestionData(questionKey, place, overallRating) {
-    const questionsData = {
-        "hello": {text: `Hello! Thanks for clicking get started. Would you like to leave a review or chat to us?`,
-            quick_replies: [
-                    {
-                        content_type: "text",
-                        title: "Review!",
-                        payload: "review"
-                    },
-                    {
-                        content_type: "text",
-                        title: "Chat!",
-                        payload: "chat"
-                    }
-                ]},
-        "visited": {text: "Can you confirm the name of the place you visited?"},
-        "city": {text: "Ok, great! Can you confirm which town or city " + place + " is in?"},
-		"image": {text: "Do you have any photos or images you'd like to upload?",
-		quick_replies: [
-                    {
-                        content_type: "text",
-                        title: "Yes!",
-                        payload: "yes"
-                    },
-                    {
-                        content_type: "text",
-                        title: "No!",
-                        payload: "no"
-                    }
-                ]},
-		"image2": {text: "Do you have any more photos or images you'd like to upload?",
-		quick_replies: [
-                    {
-                        content_type: "text",
-                        title: "Yes!",
-                        payload: "yes"
-                    },
-                    {
-                        content_type: "text",
-                        title: "No!",
-                        payload: "no"
-                    }
-                ]},
-		"upload-image": {text: "Great, to select an image to attach, click on the picture icon in the bottom left corner of the messenger and send it."
-		},
-        "title": {text: "Great! Now, what would you like to title your review?"},
-		"disabled-rating": {text: "Great Title! Now for a rating, how would you rate the disabled access overall? Please rate 1 - 5.",
-		quick_replies: ratings},
-		"disabled-summary": {text: "You've given a rating of " + overallRating + ". Could you summarize your experience at " + place + "?"},
-		"continue-or-finish": {text:"Thank you very much, your review is nearly complete!",			quick_replies: [
-			{
-			  content_type: "text",
-			  title: "Continue",
-			  payload: "continue_option_question"
-			},
-			{
-			  content_type: "text",
-			  title: "Finish",
-			  payload: "finish_option_question"
-			}
-		  ]},
-		"transport": {text: "We'll start with Getting There. Would you like to add any information on parking or transport?",
-		quick_replies: [
-			{
-			  content_type: "text",
-			  title: "Yes",
-			  payload: "yes_get_there"
-			},
-			{
-			  content_type: "text",
-			  title: "Skip",
-			  payload: "skip_get_there"
-			}
-		  ]},
-		"transport-rating": {text:"Ok, great! Let's start with a rating, again out of 5.",
-		quick_replies: ratings},
-		"transport-summary": {text: "Awesome! Could you give us some more information?"},
-		"access": {text: "Thank You! Now onto getting in and around " + place + ". Is there anything specific about Disabled Access you would like to add?",
-		quick_replies: [
-			{
-			  content_type: "text",
-			  title: "Yes",
-			  payload: "yes_disabled_access"
-			},
-			{
-			  content_type: "text",
-			  title: "Skip",
-			  payload: "skip_disabled_access"
-			}
-		  ]},
-		"access-rating": {text: "Ok, great! Let's start with a rating, again out of 5 for getting in and around.",
-		quick_replies: ratings},
-    "view": {text: "Great! Could you give us some more information on what you noticed about " + place + "?"},
-		"toilet": {text: "Now, onto toilets. Our users consistently tell us how important both accessible toilets and information about toilets is. Are you able to tell us anything about the toilets at" + place + "?",
-		quick_replies: [
-			{
-			  content_type: "text",
-			  title: "Yes",
-			  payload: "yes_disabled_access"
-			},
-			{
-			  content_type: "text",
-			  title: "Skip",
-			  payload: "skip_disabled_access"
-			}
-		  ]},
-		"toilet-rating": {text: "Ok, great! Let's start with a rating, again out of 5 for toilet accessibility.",
-		quick_replies: ratings},
-        "toilet-summary": {text: "Would you be able to provide some more details about the toilets?"},
-        "staff": {text: "Now we come to staff. " +
-				"Would you like to add any further information about the people you came across at" + place + "?",
-				quick_replies: [
-					{
-					  content_type: "text",
-					  title: "Yes",
-					  payload: "yes_disabled_access"
-					},
-					{
-					  content_type: "text",
-					  title: "Skip",
-					  payload: "skip_disabled_access"
-					}
-				  ]},
-		"staff-rating":  {text: "Ok, great! Let's start with a rating, again out of 5 for staff.", quick_replies: ratings},
-		"staff-summary": {text: "Would you be able to provide some more details about the staff?"},
-		"end": {text:"Thank you for your review - it's great. We'll send you a message when it has gone live! :)"}
+  const questionsData = {
+    "hello": {text: `Hello! Thanks for clicking get started. Would you like to leave a review or chat to us?`,
+      quick_replies: [
+        {
+          content_type: "text",
+          title: "Review!",
+          payload: "review"
+        },
+        {
+          content_type: "text",
+          title: "Chat!",
+          payload: "chat"
+        }
+      ]},
+      "visited": {text: "Can you confirm the name of the place you visited?"},
+      "city": {text: "Ok, great! Can you confirm which town or city " + place + " is in?"},
+      "image": {text: "Do you have any photos or images you'd like to upload?",
+      quick_replies: [
+        {
+          content_type: "text",
+          title: "Yes!",
+          payload: "yes"
+        },
+        {
+          content_type: "text",
+          title: "No!",
+          payload: "no"
+        }
+      ]},
+      "image2": {text: "Do you have any more photos or images you'd like to upload?",
+      quick_replies: [
+        {
+          content_type: "text",
+          title: "Yes!",
+          payload: "yes"
+        },
+        {
+          content_type: "text",
+          title: "No!",
+          payload: "no"
+        }
+      ]},
+      "upload-image": {text: "Great, to select an image to attach, click on the picture icon in the bottom left corner of the messenger and send it."
+    },
+    "title": {text: "Great! Now, what would you like to title your review?"},
+    "disabled-rating": {text: "Great Title! Now for a rating, how would you rate the disabled access overall? Please rate 1 - 5.",
+    quick_replies: ratings},
+    "disabled-summary": {text: "You've given a rating of " + overallRating + ". Could you summarize your experience at " + place + "?"},
+    "continue-or-finish": {text:"Thank you very much, your review is nearly complete!",			quick_replies: [
+      {
+        content_type: "text",
+        title: "Continue",
+        payload: "continue_option_question"
+      },
+      {
+        content_type: "text",
+        title: "Finish",
+        payload: "finish_option_question"
+      }
+    ]},
+    "transport": {text: "We'll start with Getting There. Would you like to add any information on parking or transport?",
+    quick_replies: [
+      {
+        content_type: "text",
+        title: "Yes",
+        payload: "yes_get_there"
+      },
+      {
+        content_type: "text",
+        title: "Skip",
+        payload: "skip_get_there"
+      }
+    ]},
+    "transport-rating": {text:"Ok, great! Let's start with a rating, again out of 5.",
+    quick_replies: ratings},
+    "transport-summary": {text: "Awesome! Could you give us some more information?"},
+    "access": {text: "Thank You! Now onto getting in and around " + place + ". Is there anything specific about Disabled Access you would like to add?",
+    quick_replies: [
+      {
+        content_type: "text",
+        title: "Yes",
+        payload: "yes_disabled_access"
+      },
+      {
+        content_type: "text",
+        title: "Skip",
+        payload: "skip_disabled_access"
+      }
+    ]},
+    "access-rating": {text: "Ok, great! Let's start with a rating, again out of 5 for getting in and around.",
+    quick_replies: ratings},
+    "access-summary": {text: "Great! Could you give us some more information on what you noticed about " + place + "?"},
+    "toilet": {text: "Now, onto toilets. Our users consistently tell us how important both accessible toilets and information about toilets is. Are you able to tell us anything about the toilets at" + place + "?",
+    quick_replies: [
+      {
+        content_type: "text",
+        title: "Yes",
+        payload: "yes_disabled_access"
+      },
+      {
+        content_type: "text",
+        title: "Skip",
+        payload: "skip_disabled_access"
+      }
+    ]},
+    "toilet-rating": {text: "Ok, great! Let's start with a rating, again out of 5 for toilet accessibility.",
+    quick_replies: ratings},
+    "toilet-summary": {text: "Would you be able to provide some more details about the toilets?"},
+    "staff": {text: "Now we come to staff. " +
+    "Would you like to add any further information about the people you came across at" + place + "?",
+    quick_replies: [
+      {
+        content_type: "text",
+        title: "Yes",
+        payload: "yes_disabled_access"
+      },
+      {
+        content_type: "text",
+        title: "Skip",
+        payload: "skip_disabled_access"
+      }
+    ]},
+    "staff-rating":  {text: "Ok, great! Let's start with a rating, again out of 5 for staff.", quick_replies: ratings},
+    "staff-summary": {text: "Would you be able to provide some more details about the staff?"},
+    "end": {text:"Thank you for your review - it's great. We'll send you a message when it has gone live! :)"}
 
-    };
-    return questionsData[questionKey];
+  };
+  return questionsData[questionKey];
 }
 
 // Sets server port and logs message on success
@@ -235,120 +235,120 @@ app.get("/webhook", (req, res) => {
 });
 
 function handleMessage(sender_psid,received_message){
-	if (received_message.is_echo===true)
-		return null;
+  if (received_message.is_echo===true)
+  return null;
 
-	let attachment_url = null;
-	let attachment_response = null;
+  let attachment_url = null;
+  let attachment_response = null;
 
-	switch (currentQuestion){
-		case "hello":
-			if (received_message.text===`Review!`)
-				currentQuestion="visited";
-			break;
-		case "visited":
-			place = received_message.text;
-			currentQuestion="city";
-			break;
-		case "city": currentQuestion="image";
-			break;
-		case "image":
-		case "image2":
-			if (received_message.text === "Yes!" )
-				currentQuestion="upload-image";
-			else
-				currentQuestion="title";
-		break;
-		case "upload-image":
-			if (received_message.attachments){
-				attachment_response = handleAttachment(received_message)
-			}
-			break;
-		case "title": currentQuestion="disabled-rating";
-			break;
-		case "disabled-rating":
-          if (isARatingNumber(received_message.text)) {
-			overallRating = received_message.text;
-			currentQuestion="disabled-summary";
+  switch (currentQuestion){
+    case "hello":
+    if (received_message.text===`Review!`)
+    currentQuestion="visited";
+    break;
+    case "visited":
+    place = received_message.text;
+    currentQuestion="city";
+    break;
+    case "city": currentQuestion="image";
+    break;
+    case "image":
+    case "image2":
+    if (received_message.text === "Yes!" )
+    currentQuestion="upload-image";
+    else
+    currentQuestion="title";
+    break;
+    case "upload-image":
+    if (received_message.attachments){
+      attachment_response = handleAttachment(received_message)
     }
-			break;
-		case "disabled-summary": currentQuestion="continue-or-finish";
-			break;
-		case "continue-or-finish":
-			if (received_message.text === "Continue")
-				currentQuestion="transport";
-			else {
-				currentQuestion="end";
-				finish(sender_psid);
-				sendEmail(userAnswers);
-			}
-			break;
-		case "transport":
-			if (received_message.text === "Skip")
-				currentQuestion="access";
-			else
-				currentQuestion="transport-rating";
-			break;
-		case "transport-rating":
-          if (isARatingNumber(received_message.text)) {
+    break;
+    case "title": currentQuestion="disabled-rating";
+    break;
+    case "disabled-rating":
+    if (isARatingNumber(received_message.text)) {
+      overallRating = received_message.text;
+      currentQuestion="disabled-summary";
+    }
+    break;
+    case "disabled-summary": currentQuestion="continue-or-finish";
+    break;
+    case "continue-or-finish":
+    if (received_message.text === "Continue")
+    currentQuestion="transport";
+    else {
+      currentQuestion="end";
+      finish(sender_psid);
+      sendEmail(userAnswers);
+    }
+    break;
+    case "transport":
+    if (received_message.text === "Skip")
+    currentQuestion="access";
+    else
+    currentQuestion="transport-rating";
+    break;
+    case "transport-rating":
+    if (isARatingNumber(received_message.text)) {
       currentQuestion="transport-summary";
     }
-			break;
-		case "transport-summary": currentQuestion="access";
-			break;
-		case "access":
-			if (received_message.text === "Skip")
-				currentQuestion="toilet";
-			else
-				currentQuestion="access-rating";
-			break;
-		case "access-rating": currentQuestion="view";
-			break;
-		case "view": currentQuestion="toilet";
-			break;
-		case "toilet":
-			if (received_message.text === "Skip")
-				currentQuestion = "staff";
-			else
-				currentQuestion = "toilet-rating";
-			break;
-		case "toilet-rating":
-          if (isARatingNumber(received_message.text)) {
-            currentQuestion = "toilet-summary";
-          }
-			break;
-		case "toilet-summary": currentQuestion="staff";
-			break;
-		case "staff":
-			if (received_message.text === "Skip"){
-				currentQuestion="end";
-				finish(sender_psid);
-				sendEmail(userAnswers);
-			}
-			else
-				currentQuestion="staff-rating";
-			break;
-		case "staff-rating":
-		  if (isARatingNumber(received_message.text)) {
-            currentQuestion = "staff-summary";
-          }
-			break;
-		case "staff-summary":
-			currentQuestion="end";
-			finish(sender_psid);
-			sendEmail(userAnswers);
-		break;
+    break;
+    case "transport-summary": currentQuestion="access";
+    break;
+    case "access":
+    if (received_message.text === "Skip")
+    currentQuestion="toilet";
+    else
+    currentQuestion="access-rating";
+    break;
+    case "access-rating": currentQuestion="access-summary";
+    break;
+    case "access-summary": currentQuestion="toilet";
+    break;
+    case "toilet":
+    if (received_message.text === "Skip")
+    currentQuestion = "staff";
+    else
+    currentQuestion = "toilet-rating";
+    break;
+    case "toilet-rating":
+    if (isARatingNumber(received_message.text)) {
+      currentQuestion = "toilet-summary";
+    }
+    break;
+    case "toilet-summary": currentQuestion="staff";
+    break;
+    case "staff":
+    if (received_message.text === "Skip"){
+      currentQuestion="end";
+      finish(sender_psid);
+      sendEmail(userAnswers);
+    }
+    else
+    currentQuestion="staff-rating";
+    break;
+    case "staff-rating":
+    if (isARatingNumber(received_message.text)) {
+      currentQuestion = "staff-summary";
+    }
+    break;
+    case "staff-summary":
+    currentQuestion="end";
+    finish(sender_psid);
+    sendEmail(userAnswers);
+    break;
 
-	///disabled summary needs overallRating = received_message.text;
-		}
+    ///disabled summary needs overallRating = received_message.text;
+  }
 
-	if (attachment_response!=null)
-		currentQuestionData=attachment_response;
-	else
-		currentQuestionData=getQuestionData(currentQuestion,place,overallRating);
+  if (attachment_response!=null)
+  currentQuestionData=attachment_response;
+  else
+  currentQuestionData=getQuestionData(currentQuestion,place,overallRating);
 
-	console.log("currentQuestion:",currentQuestion,"currentQuestionData:",currentQuestionData,"attachment_url:",attachment_url);
-	callSendAPI(sender_psid, currentQuestionData);
+  console.log("currentQuestion:",currentQuestion,"currentQuestionData:",currentQuestionData,"attachment_url:",attachment_url);
+  callSendAPI(sender_psid, currentQuestionData);
 }
 
 function handlePostback(sender_psid, received_postback) {
@@ -375,8 +375,8 @@ function handlePostback(sender_psid, received_postback) {
     currentQuestion = "hello";
   } else if (payload === "yes") {
     response = getQuestionData("image2");
-	currentQuestion = "image2";
-	console.log("response:",response)
+    currentQuestion = "image2";
+    console.log("response:",response)
   } else if (payload === "no") {
     response = { text: "Oops, try sending another image." };
   }
@@ -386,36 +386,36 @@ function handlePostback(sender_psid, received_postback) {
 }
 
 function handleAttachment(received_message){
-	let attachment_url = received_message.attachments[0].payload.url;
-	images.push({path: attachment_url});
-	let attachment_response = {
-		attachment: {
-			type: "template",
-			payload: {
-			template_type: "generic",
-			elements: [
-				{
-				title: "Is this the right picture?",
-				subtitle: "Tap a button to answer.",
-				image_url: attachment_url,
-				buttons: [
-					{
-					type: "postback",
-					title: "Yes!",
-					payload: "yes"
-					},
-					{
-					type: "postback",
-					title: "No!",
-					payload: "no"
-					}
-				]
-				}
-			]
-			}
-		}
-	};
-	return attachment_response;
+  let attachment_url = received_message.attachments[0].payload.url;
+  images.push({path: attachment_url});
+  let attachment_response = {
+    attachment: {
+      type: "template",
+      payload: {
+        template_type: "generic",
+        elements: [
+          {
+            title: "Is this the right picture?",
+            subtitle: "Tap a button to answer.",
+            image_url: attachment_url,
+            buttons: [
+              {
+                type: "postback",
+                title: "Yes!",
+                payload: "yes"
+              },
+              {
+                type: "postback",
+                title: "No!",
+                payload: "no"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  };
+  return attachment_response;
 }
 
 function callSendAPI(sender_psid, response) {
@@ -488,7 +488,7 @@ function sendEmail(reviewObject) {
 }
 
 function isARatingNumber(text){
-	return (!isNaN(text))&&(text >= 0)&&(text <= 5)
+  return (!isNaN(text))&&(text >= 0)&&(text <= 5)
 }
 
 function finish(sender_psid) {
