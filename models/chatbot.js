@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer");
-const getQuestionData = require("./questions");
+const getQuestionData = require("../questions");
 
 class chatBot {
   constructor (userId) {
