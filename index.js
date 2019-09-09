@@ -295,7 +295,7 @@ class chatBot {
     else
       this.currentQuestionData=getQuestionData(this.currentQuestion,place,overallRating);
 
-    console.log("currentQuestion:",currentQuestion, "currentQuestionData:", this.currentQuestionData,"attachment_url:",attachment_url);
+    console.log("currentQuestion:",this.currentQuestion, "currentQuestionData:", this.currentQuestionData,"attachment_url:",attachment_url);
     this.callSendAPI(this.currentQuestionData);
   }
 
