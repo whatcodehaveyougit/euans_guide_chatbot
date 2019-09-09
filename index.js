@@ -402,7 +402,7 @@ class chatBot {
     });
   }
 
-  static handleAttachment(received_message){
+  handleAttachment(received_message){
     let attachment_url = received_message.attachments[0].payload.url;
     images.push({path: attachment_url});
     return {
@@ -434,7 +434,7 @@ class chatBot {
     };
   }
 
-  static isARatingNumber(text){
+  isARatingNumber(text){
     return (!isNaN(text))&&(text >= 0)&&(text <= 5)
   }
 
