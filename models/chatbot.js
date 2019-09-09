@@ -164,7 +164,7 @@ class chatBot {
       case "staff-summary": this.currentQuestion = "anything-else";
         break;
       case "anything-else":
-        if (photosLater)
+        if (this.photosLater)
           this.currentQuestion = "image-last";
         else
           this.endReview();
