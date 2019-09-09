@@ -10,7 +10,7 @@ class chatBot {
     this.currentQuestion = "";
     this.currentQuestionData = null;
     this.place = "";
-    this.overallRating = "";
+    this.rating = "";
     this.images = [];
     this.submitAllowed = false;
     this.photosLater = false;
@@ -94,7 +94,7 @@ class chatBot {
         break;
       case "overall-rating":
         if (this.isARatingNumber(received_message.text)) {
-          this.overallRating = received_message.text;
+          this.rating = received_message.text;
           this.currentQuestion = "overall-summary";
         }
         break;
@@ -114,8 +114,10 @@ class chatBot {
           this.currentQuestion = "transport-rating";
         break;
       case "transport-rating":
-        if (this.isARatingNumber(received_message.text))
+        if (this.isARatingNumber(received_message.text)) {
+          this.rating = received_message.text;
           this.currentQuestion = "transport-summary";
+        }
         break;
       case "transport-summary": this.currentQuestion = "access";
         break;
@@ -126,8 +128,10 @@ class chatBot {
           this.currentQuestion = "access-rating";
         break;
       case "access-rating":
-        if (this.isARatingNumber(received_message.text))
+        if (this.isARatingNumber(received_message.text)) {
+          this.rating = received_message.text;
           this.currentQuestion = "access-summary";
+        }
         break;
       case "access-summary": this.currentQuestion = "toilet";
         break;
@@ -138,8 +142,10 @@ class chatBot {
           this.currentQuestion = "toilet-rating";
         break;
       case "toilet-rating":
-        if (this.isARatingNumber(received_message.text))
+        if (this.isARatingNumber(received_message.text)) {
+          this.rating = received_message.text;
           this.currentQuestion = "toilet-summary";
+        }
         break;
       case "toilet-summary": this.currentQuestion = "staff";
         break;
@@ -150,8 +156,10 @@ class chatBot {
           this.currentQuestion = "staff-rating";
         break;
       case "staff-rating":
-        if (this.isARatingNumber(received_message.text))
+        if (this.isARatingNumber(received_message.text)) {
+          this.rating = received_message.text;
           this.currentQuestion = "staff-summary";
+        }
         break;
       case "staff-summary": this.currentQuestion = "anything-else";
         break;

@@ -81,7 +81,7 @@ function showOrHideUpload() {
   return (show ? uploadPhotos : [uploadPhotos[1]]);
 }
 
-function getQuestionData(questionKey, place, overallRating) {
+function getQuestionData(questionKey, place, rating) {
   const questionsData = {
     "hello": {
       text: "Hello! Thanks for clicking get started. Would you like to leave a review or chat to us?",
@@ -164,7 +164,7 @@ function getQuestionData(questionKey, place, overallRating) {
       "Now for a rating... Out of 5, where 5 is great and 1 is bad, how would you rate the disabled access overall?",
       quick_replies: ratings
     },
-    "overall-summary": {text: overallResponse(overallRating, place) + "Now could you summarise your experience? \n" +
+    "overall-summary": {text: overallResponse(rating, place) + "Now could you summarise your experience? \n" +
     "\n" +
     "Some things you might want to talk about include:\n" +
     "What did you do there?\n" +
