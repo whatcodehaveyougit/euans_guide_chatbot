@@ -218,7 +218,8 @@ function getQuestionData(questionKey, place, overallRating) {
     "stop": {
       text: "Review stopped",
       quick_replies: start
-    }
+    },
+    "delete": {text: "Uh oh. Something's went wrong. Try deleting the chat and starting again. Sorry!"}
   };
   return questionsData[questionKey];
 }

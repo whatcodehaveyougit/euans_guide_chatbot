@@ -194,7 +194,7 @@ class chatBot {
       this.currentQuestion = "image2";
       console.log("response:",response)
     } else if (payload === "no") {
-      response = { text: "Oops, try sending another image." };
+      response = {text: "Oops, try sending another image."};
     }
     // Send the message to acknowledge the postback
     // setCurrentQuestion(response);
@@ -202,10 +202,7 @@ class chatBot {
   }
 
   callSendAPI(response) {
-    if (
-        this.currentQuestion ===
-        "Uh oh. Something's went wrong. Try deleting the chat and starting again. Sorry!"
-    ) {
+    if (this.currentQuestion === "delete") {
       return null;
     }
     // Construct the message body
@@ -246,7 +243,7 @@ class chatBot {
     const title = reviewObject["title"];
 
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      service: "gmail",
       auth: {
         user: process.env.EMAIL_ACCOUNT,
         pass: process.env.EMAIL_PASSWORD
@@ -256,7 +253,7 @@ class chatBot {
     const mailOptions = {
       from: process.env.EMAIL_ACCOUNT,
       to: process.env.EMAIL_RECIPIENT,
-      subject: 'Facebook review title: ' + title,
+      subject: "Facebook review title: " + title,
       text: review,
       attachments: this.images
     };
@@ -265,7 +262,7 @@ class chatBot {
       if (error) {
         console.log(error);
       } else {
-        console.log('Email sent: ' + info.response);
+        console.log("Email sent: " + info.response);
       }
     });
   }
