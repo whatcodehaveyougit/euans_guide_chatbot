@@ -1,6 +1,6 @@
 "use strict";
 
-import "./questions"
+import * from "./questions"
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 // Imports dependencies and set up http server
