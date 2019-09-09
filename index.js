@@ -365,7 +365,7 @@ class chatBot {
     };
   }
 
-  callSendAPI(sender_psid, response) {
+  callSendAPI(response) {
     if (
         currentQuestion ===
         `Uh oh. Something's went wrong. Try deleting the chat and starting again. Sorry!`
@@ -375,7 +375,7 @@ class chatBot {
     // Construct the message body
     let request_body = {
       recipient: {
-        id: sender_psid
+        id: this.userId
       },
       message: response
     };
