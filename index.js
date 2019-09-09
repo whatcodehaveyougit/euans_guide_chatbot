@@ -333,38 +333,6 @@ class chatBot {
     this.callSendAPI(response);
   }
 
-  handleAttachment(received_message){
-    let attachment_url = received_message.attachments[0].payload.url;
-    images.push({path: attachment_url});
-    return {
-      attachment: {
-        type: "template",
-        payload: {
-          template_type: "generic",
-          elements: [
-            {
-              title: "Is this the right picture?",
-              subtitle: "Tap a button to answer.",
-              image_url: attachment_url,
-              buttons: [
-                {
-                  type: "postback",
-                  title: "Yes!",
-                  payload: "yes"
-                },
-                {
-                  type: "postback",
-                  title: "No!",
-                  payload: "no"
-                }
-              ]
-            }
-          ]
-        }
-      }
-    };
-  }
-
   callSendAPI(response) {
     if (
         currentQuestion ===
@@ -434,11 +402,43 @@ class chatBot {
     });
   }
 
-  isARatingNumber(text){
+  static handleAttachment(received_message){
+    let attachment_url = received_message.attachments[0].payload.url;
+    images.push({path: attachment_url});
+    return {
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "generic",
+          elements: [
+            {
+              title: "Is this the right picture?",
+              subtitle: "Tap a button to answer.",
+              image_url: attachment_url,
+              buttons: [
+                {
+                  type: "postback",
+                  title: "Yes!",
+                  payload: "yes"
+                },
+                {
+                  type: "postback",
+                  title: "No!",
+                  payload: "no"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    };
+  }
+
+  static isARatingNumber(text){
     return (!isNaN(text))&&(text >= 0)&&(text <= 5)
   }
 
-  formatBody(string) {
+  static formatBody(string) {
     let formattedString = string.split("\n");
     formattedString.shift();
 
