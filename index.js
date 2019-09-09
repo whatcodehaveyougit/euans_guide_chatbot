@@ -293,6 +293,7 @@ class chatBot {
         // finish(this.userId);
         this.sendEmail(this.userAnswers);
         this.userAnswers = {};
+        this.images = [];
         break;
       case "end":
         this.currentQuestion="visited";
