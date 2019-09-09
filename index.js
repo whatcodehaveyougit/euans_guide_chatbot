@@ -89,7 +89,7 @@ class chatBot {
         }
         break;
       case "transport":
-        if (received_message.text === "Skip")
+        if (received_message.text === "Skip to next question")
           this.currentQuestion = "access";
         else
           this.currentQuestion = "transport-rating";
@@ -102,7 +102,7 @@ class chatBot {
       case "transport-summary": this.currentQuestion = "access";
         break;
       case "access":
-        if (received_message.text === "Skip")
+        if (received_message.text === "Skip to next question")
           this.currentQuestion = "toilet";
         else
           this.currentQuestion = "access-rating";
@@ -112,7 +112,7 @@ class chatBot {
       case "access-summary": this.currentQuestion="toilet";
         break;
       case "toilet":
-        if (received_message.text === "Skip")
+        if (received_message.text === "Skip to next question")
           this.currentQuestion = "staff";
         else
           this.currentQuestion = "toilet-rating";
@@ -125,7 +125,7 @@ class chatBot {
       case "toilet-summary": this.currentQuestion="staff";
         break;
       case "staff":
-        if (received_message.text === "Skip"){
+        if (received_message.text === "Skip to next question"){
           this.currentQuestion="end";
           // finish(this.userId);
           this.sendEmail(this.userAnswers);

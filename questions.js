@@ -26,6 +26,14 @@ const ratings = [
   }
 ];
 
+const infoOrSkip = [
+  {
+    content_type: "text",
+    title: "No!",
+    payload: "no"
+  }
+]
+
 function getQuestionData(questionKey, place, overallRating) {
   const questionsData = {
     "hello": {
