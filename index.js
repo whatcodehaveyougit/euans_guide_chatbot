@@ -231,7 +231,7 @@ class chatBot {
       return null;
     } else if (received_message.text.toLowerCase() === "stop") {
       let index = botInstances.findIndex(() => this.userId === sender_psid);
-      this.currentQuestion = "stop";
+      this.currentQuestion = "user-stop";
       botInstances.splice(index, 1);
     }
 
@@ -340,8 +340,8 @@ class chatBot {
       case "end":
         this.currentQuestion = "visited";
         break;
-      case "stop":
-        this.currentQuestion = "visited";
+      case "user-stop":
+        this.currentQuestion = "stop";
         break;
 
         ///disabled summary needs overallRating = received_message.text;
