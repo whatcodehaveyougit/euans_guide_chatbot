@@ -10,7 +10,6 @@ app = express().use(body_parser.json()); // creates express http server
 
 const nodemailer = require('nodemailer');
 
-let images = [];
 let botInstances = [];
 
 const ratings = [
@@ -187,6 +186,7 @@ class chatBot {
     this.currentQuestionData = null;
     this.place = "";
     this.overallRating = "";
+    this.images = [];
   }
 
   handleMessage(received_message){
@@ -401,7 +401,7 @@ class chatBot {
       to: process.env.EMAIL_RECIPIENT,
       subject: 'Facebook review title: ' + title,
       text: review,
-      attachments: images
+      attachments: this.images
     };
 
     transporter.sendMail(mailOptions, function(error, info){
@@ -415,7 +415,7 @@ class chatBot {
 
   handleAttachment(received_message){
     let attachment_url = received_message.attachments[0].payload.url;
-    images.push({path: attachment_url});
+    this.images.push({path: attachment_url});
     return {
       attachment: {
         type: "template",
