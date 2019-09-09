@@ -10,8 +10,8 @@ app = express().use(body_parser.json()); // creates express http server
 
 const nodemailer = require('nodemailer');
 
-let place;
-let overallRating;
+let ;
+let ;
 let images = [];
 let botInstances = [];
 
@@ -180,6 +180,8 @@ class chatBot {
     this.userAnswers = {};
     this.currentQuestion = "";
     this.currentQuestionData = null;
+    this.place = "";
+    this.overallRating = "";
   }
 
   handleMessage(received_message){
@@ -195,7 +197,7 @@ class chatBot {
           this.currentQuestion="visited";
         break;
       case "visited":
-        place = received_message.text;
+        this.place = received_message.text;
         this.currentQuestion="city";
         break;
       case "city": this.currentQuestion="image";
@@ -216,7 +218,7 @@ class chatBot {
         break;
       case "disabled-rating":
         if (this.isARatingNumber(received_message.text)) {
-          overallRating = received_message.text;
+          this.overallRating = received_message.text;
           this.currentQuestion="disabled-summary";
         }
         break;
@@ -293,7 +295,7 @@ class chatBot {
     if (attachment_response!=null)
       this.currentQuestionData=attachment_response;
     else
-      this.currentQuestionData=getQuestionData(this.currentQuestion,place,overallRating);
+      this.currentQuestionData=getQuestionData(this.currentQuestion,this.place,this.overallRating);
 
     console.log("currentQuestion:",this.currentQuestion, "currentQuestionData:", this.currentQuestionData,"attachment_url:",attachment_url);
     this.callSendAPI(this.currentQuestionData);
