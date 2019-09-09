@@ -47,7 +47,16 @@ class chatBot {
     switch (this.currentQuestion){
       case "hello":
         if (received_message.text === "Review!")
-          this.currentQuestion="visited";
+          this.currentQuestion = "account";
+        break;
+      case "account":
+        if (received_message.text === "No, I do not have an account")
+          this.currentQuestion = "visited";
+        else
+          this.currentQuestion = "username";
+        break;
+      case "username":
+        this.currentQuestion = "visited";
         break;
       case "visited":
         this.place = received_message.text;

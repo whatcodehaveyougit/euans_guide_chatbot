@@ -81,6 +81,7 @@ function getQuestionData(questionKey, place, overallRating) {
         }
       ]
     },
+    "username": {text: "Please enter your username or the associated email address so we can add this to your existing reviews."},
     "visited": {text: "Thank you, now back to your review. Please can you tell us the name of place that you visited?"},
     "city": {text: "Ok, great! Can you confirm which town or city " + place + " is in?"},
     "image": {
