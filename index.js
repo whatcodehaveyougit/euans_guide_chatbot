@@ -343,6 +343,9 @@ class chatBot {
       case "user-stop":
         this.currentQuestion = "stop";
         break;
+      case "stop":
+        this.currentQuestion = "visited";
+        break;
 
         ///disabled summary needs overallRating = received_message.text;
     }
