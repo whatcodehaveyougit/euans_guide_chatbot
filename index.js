@@ -10,11 +10,8 @@ app = express().use(body_parser.json()); // creates express http server
 
 const nodemailer = require('nodemailer');
 
-let currentQuestion = "";
-let currentQuestionData = null;
 let place;
 let overallRating;
-let userAnswers = {};
 let images = [];
 let botInstances = [];
 
@@ -180,6 +177,9 @@ function getQuestionData(questionKey, place, overallRating) {
 class chatBot {
   constructor (userId) {
     this.userId = userId;
+    this.userAnswers = {};
+    this.currentQuestion = "";
+    this.currentQuestionData = null;
   }
 
   handleMessage(received_message){
@@ -189,120 +189,120 @@ class chatBot {
     let attachment_url = null;
     let attachment_response = null;
 
-    switch (currentQuestion){
+    switch (this.currentQuestion){
       case "hello":
         if (received_message.text===`Review!`)
-          currentQuestion="visited";
+          this.currentQuestion="visited";
         break;
       case "visited":
         place = received_message.text;
-        currentQuestion="city";
+        this.currentQuestion="city";
         break;
-      case "city": currentQuestion="image";
+      case "city": this.currentQuestion="image";
         break;
       case "image":
       case "image2":
         if (received_message.text === "Yes!" )
-          currentQuestion="upload-image";
+          this.currentQuestion="upload-image";
         else
-          currentQuestion="title";
+          this.currentQuestion="title";
         break;
       case "upload-image":
         if (received_message.attachments){
           attachment_response = this.handleAttachment(received_message)
         }
         break;
-      case "title": currentQuestion="disabled-rating";
+      case "title": this.currentQuestion="disabled-rating";
         break;
       case "disabled-rating":
         if (this.isARatingNumber(received_message.text)) {
           overallRating = received_message.text;
-          currentQuestion="disabled-summary";
+          this.currentQuestion="disabled-summary";
         }
         break;
-      case "disabled-summary": currentQuestion="continue-or-finish";
+      case "disabled-summary": this.currentQuestion="continue-or-finish";
         break;
       case "continue-or-finish":
         if (received_message.text === "Continue")
-          currentQuestion="transport";
+          this.currentQuestion="transport";
         else {
-          currentQuestion="end";
+          this.currentQuestion="end";
           // finish(this.userId);
-          this.sendEmail(userAnswers);
+          this.sendEmail(this.userAnswers);
         }
         break;
       case "transport":
         if (received_message.text === "Skip")
-          currentQuestion="access";
+          this.currentQuestion="access";
         else
-          currentQuestion="transport-rating";
+          this.currentQuestion="transport-rating";
         break;
       case "transport-rating":
         if (this.isARatingNumber(received_message.text)) {
-          currentQuestion="transport-summary";
+          this.currentQuestion="transport-summary";
         }
         break;
-      case "transport-summary": currentQuestion="access";
+      case "transport-summary": this.currentQuestion="access";
         break;
       case "access":
         if (received_message.text === "Skip")
-          currentQuestion="toilet";
+          this.currentQuestion="toilet";
         else
-          currentQuestion="access-rating";
+          this.currentQuestion="access-rating";
         break;
-      case "access-rating": currentQuestion="view";
+      case "access-rating": this.currentQuestion="view";
         break;
-      case "view": currentQuestion="toilet";
+      case "view": this.currentQuestion="toilet";
         break;
       case "toilet":
         if (received_message.text === "Skip")
-          currentQuestion = "staff";
+          this.currentQuestion = "staff";
         else
-          currentQuestion = "toilet-rating";
+          this.currentQuestion = "toilet-rating";
         break;
       case "toilet-rating":
         if (this.isARatingNumber(received_message.text)) {
-          currentQuestion = "toilet-summary";
+          this.currentQuestion = "toilet-summary";
         }
         break;
-      case "toilet-summary": currentQuestion="staff";
+      case "toilet-summary": this.currentQuestion="staff";
         break;
       case "staff":
         if (received_message.text === "Skip"){
-          currentQuestion="end";
+          this.currentQuestion="end";
           // finish(this.userId);
-          this.sendEmail(userAnswers);
+          this.sendEmail(this.userAnswers);
         }
         else
-          currentQuestion="staff-rating";
+          this.currentQuestion="staff-rating";
         break;
       case "staff-rating":
         if (this.isARatingNumber(received_message.text)) {
-          currentQuestion = "staff-summary";
+          this.currentQuestion = "staff-summary";
         }
         break;
       case "staff-summary":
-        currentQuestion="end";
+        this.currentQuestion="end";
         // finish(this.userId);
-        this.sendEmail(userAnswers);
+        this.sendEmail(this.userAnswers);
         break;
 
         ///disabled summary needs overallRating = received_message.text;
     }
 
     if (attachment_response!=null)
-      currentQuestionData=attachment_response;
+      this.currentQuestionData=attachment_response;
     else
-      currentQuestionData=getQuestionData(currentQuestion,place,overallRating);
+      this.currentQuestionData=getQuestionData(currentQuestion,place,overallRating);
 
-    console.log("currentQuestion:",currentQuestion,"currentQuestionData:",currentQuestionData,"attachment_url:",attachment_url);
-    this.callSendAPI(currentQuestionData);
+    console.log("currentQuestion:",currentQuestion, "currentQuestionData:", this.currentQuestionData,"attachment_url:",attachment_url);
+    this.callSendAPI(this.currentQuestionData);
   }
 
   handlePostback(received_postback) {
     let response;
     let payload = received_postback.payload;
-    console.log("Postback payload:",payload);
+    console.log("Postback payload:", payload);
 
     if (payload === "Get Started") {
       response = {
@@ -320,10 +320,10 @@ class chatBot {
           }
         ]
       };
-      currentQuestion = "hello";
+      this.currentQuestion = "hello";
     } else if (payload === "yes") {
       response = getQuestionData("image2");
-      currentQuestion = "image2";
+      this.currentQuestion = "image2";
       console.log("response:",response)
     } else if (payload === "no") {
       response = { text: "Oops, try sending another image." };
@@ -477,10 +477,10 @@ app.post("/webhook", (req, res) => {
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
       if (webhook_event.message || webhook_event.attachments) {
-        userAnswers[currentQuestion] = webhook_event.message.text;
+        currentBot.userAnswers[currentQuestion] = webhook_event.message.text;
         currentBot.handleMessage(webhook_event.message);
       } else if (webhook_event.postback) {
-        userAnswers[currentQuestion] = webhook_event.postback.text;
+        currentBot.userAnswers[currentQuestion] = webhook_event.postback.text;
         currentBot.handlePostback(webhook_event.postback);
       }
     });
