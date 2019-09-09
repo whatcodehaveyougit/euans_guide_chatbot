@@ -35,6 +35,42 @@ function overallResponse(rating, place) {
     return "That's a great rating! People are going to love reading about " + place + "!\n"
 }
 
+function transportResponse(rating) {
+  if (rating < 3)
+   return "That doesn't sound great.\n";
+  else if (rating == 3)
+    return "That sounds like it could've been better...\n";
+  else
+    return "That sounds convenient!\n"
+}
+
+function accessResponse(rating, place) {
+  if (rating < 3)
+   return "Sorry to hear that, please can you tell us more about " + place + "?\n";
+  else if (rating == 3)
+    return "Disabled access at the " + place + " sounds ok - we're looking forward to hearing more!\n";
+  else
+    return "That's a great rating! People are going to love reading about " + place + "!\n"
+}
+
+function toiletResponse(rating, place) {
+  if (rating < 3)
+   return "Sorry to hear that, please can you tell us more about " + place + "?\n";
+  else if (rating == 3)
+    return "Disabled access at the " + place + " sounds ok - we're looking forward to hearing more!\n";
+  else
+    return "That's a great rating! People are going to love reading about " + place + "!\n"
+}
+
+function staffResponse(rating, place) {
+  if (rating < 3)
+   return "Sorry to hear that, please can you tell us more about " + place + "?\n";
+  else if (rating == 3)
+    return "Disabled access at the " + place + " sounds ok - we're looking forward to hearing more!\n";
+  else
+    return "That's a great rating! People are going to love reading about " + place + "!\n"
+}
+
 const infoOrSkip = [
   {
     content_type: "text",
@@ -206,7 +242,7 @@ function getQuestionData(questionKey, place, rating) {
       quick_replies: ratings
     },
     "transport-summary": {
-      text: "Could you give us some more information? Did you drive? If so, where did you park? If you travelled using public transport where was the nearest bus stop or train station?\n" +
+      text: transportResponse(rating) + "Could you give us some more information? Did you drive? If so, where did you park? If you travelled using public transport where was the nearest bus stop or train station?\n" +
       "What information would help others most?",
       quick_replies: skip
     },
