@@ -188,7 +188,7 @@ class chatBot {
     if (attachment_response != null)
       this.currentQuestionData = attachment_response;
     else
-      this.currentQuestionData = questions.getQuestionData(this.currentQuestion, this.place, this.overallRating);
+      this.currentQuestionData = questions.getQuestionData(this.currentQuestion, this.place, this.rating);
 
     console.log("currentQuestion:", this.currentQuestion, "currentQuestionData:", this.currentQuestionData, "attachment_url:", attachment_url);
     this.callSendAPI(this.currentQuestionData);
