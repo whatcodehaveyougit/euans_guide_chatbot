@@ -20,6 +20,7 @@ class chatBot {
     this.userAnswers = {};
     this.images = [];
     this.submitAllowed = false;
+    this.photosLater = false;
   }
 
   endReview() {
@@ -72,7 +73,11 @@ class chatBot {
       case "image2":
         if (["Upload Photos Now", "Yes!"].includes(received_message.text))
           this.currentQuestion = "upload-image";
+        else if (this.photosLater)
+          this.currentQuestion = "end";
         else
+          if (received_message.text.includes("Later"))
+            this.photosLater = true;
           this.currentQuestion = "title";
         break;
       case "upload-image":
@@ -167,7 +172,7 @@ class chatBot {
         break;
     }
 
-    if (attachment_response!=null)
+    if (attachment_response != null)
       this.currentQuestionData = attachment_response;
     else
       this.currentQuestionData = getQuestionData(this.currentQuestion, this.place, this.overallRating);
@@ -187,8 +192,9 @@ class chatBot {
     } else if (payload === "yes") {
       response = getQuestionData("image2");
       this.currentQuestion = "image2";
-      console.log("response:",response)
+      console.log("response:",response);
     } else if (payload === "no") {
+      this.images.pop();
       response = {text: "Please try to submit the image again."};
     }
     // Send the message to acknowledge the postback
