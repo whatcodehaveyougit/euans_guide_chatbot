@@ -133,7 +133,7 @@ function getQuestionData(questionKey, place, overallRating) {
     "access-rating": {text: "Ok, great! Let's start with a rating, again out of 5 for getting in and around.",
       quick_replies: ratings},
     "view": {text: "Great! Could you give us some more information on what you noticed about " + place + "?"},
-    "toilet": {text: "Now, onto toilets. Our users consistently tell us how important both accessible toilets and information about toilets is. Are you able to tell us anything about the toilets at" + place + "?",
+    "toilet": {text: "Now, onto toilets. Our users consistently tell us how important both accessible toilets and information about toilets is. Are you able to tell us anything about the toilets at " + place + "?",
       quick_replies: [
         {
           content_type: "text",
@@ -150,7 +150,7 @@ function getQuestionData(questionKey, place, overallRating) {
       quick_replies: ratings},
     "toilet-summary": {text: "Would you be able to provide some more details about the toilets?"},
     "staff": {text: "Now we come to staff. " +
-          "Would you like to add any further information about the people you came across at" + place + "?",
+          "Would you like to add any further information about the people you came across at " + place + "?",
       quick_replies: [
         {
           content_type: "text",
@@ -375,7 +375,7 @@ class chatBot {
 
     const review = this.formatBody(reviewAsString);
 
-    const title = reviewObject["Great! Now, what would you like to title your review?"];
+    const title = reviewObject["title"];
 
     const transporter = nodemailer.createTransport({
       service: 'gmail',
