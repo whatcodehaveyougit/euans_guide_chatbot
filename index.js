@@ -91,7 +91,7 @@ class chatBot {
         break;
       case "continue-or-finish":
         this.submitAllowed = true;
-        if (received_message.text === "Continue")
+        if (received_message.text === "Add more information")
           this.currentQuestion = "transport";
         else {
           this.currentQuestion = "end";
