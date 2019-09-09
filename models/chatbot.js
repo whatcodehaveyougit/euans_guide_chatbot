@@ -1,7 +1,7 @@
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN,
 request = require("request"),
 nodemailer = require("nodemailer"),
-getQuestionData = require("../questions");
+questions = require("../questions");
 
 class chatBot {
   constructor (userId) {
@@ -76,8 +76,10 @@ class chatBot {
         else if (this.photosLater)
           this.currentQuestion = "end";
         else {
-          if (received_message.text.includes("Later"))
+          if (received_message.text.includes("Later")) {
             this.photosLater = true;
+            questions.changeShowUpload();
+          }
           this.currentQuestion = "title";
         }
         break;
@@ -176,7 +178,7 @@ class chatBot {
     if (attachment_response != null)
       this.currentQuestionData = attachment_response;
     else
-      this.currentQuestionData = getQuestionData(this.currentQuestion, this.place, this.overallRating);
+      this.currentQuestionData = questions.getQuestionData(this.currentQuestion, this.place, this.overallRating);
 
     console.log("currentQuestion:", this.currentQuestion, "currentQuestionData:", this.currentQuestionData, "attachment_url:", attachment_url);
     this.callSendAPI(this.currentQuestionData);
@@ -188,10 +190,10 @@ class chatBot {
     console.log("Postback payload:", payload);
 
     if (payload === "Get Started") {
-      response = getQuestionData("hello");
+      response = questions.getQuestionData("hello");
       this.currentQuestion = "hello";
     } else if (payload === "yes") {
-      response = getQuestionData("image2");
+      response = questions.getQuestionData("image2");
       this.currentQuestion = "image2";
       console.log("response:",response);
     } else if (payload === "no") {

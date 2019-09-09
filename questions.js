@@ -49,6 +49,29 @@ const start = [
   }
 ];
 
+const uploadPhotos = [
+  {
+    content_type: "text",
+    title: "Skip to photo upload",
+    payload: "skip_question"
+  },
+  {
+    content_type: "text",
+    title: "Submit my review",
+    payload: "finish_option_question"
+  }
+]
+
+let show = false;
+
+function changeShowUpload() {
+  show = !show;
+}
+
+function showOrHideUpload() {
+  return (show ? uploadPhotos : [uploadPhotos[1]]);
+}
+
 function getQuestionData(questionKey, place, overallRating) {
   const questionsData = {
     "hello": {
@@ -222,18 +245,7 @@ function getQuestionData(questionKey, place, overallRating) {
     "anything-else": {
       text: "Thank you! That's really useful information!\n" +
       "Just one more question now, which is to ask if there's anything else you wish to tell us?",
-      quick_replies: [
-        {
-          content_type: "text",
-          title: "Skip to photo upload",
-          payload: "skip_question"
-        },
-        {
-          content_type: "text",
-          title: "Submit my review",
-          payload: "finish_option_question"
-        }
-      ]
+      quick_replies: showOrHideUpload()
     },
     "image-last": {
       text: "Now is your final chance to upload any photos or images you took at " + place + ". Images are an important way of letting people see what a venue is like before they vist.\n" +
@@ -264,4 +276,4 @@ function getQuestionData(questionKey, place, overallRating) {
   return questionsData[questionKey];
 }
 
-module.exports = getQuestionData;
+module.exports = {getQuestionData, changeShowUpload};
