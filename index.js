@@ -231,6 +231,8 @@ class chatBot {
       return null;
     } else if (received_message.text.toLowerCase() === "stop") {
       this.currentQuestion = "user-stop";
+    } else if (received_message.text.toLowerCase() === "submit") {
+      this.currentQuestion = "user-submit";
     }
 
     let attachment_url = null;
@@ -343,6 +345,9 @@ class chatBot {
         break;
       case "stop":
         this.currentQuestion = "visited";
+        break;
+      case "user-submit":
+        this.currentQuestion = "end";
         break;
 
         ///disabled summary needs overallRating = received_message.text;
