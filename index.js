@@ -46,141 +46,422 @@ const ratings = [
   }
 ];
 
+function getQuestionData(questionKey, place, overallRating) {
+  const questionsData = {
+    "hello": {text: `Hello! Thanks for clicking get started. Would you like to leave a review or chat to us?`,
+      quick_replies: [
+        {
+          content_type: "text",
+          title: "Review!",
+          payload: "review"
+        },
+        {
+          content_type: "text",
+          title: "Chat!",
+          payload: "chat"
+        }
+      ]},
+    "visited": {text: "Can you confirm the name of the place you visited?"},
+    "city": {text: "Ok, great! Can you confirm which town or city " + place + " is in?"},
+    "image": {text: "Do you have any photos or images you'd like to upload?",
+      quick_replies: [
+        {
+          content_type: "text",
+          title: "Yes!",
+          payload: "yes"
+        },
+        {
+          content_type: "text",
+          title: "No!",
+          payload: "no"
+        }
+      ]},
+    "image2": {text: "Do you have any more photos or images you'd like to upload?",
+      quick_replies: [
+        {
+          content_type: "text",
+          title: "Yes!",
+          payload: "yes"
+        },
+        {
+          content_type: "text",
+          title: "No!",
+          payload: "no"
+        }
+      ]},
+    "upload-image": {text: "Great, to select an image to attach, click on the picture icon in the bottom left corner of the messenger and send it."
+    },
+    "title": {text: "Great! Now, what would you like to title your review?"},
+    "disabled-rating": {text: "Great Title! Now for a rating, how would you rate the disabled access overall? Please rate 1 - 5.",
+      quick_replies: ratings},
+    "disabled-summary": {text: "You've given a rating of " + overallRating + ". Could you summarize your experience at " + place + "?"},
+    "continue-or-finish": {text:"Thank you very much, your review is nearly complete!",			quick_replies: [
+        {
+          content_type: "text",
+          title: "Continue",
+          payload: "continue_option_question"
+        },
+        {
+          content_type: "text",
+          title: "Finish",
+          payload: "finish_option_question"
+        }
+      ]},
+    "transport": {text: "We'll start with Getting There. Would you like to add any information on parking or transport?",
+      quick_replies: [
+        {
+          content_type: "text",
+          title: "Yes",
+          payload: "yes_get_there"
+        },
+        {
+          content_type: "text",
+          title: "Skip",
+          payload: "skip_get_there"
+        }
+      ]},
+    "transport-rating": {text:"Ok, great! Let's start with a rating, again out of 5.",
+      quick_replies: ratings},
+    "transport-summary": {text: "Awesome! Could you give us some more information?"},
+    "access": {text: "Thank You! Now onto getting in and around " + place + ". Is there anything specific about Disabled Access you would like to add?",
+      quick_replies: [
+        {
+          content_type: "text",
+          title: "Yes",
+          payload: "yes_disabled_access"
+        },
+        {
+          content_type: "text",
+          title: "Skip",
+          payload: "skip_disabled_access"
+        }
+      ]},
+    "access-rating": {text: "Ok, great! Let's start with a rating, again out of 5 for getting in and around.",
+      quick_replies: ratings},
+    "view": {text: "Great! Could you give us some more information on what you noticed about " + place + "?"},
+    "toilet": {text: "Now, onto toilets. Our users consistently tell us how important both accessible toilets and information about toilets is. Are you able to tell us anything about the toilets at" + place + "?",
+      quick_replies: [
+        {
+          content_type: "text",
+          title: "Yes",
+          payload: "yes_disabled_access"
+        },
+        {
+          content_type: "text",
+          title: "Skip",
+          payload: "skip_disabled_access"
+        }
+      ]},
+    "toilet-rating": {text: "Ok, great! Let's start with a rating, again out of 5 for toilet accessibility.",
+      quick_replies: ratings},
+    "toilet-summary": {text: "Would you be able to provide some more details about the toilets?"},
+    "staff": {text: "Now we come to staff. " +
+          "Would you like to add any further information about the people you came across at" + place + "?",
+      quick_replies: [
+        {
+          content_type: "text",
+          title: "Yes",
+          payload: "yes_disabled_access"
+        },
+        {
+          content_type: "text",
+          title: "Skip",
+          payload: "skip_disabled_access"
+        }
+      ]},
+    "staff-rating":  {text: "Ok, great! Let's start with a rating, again out of 5 for staff.", quick_replies: ratings},
+    "staff-summary": {text: "Would you be able to provide some more details about the staff?"},
+    "end": {text:"Thank you for your review - it's great. We'll send you a message when it has gone live! :)"}
+
+  };
+  return questionsData[questionKey];
+}
+
 class chatBot {
   constructor (userId) {
     this.userId = userId;
   }
-}
 
-function getQuestionData(questionKey, place, overallRating) {
-    const questionsData = {
-        "hello": {text: `Hello! Thanks for clicking get started. Would you like to leave a review or chat to us?`,
-            quick_replies: [
-                    {
-                        content_type: "text",
-                        title: "Review!",
-                        payload: "review"
-                    },
-                    {
-                        content_type: "text",
-                        title: "Chat!",
-                        payload: "chat"
-                    }
-                ]},
-        "visited": {text: "Can you confirm the name of the place you visited?"},
-        "city": {text: "Ok, great! Can you confirm which town or city " + place + " is in?"},
-		"image": {text: "Do you have any photos or images you'd like to upload?",
-		quick_replies: [
-                    {
-                        content_type: "text",
-                        title: "Yes!",
-                        payload: "yes"
-                    },
-                    {
-                        content_type: "text",
-                        title: "No!",
-                        payload: "no"
-                    }
-                ]},
-		"image2": {text: "Do you have any more photos or images you'd like to upload?",
-		quick_replies: [
-                    {
-                        content_type: "text",
-                        title: "Yes!",
-                        payload: "yes"
-                    },
-                    {
-                        content_type: "text",
-                        title: "No!",
-                        payload: "no"
-                    }
-                ]},
-		"upload-image": {text: "Great, to select an image to attach, click on the picture icon in the bottom left corner of the messenger and send it."
-		},
-        "title": {text: "Great! Now, what would you like to title your review?"},
-		"disabled-rating": {text: "Great Title! Now for a rating, how would you rate the disabled access overall? Please rate 1 - 5.",
-		quick_replies: ratings},
-		"disabled-summary": {text: "You've given a rating of " + overallRating + ". Could you summarize your experience at " + place + "?"},
-		"continue-or-finish": {text:"Thank you very much, your review is nearly complete!",			quick_replies: [
-			{
-			  content_type: "text",
-			  title: "Continue",
-			  payload: "continue_option_question"
-			},
-			{
-			  content_type: "text",
-			  title: "Finish",
-			  payload: "finish_option_question"
-			}
-		  ]},
-		"transport": {text: "We'll start with Getting There. Would you like to add any information on parking or transport?",
-		quick_replies: [
-			{
-			  content_type: "text",
-			  title: "Yes",
-			  payload: "yes_get_there"
-			},
-			{
-			  content_type: "text",
-			  title: "Skip",
-			  payload: "skip_get_there"
-			}
-		  ]},
-		"transport-rating": {text:"Ok, great! Let's start with a rating, again out of 5.",
-		quick_replies: ratings},
-		"transport-summary": {text: "Awesome! Could you give us some more information?"},
-		"access": {text: "Thank You! Now onto getting in and around " + place + ". Is there anything specific about Disabled Access you would like to add?",
-		quick_replies: [
-			{
-			  content_type: "text",
-			  title: "Yes",
-			  payload: "yes_disabled_access"
-			},
-			{
-			  content_type: "text",
-			  title: "Skip",
-			  payload: "skip_disabled_access"
-			}
-		  ]},
-		"access-rating": {text: "Ok, great! Let's start with a rating, again out of 5 for getting in and around.",
-		quick_replies: ratings},
-        "view": {text: "Great! Could you give us some more information on what you noticed about " + place + "?"},
-		"toilet": {text: "Now, onto toilets. Our users consistently tell us how important both accessible toilets and information about toilets is. Are you able to tell us anything about the toilets at" + place + "?",
-		quick_replies: [
-			{
-			  content_type: "text",
-			  title: "Yes",
-			  payload: "yes_disabled_access"
-			},
-			{
-			  content_type: "text",
-			  title: "Skip",
-			  payload: "skip_disabled_access"
-			}
-		  ]},
-		"toilet-rating": {text: "Ok, great! Let's start with a rating, again out of 5 for toilet accessibility.",
-		quick_replies: ratings},
-        "toilet-summary": {text: "Would you be able to provide some more details about the toilets?"},
-        "staff": {text: "Now we come to staff. " +
-				"Would you like to add any further information about the people you came across at" + place + "?",
-				quick_replies: [
-					{
-					  content_type: "text",
-					  title: "Yes",
-					  payload: "yes_disabled_access"
-					},
-					{
-					  content_type: "text",
-					  title: "Skip",
-					  payload: "skip_disabled_access"
-					}
-				  ]},
-		"staff-rating":  {text: "Ok, great! Let's start with a rating, again out of 5 for staff.", quick_replies: ratings},
-		"staff-summary": {text: "Would you be able to provide some more details about the staff?"},
-		"end": {text:"Thank you for your review - it's great. We'll send you a message when it has gone live! :)"}
+  handleMessage(sender_psid,received_message){
+    if (received_message.is_echo===true)
+      return null;
 
+    let attachment_url = null;
+    let attachment_response = null;
+
+    switch (currentQuestion){
+      case "hello":
+        if (received_message.text===`Review!`)
+          currentQuestion="visited";
+        break;
+      case "visited":
+        place = received_message.text;
+        currentQuestion="city";
+        break;
+      case "city": currentQuestion="image";
+        break;
+      case "image":
+      case "image2":
+        if (received_message.text === "Yes!" )
+          currentQuestion="upload-image";
+        else
+          currentQuestion="title";
+        break;
+      case "upload-image":
+        if (received_message.attachments){
+          attachment_response = handleAttachment(received_message)
+        }
+        break;
+      case "title": currentQuestion="disabled-rating";
+        break;
+      case "disabled-rating":
+        if (isARatingNumber(received_message.text)) {
+          overallRating = received_message.text;
+          currentQuestion="disabled-summary";
+        }
+        break;
+      case "disabled-summary": currentQuestion="continue-or-finish";
+        break;
+      case "continue-or-finish":
+        if (received_message.text === "Continue")
+          currentQuestion="transport";
+        else {
+          currentQuestion="end";
+          finish(sender_psid);
+          sendEmail(userAnswers);
+        }
+        break;
+      case "transport":
+        if (received_message.text === "Skip")
+          currentQuestion="access";
+        else
+          currentQuestion="transport-rating";
+        break;
+      case "transport-rating":
+        if (isARatingNumber(received_message.text)) {
+          currentQuestion="transport-summary";
+        }
+        break;
+      case "transport-summary": currentQuestion="access";
+        break;
+      case "access":
+        if (received_message.text === "Skip")
+          currentQuestion="toilet";
+        else
+          currentQuestion="access-rating";
+        break;
+      case "access-rating": currentQuestion="view";
+        break;
+      case "view": currentQuestion="toilet"
+        break;
+      case "toilet":
+        if (received_message.text === "Skip")
+          currentQuestion = "staff";
+        else
+          currentQuestion = "toilet-rating";
+        break;
+      case "toilet-rating":
+        if (isARatingNumber(received_message.text)) {
+          currentQuestion = "toilet-summary";
+        }
+        break;
+      case "toilet-summary": currentQuestion="staff";
+        break;
+      case "staff":
+        if (received_message.text === "Skip"){
+          currentQuestion="end";
+          finish(sender_psid);
+          sendEmail(userAnswers);
+        }
+        else
+          currentQuestion="staff-rating";
+        break;
+      case "staff-rating":
+        if (isARatingNumber(received_message.text)) {
+          currentQuestion = "staff-summary";
+        }
+        break;
+      case "staff-summary":
+        currentQuestion="end";
+        finish(sender_psid);
+        sendEmail(userAnswers);
+        break;
+
+        ///disabled summary needs overallRating = received_message.text;
+    }
+
+    if (attachment_response!=null)
+      currentQuestionData=attachment_response;
+    else
+      currentQuestionData=getQuestionData(currentQuestion,place,overallRating);
+
+    console.log("currentQuestion:",currentQuestion,"currentQuestionData:",currentQuestionData,"attachment_url:",attachment_url);
+    callSendAPI(sender_psid, currentQuestionData);
+  }
+
+  handlePostback(sender_psid, received_postback) {
+    let response;
+    let payload = received_postback.payload;
+    console.log("Postback payload:",payload);
+
+    if (payload === "Get Started") {
+      response = {
+        text: `Hello! Thanks for clicking get started. Would you like to leave a review or chat to us?`,
+        quick_replies: [
+          {
+            content_type: "text",
+            title: "Review!",
+            payload: "review"
+          },
+          {
+            content_type: "text",
+            title: "Chat!",
+            payload: "chat"
+          }
+        ]
+      };
+      currentQuestion = "hello";
+    } else if (payload === "yes") {
+      response = getQuestionData("image2");
+      currentQuestion = "image2";
+      console.log("response:",response)
+    } else if (payload === "no") {
+      response = { text: "Oops, try sending another image." };
+    }
+    // Send the message to acknowledge the postback
+    // setCurrentQuestion(response);
+    callSendAPI(sender_psid, response);
+  }
+
+  handleAttachment(received_message){
+    let attachment_url = received_message.attachments[0].payload.url;
+    images.push({path: attachment_url});
+    let attachment_response = {
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "generic",
+          elements: [
+            {
+              title: "Is this the right picture?",
+              subtitle: "Tap a button to answer.",
+              image_url: attachment_url,
+              buttons: [
+                {
+                  type: "postback",
+                  title: "Yes!",
+                  payload: "yes"
+                },
+                {
+                  type: "postback",
+                  title: "No!",
+                  payload: "no"
+                }
+              ]
+            }
+          ]
+        }
+      }
     };
-    return questionsData[questionKey];
+    return attachment_response;
+  }
+
+  callSendAPI(sender_psid, response) {
+    if (
+        currentQuestion ===
+        `Uh oh. Something's went wrong. Try deleting the chat and starting again. Sorry!`
+    ) {
+      return null;
+    }
+    // Construct the message body
+    let request_body = {
+      recipient: {
+        id: sender_psid
+      },
+      message: response
+    };
+
+    // Send the HTTP request to the Messenger Platform
+    request(
+        {
+          uri: `https://graph.facebook.com/v4.0/me/messages?access_token=${PAGE_ACCESS_TOKEN}`,
+          // qs: { access_token: PAGE_ACCESS_TOKEN },
+          method: "POST",
+          body: JSON.stringify(request_body),
+          headers: { 'Content-Type': 'application/json'}
+        },
+        (err, res, body) => {
+          if (err) {
+            console.error("Unable to send message:" + err);
+          } else if (body.includes("recipient_id")) {
+            console.log("message sent!", body);
+          }
+        }
+    );
+  }
+
+  sendEmail(reviewObject) {
+    let reviewAsString = JSON.stringify(reviewObject);
+    reviewAsString = reviewAsString.replace(/",/g, "\n");
+    reviewAsString = reviewAsString.replace(/"/g, " ");
+    reviewAsString = reviewAsString.replace(/{|}|\?/g, "");
+
+    const review = formatBody(reviewAsString);
+
+    const title = reviewObject["Great! Now, what would you like to title your review?"];
+
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_ACCOUNT,
+        pass: process.env.EMAIL_PASSWORD
+      }
+    });
+
+    const mailOptions = {
+      from: process.env.EMAIL_ACCOUNT,
+      to: process.env.EMAIL_RECIPIENT,
+      subject: 'Facebook review title: ' + title,
+      text: review,
+      attachments: images
+    };
+
+    transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
+  }
+
+  isARatingNumber(text){
+    return (!isNaN(text))&&(text >= 0)&&(text <= 5)
+  }
+
+  formatBody(string) {
+    let formattedString = string.split("\n");
+    formattedString.shift();
+
+    formattedString = formattedString.filter(str => !(str.includes("Do you have any") || str.includes("Great!") || str.includes("Great Title!") || str.includes("nearly complete!") || str.includes("Skip") || str.includes("Yes")));
+
+    formattedString = formattedString.join("\n");
+
+    formattedString = formattedString.replace("Can you confirm the name of the place you visited", "Name of place");
+    formattedString = formattedString.replace("Ok, great! Can you confirm which town or city ", "");
+    formattedString = formattedString.replace("You've given a rating of", "Disabled access overall rating :");
+    formattedString = formattedString.replace("Could you summarize your experience at", "\n Overview of");
+    formattedString = formattedString.replace("Ok, great! Let's start with a rating, again out of 5.", "Transport & parking rating");
+    formattedString = formattedString.replace("Awesome! Could you give us some more information", "Transport & parking summary");
+    formattedString = formattedString.replace("Ok, great! Let's start with a rating, again out of 5 for getting in and around.", "Access rating");
+    formattedString = formattedString.replace("Great! Could you give us some more information on what you noticed about", "Access summary of");
+    formattedString = formattedString.replace("Ok, great! Let's start with a rating, again out of 5 for toilet accessiblity.", "Toilet rating");
+    formattedString = formattedString.replace("Would you be able to provide some more details about the toilets", "Toilet summary");
+    formattedString = formattedString.replace("Ok, great! Let's start with a rating, again out of 5 for staff.", "Staff rating");
+    formattedString = formattedString.replace("Would you be able to provide some more details about the staff", "Staff summary");
+
+    return formattedString;
+  }
 }
 
 // Sets server port and logs message on success
@@ -250,262 +531,7 @@ app.get("/webhook", (req, res) => {
 
 
 
-function handleMessage(sender_psid,received_message){
-	if (received_message.is_echo===true)
-		return null;
 
-	let attachment_url = null;
-	let attachment_response = null;
-
-	switch (currentQuestion){
-		case "hello":
-			if (received_message.text===`Review!`)
-				currentQuestion="visited";
-			break;
-		case "visited":
-			place = received_message.text;
-			currentQuestion="city";
-			break;
-		case "city": currentQuestion="image";
-			break;
-		case "image":
-		case "image2":
-			if (received_message.text === "Yes!" )
-				currentQuestion="upload-image";
-			else
-				currentQuestion="title";
-		break;
-		case "upload-image":
-			if (received_message.attachments){
-				attachment_response = handleAttachment(received_message)
-			}
-			break;
-		case "title": currentQuestion="disabled-rating";
-			break;
-		case "disabled-rating":
-          if (isARatingNumber(received_message.text)) {
-			overallRating = received_message.text;
-			currentQuestion="disabled-summary";
-    }
-			break;
-		case "disabled-summary": currentQuestion="continue-or-finish";
-			break;
-		case "continue-or-finish":
-			if (received_message.text === "Continue")
-				currentQuestion="transport";
-			else {
-				currentQuestion="end";
-				finish(sender_psid);
-				sendEmail(userAnswers);
-			}
-			break;
-		case "transport":
-			if (received_message.text === "Skip")
-				currentQuestion="access";
-			else
-				currentQuestion="transport-rating";
-			break;
-		case "transport-rating":
-          if (isARatingNumber(received_message.text)) {
-      currentQuestion="transport-summary";
-    }
-			break;
-		case "transport-summary": currentQuestion="access";
-			break;
-		case "access":
-			if (received_message.text === "Skip")
-				currentQuestion="toilet";
-			else
-				currentQuestion="access-rating";
-			break;
-		case "access-rating": currentQuestion="view";
-			break;
-		case "view": currentQuestion="toilet"
-			break;
-		case "toilet":
-			if (received_message.text === "Skip")
-				currentQuestion = "staff";
-			else
-				currentQuestion = "toilet-rating";
-			break;
-		case "toilet-rating":
-          if (isARatingNumber(received_message.text)) {
-            currentQuestion = "toilet-summary";
-          }
-			break;
-		case "toilet-summary": currentQuestion="staff";
-			break;
-		case "staff":
-			if (received_message.text === "Skip"){
-				currentQuestion="end";
-				finish(sender_psid);
-				sendEmail(userAnswers);
-			}
-			else
-				currentQuestion="staff-rating";
-			break;
-		case "staff-rating":
-		  if (isARatingNumber(received_message.text)) {
-            currentQuestion = "staff-summary";
-          }
-			break;
-		case "staff-summary":
-			currentQuestion="end";
-			finish(sender_psid);
-			sendEmail(userAnswers);
-		break;
-
-	///disabled summary needs overallRating = received_message.text;
-		}
-
-	if (attachment_response!=null)
-		currentQuestionData=attachment_response;
-	else
-		currentQuestionData=getQuestionData(currentQuestion,place,overallRating);
-
-	console.log("currentQuestion:",currentQuestion,"currentQuestionData:",currentQuestionData,"attachment_url:",attachment_url);
-	callSendAPI(sender_psid, currentQuestionData);
-}
-
-function handlePostback(sender_psid, received_postback) {
-  let response;
-  let payload = received_postback.payload;
-  console.log("Postback payload:",payload);
-
-  if (payload === "Get Started") {
-    response = {
-      text: `Hello! Thanks for clicking get started. Would you like to leave a review or chat to us?`,
-      quick_replies: [
-        {
-          content_type: "text",
-          title: "Review!",
-          payload: "review"
-        },
-        {
-          content_type: "text",
-          title: "Chat!",
-          payload: "chat"
-        }
-      ]
-    };
-    currentQuestion = "hello";
-  } else if (payload === "yes") {
-    response = getQuestionData("image2");
-	currentQuestion = "image2";
-	console.log("response:",response)
-  } else if (payload === "no") {
-    response = { text: "Oops, try sending another image." };
-  }
-  // Send the message to acknowledge the postback
-  // setCurrentQuestion(response);
-  callSendAPI(sender_psid, response);
-}
-
-function handleAttachment(received_message){
-	let attachment_url = received_message.attachments[0].payload.url;
-	images.push({path: attachment_url});
-	let attachment_response = {
-		attachment: {
-			type: "template",
-			payload: {
-			template_type: "generic",
-			elements: [
-				{
-				title: "Is this the right picture?",
-				subtitle: "Tap a button to answer.",
-				image_url: attachment_url,
-				buttons: [
-					{
-					type: "postback",
-					title: "Yes!",
-					payload: "yes"
-					},
-					{
-					type: "postback",
-					title: "No!",
-					payload: "no"
-					}
-				]
-				}
-			]
-			}
-		}
-	};
-	return attachment_response;
-}
-
-function callSendAPI(sender_psid, response) {
-  if (
-    currentQuestion ===
-    `Uh oh. Something's went wrong. Try deleting the chat and starting again. Sorry!`
-  ) {
-    return null;
-  }
-  // Construct the message body
-  let request_body = {
-    recipient: {
-      id: sender_psid
-    },
-    message: response
-  };
-
-  // Send the HTTP request to the Messenger Platform
-  request(
-    {
-      uri: `https://graph.facebook.com/v4.0/me/messages?access_token=${PAGE_ACCESS_TOKEN}`,
-      // qs: { access_token: PAGE_ACCESS_TOKEN },
-      method: "POST",
-      body: JSON.stringify(request_body),
-      headers: { 'Content-Type': 'application/json'}
-    },
-    (err, res, body) => {
-      if (err) {
-        console.error("Unable to send message:" + err);
-      } else if (body.includes("recipient_id")) {
-        console.log("message sent!", body);
-      }
-    }
-  );
-}
-
-function sendEmail(reviewObject) {
-  let reviewAsString = JSON.stringify(reviewObject);
-  reviewAsString = reviewAsString.replace(/",/g, "\n");
-  reviewAsString = reviewAsString.replace(/"/g, " ");
-  reviewAsString = reviewAsString.replace(/{|}|\?/g, "");
-
-  const review = formatBody(reviewAsString);
-
-  const title = reviewObject["Great! Now, what would you like to title your review?"];
-
-  const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: process.env.EMAIL_ACCOUNT,
-      pass: process.env.EMAIL_PASSWORD
-    }
-  });
-
-  const mailOptions = {
-    from: process.env.EMAIL_ACCOUNT,
-    to: process.env.EMAIL_RECIPIENT,
-    subject: 'Facebook review title: ' + title,
-    text: review,
-    attachments: images
-  };
-
-  transporter.sendMail(mailOptions, function(error, info){
-    if (error) {
-      console.log(error);
-    } else {
-      console.log('Email sent: ' + info.response);
-    }
-  });
-}
-
-function isARatingNumber(text){
-	return (!isNaN(text))&&(text >= 0)&&(text <= 5)
-}
 
 function finish(sender_psid) {
   console.log("Users answers: ", userAnswers);
@@ -520,26 +546,4 @@ function finish(sender_psid) {
   fs.writeFile(`${sender_psid}_${date}.JSON`, userAnswers, err => {console.error()});
 }
 
-function formatBody(string) {
-  let formattedString = string.split("\n");
-  formattedString.shift();
 
-  formattedString = formattedString.filter(str => !(str.includes("Do you have any") || str.includes("Great!") || str.includes("Great Title!") || str.includes("nearly complete!") || str.includes("Skip") || str.includes("Yes")));
-
-  formattedString = formattedString.join("\n");
-
-  formattedString = formattedString.replace("Can you confirm the name of the place you visited", "Name of place");
-  formattedString = formattedString.replace("Ok, great! Can you confirm which town or city ", "");
-  formattedString = formattedString.replace("You've given a rating of", "Disabled access overall rating :");
-  formattedString = formattedString.replace("Could you summarize your experience at", "\n Overview of");
-  formattedString = formattedString.replace("Ok, great! Let's start with a rating, again out of 5.", "Transport & parking rating");
-  formattedString = formattedString.replace("Awesome! Could you give us some more information", "Transport & parking summary");
-  formattedString = formattedString.replace("Ok, great! Let's start with a rating, again out of 5 for getting in and around.", "Access rating");
-  formattedString = formattedString.replace("Great! Could you give us some more information on what you noticed about", "Access summary of");
-  formattedString = formattedString.replace("Ok, great! Let's start with a rating, again out of 5 for toilet accessiblity.", "Toilet rating");
-  formattedString = formattedString.replace("Would you be able to provide some more details about the toilets", "Toilet summary");
-  formattedString = formattedString.replace("Ok, great! Let's start with a rating, again out of 5 for staff.", "Staff rating");
-  formattedString = formattedString.replace("Would you be able to provide some more details about the staff", "Staff summary");
-
-  return formattedString;
-}
