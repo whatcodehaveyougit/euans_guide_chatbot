@@ -8,7 +8,7 @@ body_parser = require("body-parser"),
 fs = require("fs"),
 app = express().use(body_parser.json()); // creates express http server
 
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
 
 let botInstances = [];
 
@@ -42,140 +42,140 @@ const ratings = [
 
 function getQuestionData(questionKey, place, overallRating) {
   const questionsData = {
-    "hello": {text: `Hello! Thanks for clicking get started. Would you like to leave a review or chat to us?`,
-      quick_replies: [
-        {
-          content_type: "text",
-          title: "Review!",
-          payload: "review"
-        },
-        {
-          content_type: "text",
-          title: "Chat!",
-          payload: "chat"
-        }
-      ]},
-      "visited": {text: "Can you confirm the name of the place you visited?"},
-      "city": {text: "Ok, great! Can you confirm which town or city " + place + " is in?"},
-      "image": {text: "Do you have any photos or images you'd like to upload?",
-      quick_replies: [
-        {
-          content_type: "text",
-          title: "Yes!",
-          payload: "yes"
-        },
-        {
-          content_type: "text",
-          title: "No!",
-          payload: "no"
-        }
-      ]},
-      "image2": {text: "Do you have any more photos or images you'd like to upload?",
-      quick_replies: [
-        {
-          content_type: "text",
-          title: "Yes!",
-          payload: "yes"
-        },
-        {
-          content_type: "text",
-          title: "No!",
-          payload: "no"
-        }
-      ]},
+    "hello": {text: "Hello! Thanks for clicking get started. Would you like to leave a review or chat to us?",
+    quick_replies: [
+      {
+        content_type: "text",
+        title: "Review!",
+        payload: "review"
+      },
+      {
+        content_type: "text",
+        title: "Chat!",
+        payload: "chat"
+      }
+    ]},
+    "visited": {text: "Can you confirm the name of the place you visited?"},
+    "city": {text: "Ok, great! Can you confirm which town or city " + place + " is in?"},
+    "image": {text: "Do you have any photos or images you'd like to upload?",
+    quick_replies: [
+      {
+        content_type: "text",
+        title: "Yes!",
+        payload: "yes"
+      },
+      {
+        content_type: "text",
+        title: "No!",
+        payload: "no"
+      }
+    ]},
+    "image2": {text: "Do you have any more photos or images you'd like to upload?",
+    quick_replies: [
+      {
+        content_type: "text",
+        title: "Yes!",
+        payload: "yes"
+      },
+      {
+        content_type: "text",
+        title: "No!",
+        payload: "no"
+      }
+    ]},
     "upload-image": {text: "Great, to select an image to attach, click on the picture icon in the bottom left corner of the messenger and send it."
+  },
+  "title": {text: "Great! Now, what would you like to title your review?"},
+  "disabled-rating": {text: "Great Title! Now for a rating, how would you rate the disabled access overall? Please rate 1 - 5.",
+  quick_replies: ratings},
+  "disabled-summary": {text: "You've given a rating of " + overallRating + ". Could you summarize your experience at " + place + "?"},
+  "continue-or-finish": {text: "Thank you very much, your review is nearly complete!",			quick_replies: [
+    {
+      content_type: "text",
+      title: "Continue",
+      payload: "continue_option_question"
     },
-    "title": {text: "Great! Now, what would you like to title your review?"},
-    "disabled-rating": {text: "Great Title! Now for a rating, how would you rate the disabled access overall? Please rate 1 - 5.",
-      quick_replies: ratings},
-    "disabled-summary": {text: "You've given a rating of " + overallRating + ". Could you summarize your experience at " + place + "?"},
-    "continue-or-finish": {text:"Thank you very much, your review is nearly complete!",			quick_replies: [
-        {
-          content_type: "text",
-          title: "Continue",
-          payload: "continue_option_question"
-        },
-        {
-          content_type: "text",
-          title: "Finish",
-          payload: "finish_option_question"
-        }
-      ]},
-    "transport": {text: "We'll start with Getting There. Would you like to add any information on parking or transport?",
-      quick_replies: [
-        {
-          content_type: "text",
-          title: "Yes",
-          payload: "yes_get_there"
-        },
-        {
-          content_type: "text",
-          title: "Skip",
-          payload: "skip_get_there"
-        }
-      ]},
-    "transport-rating": {text:"Ok, great! Let's start with a rating, again out of 5.",
-      quick_replies: ratings},
-    "transport-summary": {text: "Awesome! Could you give us some more information?"},
-    "access": {text: "Thank You! Now onto getting in and around " + place + ". Is there anything specific about Disabled Access you would like to add?",
-      quick_replies: [
-        {
-          content_type: "text",
-          title: "Yes",
-          payload: "yes_disabled_access"
-        },
-        {
-          content_type: "text",
-          title: "Skip",
-          payload: "skip_disabled_access"
-        }
-      ]},
-    "access-rating": {text: "Ok, great! Let's start with a rating, again out of 5 for getting in and around.",
-      quick_replies: ratings},
-    "view": {text: "Great! Could you give us some more information on what you noticed about " + place + "?"},
-    "toilet": {text: "Now, onto toilets. Our users consistently tell us how important both accessible toilets and information about toilets is. Are you able to tell us anything about the toilets at " + place + "?",
-      quick_replies: [
-        {
-          content_type: "text",
-          title: "Yes",
-          payload: "yes_disabled_access"
-        },
-        {
-          content_type: "text",
-          title: "Skip",
-          payload: "skip_disabled_access"
-        }
-      ]},
-    "toilet-rating": {text: "Ok, great! Let's start with a rating, again out of 5 for toilet accessibility.",
-      quick_replies: ratings},
-    "toilet-summary": {text: "Would you be able to provide some more details about the toilets?"},
-    "staff": {text: "Now we come to staff. " +
-          "Would you like to add any further information about the people you came across at " + place + "?",
-      quick_replies: [
-        {
-          content_type: "text",
-          title: "Yes",
-          payload: "yes_disabled_access"
-        },
-        {
-          content_type: "text",
-          title: "Skip",
-          payload: "skip_disabled_access"
-        }
-      ]},
-    "staff-rating":  {text: "Ok, great! Let's start with a rating, again out of 5 for staff.", quick_replies: ratings},
-    "staff-summary": {text: "Would you be able to provide some more details about the staff?"},
-    "end": {text:"Thank you for your review - it's great. We'll send you a message when it has gone live! :)",
-      quick_replies: [
-        {
-          content_type: "text",
-          title: "Start another review",
-          payload: "review"
-        }
-      ]
+    {
+      content_type: "text",
+      title: "Finish",
+      payload: "finish_option_question"
     }
-  };
-  return questionsData[questionKey];
+  ]},
+  "transport": {text: "We'll start with Getting There. Would you like to add any information on parking or transport?",
+  quick_replies: [
+    {
+      content_type: "text",
+      title: "Yes",
+      payload: "yes_get_there"
+    },
+    {
+      content_type: "text",
+      title: "Skip",
+      payload: "skip_get_there"
+    }
+  ]},
+  "transport-rating": {text: "Ok, great! Let's start with a rating, again out of 5.",
+  quick_replies: ratings},
+  "transport-summary": {text: "Awesome! Could you give us some more information?"},
+  "access": {text: "Thank You! Now onto getting in and around " + place + ". Is there anything specific about Disabled Access you would like to add?",
+  quick_replies: [
+    {
+      content_type: "text",
+      title: "Yes",
+      payload: "yes_disabled_access"
+    },
+    {
+      content_type: "text",
+      title: "Skip",
+      payload: "skip_disabled_access"
+    }
+  ]},
+  "access-rating": {text: "Ok, great! Let's start with a rating, again out of 5 for getting in and around.",
+  quick_replies: ratings},
+  "view": {text: "Great! Could you give us some more information on what you noticed about " + place + "?"},
+  "toilet": {text: "Now, onto toilets. Our users consistently tell us how important both accessible toilets and information about toilets is. Are you able to tell us anything about the toilets at " + place + "?",
+  quick_replies: [
+    {
+      content_type: "text",
+      title: "Yes",
+      payload: "yes_disabled_access"
+    },
+    {
+      content_type: "text",
+      title: "Skip",
+      payload: "skip_disabled_access"
+    }
+  ]},
+  "toilet-rating": {text: "Ok, great! Let's start with a rating, again out of 5 for toilet accessibility.",
+  quick_replies: ratings},
+  "toilet-summary": {text: "Would you be able to provide some more details about the toilets?"},
+  "staff": {text: "Now we come to staff. " +
+  "Would you like to add any further information about the people you came across at " + place + "?",
+  quick_replies: [
+    {
+      content_type: "text",
+      title: "Yes",
+      payload: "yes_disabled_access"
+    },
+    {
+      content_type: "text",
+      title: "Skip",
+      payload: "skip_disabled_access"
+    }
+  ]},
+  "staff-rating":  {text: "Ok, great! Let's start with a rating, again out of 5 for staff.", quick_replies: ratings},
+  "staff-summary": {text: "Would you be able to provide some more details about the staff?"},
+  "end": {text: "Thank you for your review - it's great. We'll send you a message when it has gone live! :)",
+  quick_replies: [
+    {
+      content_type: "text",
+      title: "Start another review",
+      payload: "review"
+    }
+  ]
+}
+};
+return questionsData[questionKey];
 }
 
 class chatBot {
@@ -192,70 +192,71 @@ class chatBot {
   handleMessage(received_message){
     if (received_message.is_echo===true)
       return null;
+    else if (received_message.text==="")
 
     let attachment_url = null;
     let attachment_response = null;
 
     switch (this.currentQuestion){
       case "hello":
-        if (received_message.text===`Review!`)
+        if (received_message.text === "Review!")
           this.currentQuestion="visited";
         break;
       case "visited":
         this.place = received_message.text;
-        this.currentQuestion="city";
+        this.currentQuestion = "city";
         break;
-      case "city": this.currentQuestion="image";
+      case "city": this.currentQuestion = "image";
         break;
       case "image":
       case "image2":
         if (received_message.text === "Yes!" )
-          this.currentQuestion="upload-image";
+          this.currentQuestion = "upload-image";
         else
-          this.currentQuestion="title";
+          this.currentQuestion = "title";
         break;
       case "upload-image":
         if (received_message.attachments){
           attachment_response = this.handleAttachment(received_message)
         }
         break;
-      case "title": this.currentQuestion="disabled-rating";
+      case "title": this.currentQuestion = "disabled-rating";
         break;
       case "disabled-rating":
         if (this.isARatingNumber(received_message.text)) {
           this.overallRating = received_message.text;
-          this.currentQuestion="disabled-summary";
+          this.currentQuestion = "disabled-summary";
         }
         break;
-      case "disabled-summary": this.currentQuestion="continue-or-finish";
+      case "disabled-summary": this.currentQuestion = "continue-or-finish";
         break;
       case "continue-or-finish":
         if (received_message.text === "Continue")
-          this.currentQuestion="transport";
+          this.currentQuestion = "transport";
         else {
-          this.currentQuestion="end";
+          this.currentQuestion = "end";
           // finish(this.userId);
           this.sendEmail(this.userAnswers);
         }
         break;
       case "transport":
         if (received_message.text === "Skip")
-          this.currentQuestion="access";
+          this.currentQuestion = "access";
         else
-          this.currentQuestion="transport-rating";
+          this.currentQuestion = "transport-rating";
         break;
       case "transport-rating":
         if (this.isARatingNumber(received_message.text)) {
-          this.currentQuestion="transport-summary";
+          this.currentQuestion = "transport-summary";
         }
         break;
-      case "transport-summary": this.currentQuestion="access";
+      case "transport-summary": this.currentQuestion = "access";
         break;
       case "access":
         if (received_message.text === "Skip")
-          this.currentQuestion="toilet";
+          this.currentQuestion = "toilet";
         else
-          this.currentQuestion="access-rating";
+          this.currentQuestion = "access-rating";
         break;
       case "access-rating": this.currentQuestion="view";
         break;
@@ -281,7 +282,7 @@ class chatBot {
           this.sendEmail(this.userAnswers);
         }
         else
-          this.currentQuestion="staff-rating";
+          this.currentQuestion = "staff-rating";
         break;
       case "staff-rating":
         if (this.isARatingNumber(received_message.text)) {
@@ -289,23 +290,23 @@ class chatBot {
         }
         break;
       case "staff-summary":
-        this.currentQuestion="end";
+        this.currentQuestion = "end";
         // finish(this.userId);
         this.sendEmail(this.userAnswers);
         this.userAnswers = {};
         this.images = [];
         break;
       case "end":
-        this.currentQuestion="visited";
+        this.currentQuestion = "visited";
         break;
 
         ///disabled summary needs overallRating = received_message.text;
     }
 
     if (attachment_response!=null)
-      this.currentQuestionData=attachment_response;
+      this.currentQuestionData = attachment_response;
     else
-      this.currentQuestionData=getQuestionData(this.currentQuestion,this.place,this.overallRating);
+      this.currentQuestionData = getQuestionData(this.currentQuestion,this.place,this.overallRating);
 
     console.log("currentQuestion:",this.currentQuestion, "currentQuestionData:", this.currentQuestionData,"attachment_url:",attachment_url);
     this.callSendAPI(this.currentQuestionData);
