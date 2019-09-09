@@ -3,10 +3,10 @@
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 // Imports dependencies and set up http server
 const request = require("request"),
-  express = require("express"),
-  body_parser = require("body-parser"),
-  fs = require("fs"),
-  app = express().use(body_parser.json()); // creates express http server
+express = require("express"),
+body_parser = require("body-parser"),
+fs = require("fs"),
+app = express().use(body_parser.json()); // creates express http server
 
 const nodemailer = require('nodemailer');
 
@@ -61,9 +61,9 @@ function getQuestionData(questionKey, place, overallRating) {
           payload: "chat"
         }
       ]},
-    "visited": {text: "Can you confirm the name of the place you visited?"},
-    "city": {text: "Ok, great! Can you confirm which town or city " + place + " is in?"},
-    "image": {text: "Do you have any photos or images you'd like to upload?",
+      "visited": {text: "Can you confirm the name of the place you visited?"},
+      "city": {text: "Ok, great! Can you confirm which town or city " + place + " is in?"},
+      "image": {text: "Do you have any photos or images you'd like to upload?",
       quick_replies: [
         {
           content_type: "text",
@@ -76,7 +76,7 @@ function getQuestionData(questionKey, place, overallRating) {
           payload: "no"
         }
       ]},
-    "image2": {text: "Do you have any more photos or images you'd like to upload?",
+      "image2": {text: "Do you have any more photos or images you'd like to upload?",
       quick_replies: [
         {
           content_type: "text",
@@ -540,5 +540,3 @@ function finish(sender_psid) {
 
   fs.writeFile(`${sender_psid}_${date}.JSON`, userAnswers, err => {console.error()});
 }
-
-
