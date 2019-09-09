@@ -56,10 +56,7 @@ class chatBot {
           this.currentQuestion = "username";
         break;
       case "username":
-        this.currentQuestion = "visited";
-        break;
-      case "new-user":
-        this.currentQuestion = "visited";
+      case "new-user": this.currentQuestion = "visited";
         break;
       case "visited":
         this.place = received_message.text;
@@ -79,12 +76,12 @@ class chatBot {
           attachment_response = this.handleAttachment(received_message)
         }
         break;
-      case "title": this.currentQuestion = "disabled-rating";
+      case "title": this.currentQuestion = "overall-rating";
         break;
       case "overall-rating":
         if (this.isARatingNumber(received_message.text)) {
           this.overallRating = received_message.text;
-          this.currentQuestion = "disabled-summary";
+          this.currentQuestion = "overall-summary";
         }
         break;
       case "overall-summary": this.currentQuestion = "continue-or-finish";
@@ -139,7 +136,6 @@ class chatBot {
       case "staff":
         if (received_message.text.slice(0, 4) === "Skip"){
           this.currentQuestion="end";
-          // finish(this.userId);
           this.sendEmail(this.userAnswers);
           this.reset();
         }
@@ -151,22 +147,18 @@ class chatBot {
           this.currentQuestion = "staff-summary";
         }
         break;
-      case "staff-summary":
-        this.currentQuestion = "anything-else"
+      case "staff-summary": this.currentQuestion = "anything-else";
+        break;
       case "anything-else":
         this.currentQuestion = "end";
-        // finish(this.userId);
         this.sendEmail(this.userAnswers);
         this.reset();
         break;
-      case "end":
-        this.currentQuestion = "visited";
+      case "end": this.currentQuestion = "visited";
         break;
-      case "user-stop":
-        this.currentQuestion = "stop";
+      case "user-stop": this.currentQuestion = "stop";
         break;
-      case "stop":
-        this.currentQuestion = "visited";
+      case "stop": this.currentQuestion = "visited";
         break;
       case "user-submit":
         this.currentQuestion = "end";
@@ -199,7 +191,7 @@ class chatBot {
       this.currentQuestion = "image2";
       console.log("response:",response)
     } else if (payload === "no") {
-      response = {text: "Oops, try sending another image."};
+      response = {text: "Please try to submit the image again."};
     }
     // Send the message to acknowledge the postback
     // setCurrentQuestion(response);
