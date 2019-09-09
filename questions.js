@@ -27,43 +27,43 @@ const ratings = [
 ];
 
 function overallResponse(rating, place) {
-  if (rating < 3)
+  if (rating < "3")
    return "Sorry to hear that, please can you tell us more about " + place + "?\n";
-  else if (rating == 3)
+  else if (rating === "3")
     return "Disabled access at the " + place + " sounds ok - we're looking forward to hearing more!\n";
   else
     return "That's a great rating! People are going to love reading about " + place + "!\n"
 }
 
 function transportResponse(rating) {
-  if (rating < 3)
+  if (rating < "3")
    return "That doesn't sound great.\n";
-  else if (rating == 3)
+  else if (rating === "3")
     return "That sounds like it could've been better...\n";
   else
     return "That sounds convenient!\n"
 }
 
 function accessResponse(rating) {
-  if (rating < 3)
+  if (rating < "3")
    return "That's not a good rating...\n";
-  else if (rating == 3)
+  else if (rating === "3")
     return "That sounds like it could've been better...\n";
   else
     return rating + "* is a great rating!\n"
 }
 
 function toiletResponse(rating) {
-  if (rating < 3)
+  if (rating < "3")
    return "They don't sound very good\n";
-  else if (rating == 3)
+  else if (rating === "3")
     return "The loos sound like they could've been better...\n";
   else
     return "Wow! They sound great! We'd love to hear some more!\n"
 }
 
 function staffResponse(rating) {
-  if (rating < 4)
+  if (rating < "4")
    return "That's useful to know...\n";
   else
     return "That's great to know!\n"
