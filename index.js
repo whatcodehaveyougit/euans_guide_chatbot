@@ -442,22 +442,9 @@ class chatBot {
     let formattedString = string.split("\n");
     formattedString.shift();
 
-    formattedString = formattedString.filter(str => !(str.includes("Do you have any") || str.includes("Great!") || str.includes("Great Title!") || str.includes("nearly complete!") || str.includes("Skip") || str.includes("Yes")));
+    formattedString = formattedString.filter(str => !(str.includes("image :") || str.includes("image2 :") || str.includes("continue-or-finish :") || str.includes("transport :") || str.includes("access :") || str.includes("toilet :") || str.includes("staff :")));
 
     formattedString = formattedString.join("\n");
-
-    formattedString = formattedString.replace("Can you confirm the name of the place you visited", "Name of place");
-    formattedString = formattedString.replace("Ok, great! Can you confirm which town or city ", "");
-    formattedString = formattedString.replace("You've given a rating of", "Disabled access overall rating :");
-    formattedString = formattedString.replace("Could you summarize your experience at", "\n Overview of");
-    formattedString = formattedString.replace("Ok, great! Let's start with a rating, again out of 5.", "Transport & parking rating");
-    formattedString = formattedString.replace("Awesome! Could you give us some more information", "Transport & parking summary");
-    formattedString = formattedString.replace("Ok, great! Let's start with a rating, again out of 5 for getting in and around.", "Access rating");
-    formattedString = formattedString.replace("Great! Could you give us some more information on what you noticed about", "Access summary of");
-    formattedString = formattedString.replace("Ok, great! Let's start with a rating, again out of 5 for toilet accessiblity.", "Toilet rating");
-    formattedString = formattedString.replace("Would you be able to provide some more details about the toilets", "Toilet summary");
-    formattedString = formattedString.replace("Ok, great! Let's start with a rating, again out of 5 for staff.", "Staff rating");
-    formattedString = formattedString.replace("Would you be able to provide some more details about the staff", "Staff summary");
 
     return formattedString;
   }
