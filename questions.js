@@ -121,13 +121,13 @@ function getQuestionData(questionKey, place, overallRating) {
     "upload-image": {text: "Great, to select an image to attach, click on the picture icon in the bottom left corner of the messenger and send it."},
     "title": {text: "Thanks! Now, what would you like to title your review? This will be the first thing people will see. \n " +
     "An example might be \"Accessible Museum in the heart of London\" or \"Great accessible cafe with delicious cakes!\""},
-    "disabled-rating": {
+    "overall-rating": {
       text: "Great title! \n" +
       "\n" +
       "Now for a rating... Out of 5, where 5 is great and 1 is bad, how would you rate the disabled access overall?",
       quick_replies: ratings
     },
-    "disabled-summary": {text: "People are going to love reading about  " + place + "! Now could you summarise your experience? \n" +
+    "overall-summary": {text: "People are going to love reading about  " + place + "! Now could you summarise your experience? \n" +
     "\n" +
     "Some things you might want to talk about include:\n" +
     "What did you do there?\n" +
@@ -210,12 +210,28 @@ function getQuestionData(questionKey, place, overallRating) {
       quick_replies: ratings
     },
     "staff-summary": {
-      text: "	That's great to know!" + "Would you be able to tell us a bit more about the welcome you received?\n" +
+      text: "	That's great to know!\n" + "Would you be able to tell us a bit more about the welcome you received?\n" +
       "Was there anyone who particularly who stood out? If so, what did they do to make it a memorable experience?",
       quick_replies: skip
     },
+    "anything-else": {
+      text: "Thank you! That's really useful information!\n" +
+      "Just one more question now, which is to ask if there's anything else you wish to tell us?",
+      quick_replies: [
+        {
+          content_type: "text",
+          title: "Skip to photo upload",
+          payload: "skip_question"
+        },
+        {
+          content_type: "text",
+          title: "Submit my review",
+          payload: "finish_option_question"
+        }
+      ]
+    },
     "end": {
-      text: "Thank you for your review - it's great. We'll send you a message when it has gone live! :)",
+      text: "Thank you for taking the time to leave your review! We'll send you a message when it has gone live!",
       quick_replies: start
     },
     "stop": {

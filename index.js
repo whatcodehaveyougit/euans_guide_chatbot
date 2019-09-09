@@ -81,13 +81,13 @@ class chatBot {
         break;
       case "title": this.currentQuestion = "disabled-rating";
         break;
-      case "disabled-rating":
+      case "overall-rating":
         if (this.isARatingNumber(received_message.text)) {
           this.overallRating = received_message.text;
           this.currentQuestion = "disabled-summary";
         }
         break;
-      case "disabled-summary": this.currentQuestion = "continue-or-finish";
+      case "overall-summary": this.currentQuestion = "continue-or-finish";
         break;
       case "continue-or-finish":
         this.submitAllowed = true;
@@ -152,6 +152,8 @@ class chatBot {
         }
         break;
       case "staff-summary":
+        this.currentQuestion = "anything-else"
+      case "anything-else":
         this.currentQuestion = "end";
         // finish(this.userId);
         this.sendEmail(this.userAnswers);
