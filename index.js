@@ -226,13 +226,11 @@ class chatBot {
     this.images = [];
   }
 
-  handleMessage(received_message, sender_psid){
+  handleMessage(received_message){
     if (received_message.is_echo === true) {
       return null;
     } else if (received_message.text.toLowerCase() === "stop") {
-      // let index = botInstances.findIndex(() => this.userId === sender_psid);
       this.currentQuestion = "user-stop";
-      // botInstances.splice(index, 1);
     }
 
     let attachment_url = null;
@@ -538,7 +536,7 @@ app.post("/webhook", (req, res) => {
       // pass the event to the appropriate handler function
       if (webhook_event.message || webhook_event.attachments) {
         currentBot.userAnswers[currentBot.currentQuestion] = webhook_event.message.text;
-        currentBot.handleMessage(webhook_event.message, sender_psid);
+        currentBot.handleMessage(webhook_event.message);
       } else if (webhook_event.postback) {
         currentBot.userAnswers[currentBot.currentQuestion] = webhook_event.postback.text;
         currentBot.handlePostback(webhook_event.postback);
