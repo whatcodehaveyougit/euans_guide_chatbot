@@ -230,9 +230,9 @@ class chatBot {
     if (received_message.is_echo === true) {
       return null;
     } else if (received_message.text.toLowerCase() === "stop") {
-      let index = botInstances.findIndex(() => this.userId === sender_psid);
+      // let index = botInstances.findIndex(() => this.userId === sender_psid);
       this.currentQuestion = "user-stop";
-      botInstances.splice(index, 1);
+      // botInstances.splice(index, 1);
     }
 
     let attachment_url = null;
