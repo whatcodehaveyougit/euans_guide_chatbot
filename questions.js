@@ -26,7 +26,7 @@ const ratings = [
   }
 ];
 
-function getQuestionData(questionKey, place, overallRating) {
+export function getQuestionData(questionKey, place, overallRating) {
   const questionsData = {
     "hello": {
       text: "Hello! Thanks for clicking get started. Would you like to leave a review or chat to us?",
@@ -300,5 +300,3 @@ function getQuestionData(questionKey, place, overallRating) {
   };
   return questionsData[questionKey];
 }
-
-export default getQuestionData;
