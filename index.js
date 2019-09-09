@@ -299,7 +299,7 @@ class chatBot {
     callSendAPI(this.userId, currentQuestionData);
   }
 
-  handlePostback(sender_psid, received_postback) {
+  handlePostback(received_postback) {
     let response;
     let payload = received_postback.payload;
     console.log("Postback payload:",payload);
@@ -330,7 +330,7 @@ class chatBot {
     }
     // Send the message to acknowledge the postback
     // setCurrentQuestion(response);
-    callSendAPI(sender_psid, response);
+    this.callSendAPI(this.userId, response);
   }
 
   handleAttachment(received_message){
