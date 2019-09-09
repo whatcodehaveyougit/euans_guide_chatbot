@@ -187,21 +187,7 @@ class chatBot {
     console.log("Postback payload:", payload);
 
     if (payload === "Get Started") {
-      response = {
-        text: `Hello! Thanks for clicking get started. Would you like to leave a review or chat to us?`,
-        quick_replies: [
-          {
-            content_type: "text",
-            title: "Review!",
-            payload: "review"
-          },
-          {
-            content_type: "text",
-            title: "Chat!",
-            payload: "chat"
-          }
-        ]
-      };
+      response = getQuestionData("hello");
       this.currentQuestion = "hello";
     } else if (payload === "yes") {
       response = getQuestionData("image2");
@@ -218,7 +204,7 @@ class chatBot {
   callSendAPI(response) {
     if (
         this.currentQuestion ===
-        `Uh oh. Something's went wrong. Try deleting the chat and starting again. Sorry!`
+        "Uh oh. Something's went wrong. Try deleting the chat and starting again. Sorry!"
     ) {
       return null;
     }
