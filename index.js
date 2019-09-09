@@ -4,9 +4,8 @@
 const express = require("express"),
 body_parser = require("body-parser"),
 fs = require("fs"),
-app = express().use(body_parser.json()); // creates express http server
-
-const chatBot = require("./models/chatbot");
+app = express().use(body_parser.json()), // creates express http server
+chatBot = require("./models/chatbot");
 
 let botInstances = [];
 
@@ -75,15 +74,15 @@ app.get("/webhook", (req, res) => {
   }
 });
 
-function finish(sender_psid) {
-  console.log("Users answers: ", userAnswers);
-  let today = new Date();
-  let dd = String(today.getDate()).padStart(2, '0');
-  let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-  let yyyy = today.getFullYear();
-  let hour = String(today.getHours()).padStart(2, '0');
-  let minute = String(today.getMinutes()).padStart(2, '0');
-  let date = dd + "-" + mm + "-" + yyyy + "-" + hour + ":" + minute;
-
-  fs.writeFile(`${sender_psid}_${date}.JSON`, userAnswers, err => {console.error()});
-}
+// function finish(sender_psid) {
+//   console.log("Users answers: ", userAnswers);
+//   let today = new Date();
+//   let dd = String(today.getDate()).padStart(2, '0');
+//   let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+//   let yyyy = today.getFullYear();
+//   let hour = String(today.getHours()).padStart(2, '0');
+//   let minute = String(today.getMinutes()).padStart(2, '0');
+//   let date = dd + "-" + mm + "-" + yyyy + "-" + hour + ":" + minute;
+//
+//   fs.writeFile(`${sender_psid}_${date}.JSON`, userAnswers, err => {console.error()});
+// }
