@@ -34,7 +34,7 @@ const info = [
   },
   {
     content_type: "text",
-    title: "Skip to next question",
+    title: "Skip this question",
     payload: "skip_question"
   }
 ];

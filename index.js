@@ -50,7 +50,7 @@ class chatBot {
           this.currentQuestion = "account";
         break;
       case "account":
-        if (received_message.text === "No, I do not have an account")
+        if (received_message.text.includes("No"))
           this.currentQuestion = "new-user";
         else
           this.currentQuestion = "username";
@@ -69,7 +69,7 @@ class chatBot {
         break;
       case "image":
       case "image2":
-        if (received_message.text === "Upload Photos Now")
+        if (received_message.text === ("Upload Photos Now" || "Yes!"))
           this.currentQuestion = "upload-image";
         else
           this.currentQuestion = "title";
@@ -101,7 +101,7 @@ class chatBot {
         }
         break;
       case "transport":
-        if (received_message.text === "Skip to next question")
+        if (received_message.text.includes("Skip"))
           this.currentQuestion = "access";
         else
           this.currentQuestion = "transport-rating";
@@ -114,7 +114,7 @@ class chatBot {
       case "transport-summary": this.currentQuestion = "access";
         break;
       case "access":
-        if (received_message.text === "Skip to next question")
+        if (received_message.text.includes("Skip"))
           this.currentQuestion = "toilet";
         else
           this.currentQuestion = "access-rating";
@@ -124,7 +124,7 @@ class chatBot {
       case "access-summary": this.currentQuestion="toilet";
         break;
       case "toilet":
-        if (received_message.text === "Skip to next question")
+        if (received_message.text.includes("Skip"))
           this.currentQuestion = "staff";
         else
           this.currentQuestion = "toilet-rating";
@@ -137,7 +137,7 @@ class chatBot {
       case "toilet-summary": this.currentQuestion="staff";
         break;
       case "staff":
-        if (received_message.text === "Skip to next question"){
+        if (received_message.text.includes("Skip")){
           this.currentQuestion="end";
           // finish(this.userId);
           this.sendEmail(this.userAnswers);
