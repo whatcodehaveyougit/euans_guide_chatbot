@@ -73,8 +73,10 @@ class chatBot {
       case "image2":
         if (["Upload Photos Now", "Yes!"].includes(received_message.text))
           this.currentQuestion = "upload-image";
-        else if (this.photosLater)
+        else if (this.photosLater) {
+          this.endReview();
           this.currentQuestion = "end";
+        }
         else {
           if (received_message.text.includes("Later")) {
             this.photosLater = true;
