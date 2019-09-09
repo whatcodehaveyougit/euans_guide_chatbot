@@ -336,7 +336,7 @@ class chatBot {
   handleAttachment(received_message){
     let attachment_url = received_message.attachments[0].payload.url;
     images.push({path: attachment_url});
-    let attachment_response = {
+    return {
       attachment: {
         type: "template",
         payload: {
@@ -363,7 +363,6 @@ class chatBot {
         }
       }
     };
-    return attachment_response;
   }
 
   callSendAPI(sender_psid, response) {
