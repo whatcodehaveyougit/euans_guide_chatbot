@@ -104,7 +104,7 @@ function getQuestionData(questionKey, place, overallRating) {
       ]
     },
     "image2": {
-      text: "Do you have any more photos or images you'd like to upload?",
+      text: "Do you have any more images you'd like to share?",
       quick_replies: [
         {
           content_type: "text",
@@ -222,6 +222,22 @@ function getQuestionData(questionKey, place, overallRating) {
           content_type: "text",
           title: "Skip to photo upload",
           payload: "skip_question"
+        },
+        {
+          content_type: "text",
+          title: "Submit my review",
+          payload: "finish_option_question"
+        }
+      ]
+    },
+    "image-last": {
+      text: "Now is your final chance to upload any photos or images you took at " + place + ". Images are an important way of letting people see what a venue is like before they vist.\n" +
+      "By uploading images you agree that you are the creator and owner of the content you upload and that you are happy for the images to be used by Euan’s Guide.",
+      quick_replies: [
+        {
+          content_type: "text",
+          title: "Upload photos",
+          payload: "yes"
         },
         {
           content_type: "text",
