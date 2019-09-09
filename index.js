@@ -278,6 +278,8 @@ class chatBot {
           this.currentQuestion = "end";
           // finish(this.userId);
           this.sendEmail(this.userAnswers);
+          this.userAnswers = {};
+          this.images = [];
         }
         break;
       case "transport":
@@ -321,6 +323,8 @@ class chatBot {
           this.currentQuestion="end";
           // finish(this.userId);
           this.sendEmail(this.userAnswers);
+          this.userAnswers = {};
+          this.images = [];
         }
         else
           this.currentQuestion = "staff-rating";
@@ -348,6 +352,9 @@ class chatBot {
         break;
       case "user-submit":
         this.currentQuestion = "end";
+        this.sendEmail(this.userAnswers);
+        this.userAnswers = {};
+        this.images = [];
         break;
 
         ///disabled summary needs overallRating = received_message.text;
