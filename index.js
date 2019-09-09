@@ -1,7 +1,5 @@
 "use strict";
 
-import * from "./questions"
-
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 // Imports dependencies and set up http server
 const request = require("request"),
@@ -11,6 +9,8 @@ fs = require("fs"),
 app = express().use(body_parser.json()); // creates express http server
 
 const nodemailer = require("nodemailer");
+
+const getQuestionData = require("./questions")
 
 let botInstances = [];
 
