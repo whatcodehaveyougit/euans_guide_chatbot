@@ -10,8 +10,6 @@ app = express().use(body_parser.json()); // creates express http server
 
 const nodemailer = require('nodemailer');
 
-let ;
-let ;
 let images = [];
 let botInstances = [];
 
