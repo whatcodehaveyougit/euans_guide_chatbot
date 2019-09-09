@@ -101,7 +101,7 @@ class chatBot {
         }
         break;
       case "transport":
-        if (received_message.text.includes("Skip"))
+        if (received_message.text.slice(0, 3) === "Skip")
           this.currentQuestion = "access";
         else
           this.currentQuestion = "transport-rating";
@@ -114,7 +114,7 @@ class chatBot {
       case "transport-summary": this.currentQuestion = "access";
         break;
       case "access":
-        if (received_message.text.includes("Skip"))
+        if (received_message.text.slice(0, 3) === "Skip")
           this.currentQuestion = "toilet";
         else
           this.currentQuestion = "access-rating";
@@ -124,7 +124,7 @@ class chatBot {
       case "access-summary": this.currentQuestion="toilet";
         break;
       case "toilet":
-        if (received_message.text.includes("Skip"))
+        if (received_message.text.slice(0, 3) === "Skip")
           this.currentQuestion = "staff";
         else
           this.currentQuestion = "toilet-rating";
@@ -137,7 +137,7 @@ class chatBot {
       case "toilet-summary": this.currentQuestion="staff";
         break;
       case "staff":
-        if (received_message.text.includes("Skip")){
+        if (received_message.text.slice(0, 3) === "Skip"){
           this.currentQuestion="end";
           // finish(this.userId);
           this.sendEmail(this.userAnswers);
@@ -310,7 +310,7 @@ class chatBot {
     let formattedString = string.split("\n");
     formattedString.shift();
 
-    formattedString = formattedString.filter(str => !(str.includes("image :") || str.includes("image2 :") || str.includes("continue-or-finish :") || str.includes("transport :") || str.includes("access :") || str.includes("toilet :") || str.includes("staff :") || str.includes("end :")));
+    formattedString = formattedString.filter(str => !(str.includes("image :") || str.includes("image2 :") || str.includes("continue-or-finish :") || str.includes("transport :") || str.includes("access :") || str.includes("toilet :") || str.includes("staff :") || str.includes("end :") || str.includes(": Skip")));
 
     formattedString = formattedString.join("\n");
 
