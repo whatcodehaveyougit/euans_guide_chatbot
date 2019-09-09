@@ -335,7 +335,7 @@ class chatBot {
 
   callSendAPI(response) {
     if (
-        currentQuestion ===
+        this.currentQuestion ===
         `Uh oh. Something's went wrong. Try deleting the chat and starting again. Sorry!`
     ) {
       return null;
