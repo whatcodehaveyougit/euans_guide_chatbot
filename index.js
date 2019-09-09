@@ -313,7 +313,7 @@ class chatBot {
 
     // formattedString = formattedString.filter(str => !(str.includes("image :") || str.includes("image2 :") || str.includes("continue-or-finish :") || str.includes("transport :") || str.includes("access :") || str.includes("toilet :") || str.includes("staff :") || str.includes("end :") || str.includes(": Skip")));
 
-    formattedString = formattedString.filter(str => filterArray.some(substring => str.includes(substring)));
+    formattedString = formattedString.filter(str => !filterArray.some(substring => str.includes(substring)));
 
     formattedString = formattedString.join("\n");
 
