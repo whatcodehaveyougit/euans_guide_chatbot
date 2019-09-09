@@ -292,9 +292,10 @@ class chatBot {
         this.currentQuestion="end";
         // finish(this.userId);
         this.sendEmail(this.userAnswers);
+        this.userAnswers = {};
         break;
       case "end":
-        this.currentQuestion="visited"
+        this.currentQuestion="visited";
         break;
 
         ///disabled summary needs overallRating = received_message.text;
