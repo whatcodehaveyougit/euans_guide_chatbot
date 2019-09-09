@@ -35,9 +35,9 @@ class chatBot {
   handleMessage(received_message){
     if (received_message.is_echo === true) {
       return null;
-    } else if (received_message.text.toLowerCase() === "stop") {
+    } else if (received_message.text && received_message.text.toLowerCase() === "stop") {
       this.currentQuestion = "user-stop";
-    } else if (received_message.text.toLowerCase() === "submit" && this.submitAllowed) {
+    } else if (received_message.text && received_message.text.toLowerCase() === "submit" && this.submitAllowed) {
       this.currentQuestion = "user-submit";
     }
 
