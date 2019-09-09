@@ -26,13 +26,20 @@ const ratings = [
   }
 ];
 
-const skip = [
+const info = [
+  {
+    content_type: "text",
+    title: "Add more info",
+    payload: "add_review"
+  },
   {
     content_type: "text",
     title: "Skip to next question",
     payload: "skip_question"
   }
-]
+];
+
+const skip = [info[1]];
 
 const start = [
   {
@@ -40,7 +47,7 @@ const start = [
     title: "Start another review",
     payload: "review"
   }
-]
+];
 
 function getQuestionData(questionKey, place, overallRating) {
   const questionsData = {
@@ -155,7 +162,7 @@ function getQuestionData(questionKey, place, overallRating) {
     },
     "transport": {
       text: "We'll start with getting there. Would you like to add any information on parking or transport?",
-      quick_replies: skip
+      quick_replies: info
     },
     "transport-rating": {
       text: "How would you rate the parking and transport options? (Where 5 is great and 1 is bad.)",
@@ -168,7 +175,7 @@ function getQuestionData(questionKey, place, overallRating) {
     },
     "access": {
       text: "Thank You! Now onto getting in and around " + place + ". Is there anything specific about Disabled Access you would like to add?",
-      quick_replies: skip
+      quick_replies: info
     },
     "access-rating": {
       text: "Ok, great! Let's start with a rating, again out of 5.",
@@ -182,7 +189,7 @@ function getQuestionData(questionKey, place, overallRating) {
     },
     "toilet": {
       text: "Thank you for taking the time to provide additional information on the disabled access at " + place + "!\n" + "Now, onto toilets. Our users consistently tell us how important both accessible toilets and information about toilets is. Are you able to tell us anything about the toilets at " + place + "?",
-      quick_replies: skip
+      quick_replies: info
     },
     "toilet-rating": {
       text: "Brilliant! We'd love to know more…\n Let's start with a rating…",
@@ -196,7 +203,7 @@ function getQuestionData(questionKey, place, overallRating) {
       text: "Thank you - that's such important information to share with people.\n" +
       "\n" +
       "Now we come to staff. Would you like to add any further information about the people you came across at " + place + "?",
-      quick_replies: skip
+      quick_replies: info
     },
     "staff-rating":  {
       text: "	Thank you! This will be the last time we ask you for a rating…",
