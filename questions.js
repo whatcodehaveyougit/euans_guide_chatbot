@@ -44,7 +44,7 @@ function transportResponse(rating) {
     return "That sounds convenient!\n"
 }
 
-function accessResponse(rating, place) {
+function accessResponse(rating) {
   if (rating < 3)
    return "That's not a good rating...\n";
   else if (rating == 3)
@@ -53,22 +53,20 @@ function accessResponse(rating, place) {
     return rating + "* is a great rating!\n"
 }
 
-function toiletResponse(rating, place) {
+function toiletResponse(rating) {
   if (rating < 3)
-   return "Sorry to hear that, please can you tell us more about " + place + "?\n";
+   return "They don't sound very good\n";
   else if (rating == 3)
-    return "Disabled access at the " + place + " sounds ok - we're looking forward to hearing more!\n";
+    return "The loos sound like they could've been better...\n";
   else
-    return "That's a great rating! People are going to love reading about " + place + "!\n"
+    return "Wow! They sound great! We'd love to hear some more!\n"
 }
 
-function staffResponse(rating, place) {
-  if (rating < 3)
-   return "Sorry to hear that, please can you tell us more about " + place + "?\n";
-  else if (rating == 3)
-    return "Disabled access at the " + place + " sounds ok - we're looking forward to hearing more!\n";
+function staffResponse(rating) {
+  if (rating < 4)
+   return "That's useful to know...\n";
   else
-    return "That's a great rating! People are going to love reading about " + place + "!\n"
+    return "That's great to know!\n"
 }
 
 const infoOrSkip = [
@@ -269,7 +267,7 @@ function getQuestionData(questionKey, place, rating) {
       quick_replies: ratings
     },
     "toilet-summary": {
-      text: "Would you be able to provide some more detail? Things to mention might include: Was there an accessible loo? How easy was it to find? Was there enough space to manoeuvre? Did it have grab rails? Was it clean and tidy? Was there space for a carer? Do you know if it was a certified Changing Places toilet?",
+      text: toiletResponse(rating) + "Would you be able to provide some more detail? Things to mention might include: Was there an accessible loo? How easy was it to find? Was there enough space to manoeuvre? Did it have grab rails? Was it clean and tidy? Was there space for a carer? Do you know if it was a certified Changing Places toilet?",
       quick_replies: skip
     },
     "staff": {
@@ -283,7 +281,7 @@ function getQuestionData(questionKey, place, rating) {
       quick_replies: ratings
     },
     "staff-summary": {
-      text: "	That's great to know!\n" + "Would you be able to tell us a bit more about the welcome you received?\n" +
+      text: staffResponse(rating) + "Would you be able to tell us a bit more about the welcome you received?\n" +
       "Was there anyone who particularly who stood out? If so, what did they do to make it a memorable experience?",
       quick_replies: skip
     },
