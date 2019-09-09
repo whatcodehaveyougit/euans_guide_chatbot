@@ -182,7 +182,7 @@ class chatBot {
     this.userId = userId;
   }
 
-  handleMessage(sender_psid,received_message){
+  handleMessage(received_message){
     if (received_message.is_echo===true)
       return null;
 
@@ -209,13 +209,13 @@ class chatBot {
         break;
       case "upload-image":
         if (received_message.attachments){
-          attachment_response = handleAttachment(received_message)
+          attachment_response = this.handleAttachment(received_message)
         }
         break;
       case "title": currentQuestion="disabled-rating";
         break;
       case "disabled-rating":
-        if (isARatingNumber(received_message.text)) {
+        if (this.isARatingNumber(received_message.text)) {
           overallRating = received_message.text;
           currentQuestion="disabled-summary";
         }
@@ -227,8 +227,8 @@ class chatBot {
           currentQuestion="transport";
         else {
           currentQuestion="end";
-          finish(sender_psid);
-          sendEmail(userAnswers);
+          finish(this.userId);
+          this.sendEmail(userAnswers);
         }
         break;
       case "transport":
@@ -238,7 +238,7 @@ class chatBot {
           currentQuestion="transport-rating";
         break;
       case "transport-rating":
-        if (isARatingNumber(received_message.text)) {
+        if (this.isARatingNumber(received_message.text)) {
           currentQuestion="transport-summary";
         }
         break;
@@ -252,7 +252,7 @@ class chatBot {
         break;
       case "access-rating": currentQuestion="view";
         break;
-      case "view": currentQuestion="toilet"
+      case "view": currentQuestion="toilet";
         break;
       case "toilet":
         if (received_message.text === "Skip")
@@ -261,7 +261,7 @@ class chatBot {
           currentQuestion = "toilet-rating";
         break;
       case "toilet-rating":
-        if (isARatingNumber(received_message.text)) {
+        if (this.isARatingNumber(received_message.text)) {
           currentQuestion = "toilet-summary";
         }
         break;
@@ -270,21 +270,21 @@ class chatBot {
       case "staff":
         if (received_message.text === "Skip"){
           currentQuestion="end";
-          finish(sender_psid);
-          sendEmail(userAnswers);
+          finish(this.userId);
+          this.sendEmail(userAnswers);
         }
         else
           currentQuestion="staff-rating";
         break;
       case "staff-rating":
-        if (isARatingNumber(received_message.text)) {
+        if (this.isARatingNumber(received_message.text)) {
           currentQuestion = "staff-summary";
         }
         break;
       case "staff-summary":
         currentQuestion="end";
-        finish(sender_psid);
-        sendEmail(userAnswers);
+        finish(this.userId);
+        this.sendEmail(userAnswers);
         break;
 
         ///disabled summary needs overallRating = received_message.text;
@@ -296,7 +296,7 @@ class chatBot {
       currentQuestionData=getQuestionData(currentQuestion,place,overallRating);
 
     console.log("currentQuestion:",currentQuestion,"currentQuestionData:",currentQuestionData,"attachment_url:",attachment_url);
-    callSendAPI(sender_psid, currentQuestionData);
+    callSendAPI(this.userId, currentQuestionData);
   }
 
   handlePostback(sender_psid, received_postback) {
