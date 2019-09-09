@@ -32,6 +32,20 @@ class chatBot {
     this.submitAllowed = false;
   }
 
+  endReview() {
+    this.currentQuestion = "end";
+    this.sendEmail(this.userAnswers);
+    this.reset();
+  }
+
+  checkSkip(message) {
+    return message.text.slice(0, 4) === "Skip";
+  }
+
+  isARatingNumber(text) {
+    return (!isNaN(text))&&(text >= 0)&&(text <= 5);
+  }
+
   handleMessage(received_message){
     if (received_message.is_echo === true) {
       return null;
@@ -72,8 +86,8 @@ class chatBot {
           this.currentQuestion = "title";
         break;
       case "upload-image":
-        if (received_message.attachments){
-          attachment_response = this.handleAttachment(received_message)
+        if (received_message.attachments) {
+          attachment_response = this.handleAttachment(received_message);
         }
         break;
       case "title": this.currentQuestion = "overall-rating";
@@ -90,28 +104,23 @@ class chatBot {
         this.submitAllowed = true;
         if (received_message.text === "Add more information")
           this.currentQuestion = "transport";
-        else {
-          this.currentQuestion = "end";
-          // finish(this.userId);
-          this.sendEmail(this.userAnswers);
-          this.reset();
-        }
+        else
+          this.endReview();
         break;
       case "transport":
-        if (received_message.text.slice(0, 4) === "Skip")
+        if (this.checkSkip(received_message))
           this.currentQuestion = "access";
         else
           this.currentQuestion = "transport-rating";
         break;
       case "transport-rating":
-        if (this.isARatingNumber(received_message.text)) {
+        if (this.isARatingNumber(received_message.text))
           this.currentQuestion = "transport-summary";
-        }
         break;
       case "transport-summary": this.currentQuestion = "access";
         break;
       case "access":
-        if (received_message.text.slice(0, 4) === "Skip")
+        if (this.checkSkip(received_message))
           this.currentQuestion = "toilet";
         else
           this.currentQuestion = "access-rating";
@@ -121,38 +130,40 @@ class chatBot {
       case "access-summary": this.currentQuestion="toilet";
         break;
       case "toilet":
-        if (received_message.text.slice(0, 4) === "Skip")
+        if (this.checkSkip(received_message))
           this.currentQuestion = "staff";
         else
           this.currentQuestion = "toilet-rating";
         break;
       case "toilet-rating":
-        if (this.isARatingNumber(received_message.text)) {
+        if (this.isARatingNumber(received_message.text))
           this.currentQuestion = "toilet-summary";
-        }
         break;
       case "toilet-summary": this.currentQuestion="staff";
         break;
       case "staff":
-        if (received_message.text.slice(0, 4) === "Skip"){
-          this.currentQuestion="end";
-          this.sendEmail(this.userAnswers);
-          this.reset();
-        }
+        if (this.checkSkip(received_message))
+          this.endReview();
         else
           this.currentQuestion = "staff-rating";
         break;
       case "staff-rating":
-        if (this.isARatingNumber(received_message.text)) {
+        if (this.isARatingNumber(received_message.text))
           this.currentQuestion = "staff-summary";
-        }
         break;
       case "staff-summary": this.currentQuestion = "anything-else";
         break;
       case "anything-else":
-        this.currentQuestion = "end";
-        this.sendEmail(this.userAnswers);
-        this.reset();
+        if (received_message.text.slice(0, 6) === "Submit")
+          this.endReview();
+        else
+          this.currentQuestion = "image-last";
+        break;
+      case "image-last":
+        if (received_message.text.slice(0, 6) === "Submit")
+          this.endReview();
+        else
+          this.currentQuestion = "upload-image"
         break;
       case "end": this.currentQuestion = "visited";
         break;
@@ -160,13 +171,8 @@ class chatBot {
         break;
       case "stop": this.currentQuestion = "visited";
         break;
-      case "user-submit":
-        this.currentQuestion = "end";
-        this.sendEmail(this.userAnswers);
-        this.reset();
+      case "user-submit": this.endReview();
         break;
-
-        ///disabled summary needs overallRating = received_message.text;
     }
 
     if (attachment_response!=null)
@@ -255,7 +261,7 @@ class chatBot {
       attachments: this.images
     };
 
-    transporter.sendMail(mailOptions, function(error, info){
+    transporter.sendMail(mailOptions, function(error, info) {
       if (error) {
         console.log(error);
       } else {
@@ -264,7 +270,7 @@ class chatBot {
     });
   }
 
-  handleAttachment(received_message){
+  handleAttachment(received_message) {
     let attachment_url = received_message.attachments[0].payload.url;
     this.images.push({path: attachment_url});
     return {
@@ -294,10 +300,6 @@ class chatBot {
         }
       }
     };
-  }
-
-  isARatingNumber(text){
-    return (!isNaN(text))&&(text >= 0)&&(text <= 5)
   }
 
   formatBody(string) {
