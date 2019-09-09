@@ -26,12 +26,7 @@ const ratings = [
   }
 ];
 
-const infoOrSkip = [
-  {
-    content_type: "text",
-    title: "Add more info",
-    payload: "yes_review"
-  },
+const skip = [
   {
     content_type: "text",
     title: "Skip to next question",
@@ -160,7 +155,7 @@ function getQuestionData(questionKey, place, overallRating) {
     },
     "transport": {
       text: "We'll start with getting there. Would you like to add any information on parking or transport?",
-      quick_replies: infoOrSkip
+      quick_replies: skip
     },
     "transport-rating": {
       text: "How would you rate the parking and transport options? (Where 5 is great and 1 is bad.)",
@@ -169,11 +164,11 @@ function getQuestionData(questionKey, place, overallRating) {
     "transport-summary": {
       text: "Could you give us some more information? Did you drive? If so, where did you park? If you travelled using public transport where was the nearest bus stop or train station?\n" +
       "What information would help others most?",
-      quick_replies: infoOrSkip
+      quick_replies: skip
     },
     "access": {
       text: "Thank You! Now onto getting in and around " + place + ". Is there anything specific about Disabled Access you would like to add?",
-      quick_replies: infoOrSkip
+      quick_replies: skip
     },
     "access-rating": {
       text: "Ok, great! Let's start with a rating, again out of 5.",
@@ -183,11 +178,11 @@ function getQuestionData(questionKey, place, overallRating) {
       text: "Would you be able to give any more detail on what you noticed?\n" +
       "\n" +
       "For example, do you have any comments on doors or ramps? Were there any lifts? What was the signage like? Were there any steps? Could you see everything you wanted to? Was there an induction loop? Was there any seating so you could stop and take a rest? Were there any alternative formats available such as braille, large print, easy read or BSL?",
-      quick_replies: infoOrSkip
+      quick_replies: skip
     },
     "toilet": {
       text: "Thank you for taking the time to provide additional information on the disabled access at " + place + "!\n" + "Now, onto toilets. Our users consistently tell us how important both accessible toilets and information about toilets is. Are you able to tell us anything about the toilets at " + place + "?",
-      quick_replies: infoOrSkip
+      quick_replies: skip
     },
     "toilet-rating": {
       text: "Brilliant! We'd love to know more…\n Let's start with a rating…",
@@ -195,13 +190,13 @@ function getQuestionData(questionKey, place, overallRating) {
     },
     "toilet-summary": {
       text: "Would you be able to provide some more detail? Things to mention might include: Was there an accessible loo? How easy was it to find? Was there enough space to manoeuvre? Did it have grab rails? Was it clean and tidy? Was there space for a carer? Do you know if it was a certified Changing Places toilet?",
-      quick_replies: infoOrSkip
+      quick_replies: skip
     },
     "staff": {
       text: "Thank you - that's such important information to share with people.\n" +
       "\n" +
       "Now we come to staff. Would you like to add any further information about the people you came across at " + place + "?",
-      quick_replies: infoOrSkip
+      quick_replies: skip
     },
     "staff-rating":  {
       text: "	Thank you! This will be the last time we ask you for a rating…",
@@ -210,7 +205,7 @@ function getQuestionData(questionKey, place, overallRating) {
     "staff-summary": {
       text: "	That's great to know!" + "Would you be able to tell us a bit more about the welcome you received?\n" +
       "Was there anyone who particularly who stood out? If so, what did they do to make it a memorable experience?",
-      quick_replies: infoOrSkip
+      quick_replies: skip
     },
     "end": {
       text: "Thank you for your review - it's great. We'll send you a message when it has gone live! :)",
