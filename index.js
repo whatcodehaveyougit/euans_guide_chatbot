@@ -308,9 +308,9 @@ class chatBot {
         else
           this.currentQuestion = "access-rating";
         break;
-      case "access-rating": this.currentQuestion="view";
+      case "access-rating": this.currentQuestion="access-summary";
         break;
-      case "view": this.currentQuestion="toilet";
+      case "access-summary": this.currentQuestion="toilet";
         break;
       case "toilet":
         if (received_message.text === "Skip")
