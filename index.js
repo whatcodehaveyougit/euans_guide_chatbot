@@ -165,8 +165,15 @@ function getQuestionData(questionKey, place, overallRating) {
       ]},
     "staff-rating":  {text: "Ok, great! Let's start with a rating, again out of 5 for staff.", quick_replies: ratings},
     "staff-summary": {text: "Would you be able to provide some more details about the staff?"},
-    "end": {text:"Thank you for your review - it's great. We'll send you a message when it has gone live! :)"}
-
+    "end": {text:"Thank you for your review - it's great. We'll send you a message when it has gone live! :)",
+      quick_replies: [
+        {
+          content_type: "text",
+          title: "Start another review",
+          payload: "review"
+        }
+      ]
+    }
   };
   return questionsData[questionKey];
 }
@@ -285,6 +292,9 @@ class chatBot {
         this.currentQuestion="end";
         // finish(this.userId);
         this.sendEmail(this.userAnswers);
+        break;
+      case "end":
+        this.currentQuestion="visited"
         break;
 
         ///disabled summary needs overallRating = received_message.text;
