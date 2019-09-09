@@ -200,6 +200,16 @@ function getQuestionData(questionKey, place, overallRating) {
           payload: "review"
         }
       ]
+    },
+    "stop": {
+      text: "Review stopped",
+      quick_replies: [
+        {
+          content_type: "text",
+          title: "Start another review",
+          payload: "review"
+        }
+      ]
     }
   };
   return questionsData[questionKey];
@@ -219,9 +229,9 @@ class chatBot {
   handleMessage(received_message, sender_psid){
     if (received_message.is_echo === true) {
       return null;
-    } else if (received_message.text === "exit") {
+    } else if (received_message.text.toLowerCase() === "stop") {
       let index = botInstances.findIndex(() => this.userId === sender_psid);
-      this.currentQuestion = "";
+      this.currentQuestion = "stop";
       botInstances.splice(index, 1);
     }
 
@@ -328,6 +338,9 @@ class chatBot {
         this.images = [];
         break;
       case "end":
+        this.currentQuestion = "visited";
+        break;
+      case "stop":
         this.currentQuestion = "visited";
         break;
 
