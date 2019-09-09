@@ -211,41 +211,72 @@ function getQuestionData(questionKey, place, overallRating) {
       quick_replies: [
         {
           content_type: "text",
-          title: "Yes",
+          title: "Add more info",
           payload: "yes_disabled_access"
         },
         {
           content_type: "text",
-          title: "Skip",
+          title: "Skip to next question",
           payload: "skip_disabled_access"
         }
       ]
     },
     "toilet-rating": {
-      text: "Ok, great! Let's start with a rating, again out of 5 for toilet accessibility.",
+      text: "Brilliant! We'd love to know more…\n Let's start with a rating…",
       quick_replies: ratings
     },
-    "toilet-summary": {text: "Would you be able to provide some more details about the toilets?"},
-    "staff": {
-      text: "Now we come to staff. " + "Would you like to add any further information about the people you came across at " + place + "?",
+    "toilet-summary": {
+      text: "Would you be able to provide some more detail? Things to mention might include: Was there an accessible loo? How easy was it to find? Was there enough space to manoeuvre? Did it have grab rails? Was it clean and tidy? Was there space for a carer? Do you know if it was a certified Changing Places toilet?",
       quick_replies: [
         {
           content_type: "text",
-          title: "Yes",
+          title: "Add more info",
           payload: "yes_disabled_access"
         },
         {
           content_type: "text",
-          title: "Skip",
+          title: "Skip to next question",
+          payload: "skip_disabled_access"
+        }
+      ]
+    },
+    "staff": {
+      text: "Thank you - that's such important information to share with people.\n" +
+      "\n" +
+      "Now we come to staff. Would you like to add any further information about the people you came across at " + place + "?",
+      quick_replies: [
+        {
+          content_type: "text",
+          title: "Add more info",
+          payload: "yes_disabled_access"
+        },
+        {
+          content_type: "text",
+          title: "Skip to next question",
           payload: "skip_disabled_access"
         }
       ]
     },
     "staff-rating":  {
-      text: "Ok, great! Let's start with a rating, again out of 5 for staff.",
+      text: "	Thank you! This will be the last time we ask you for a rating…",
       quick_replies: ratings
     },
-    "staff-summary": {text: "Would you be able to provide some more details about the staff?"},
+    "staff-summary": {
+      text: "	That's great to know!" + "Would you be able to tell us a bit more about the welcome you received?\n" +
+      "Was there anyone who particularly who stood out? If so, what did they do to make it a memorable experience?",
+      quick_replies: [
+        {
+          content_type: "text",
+          title: "Add more info",
+          payload: "yes_disabled_access"
+        },
+        {
+          content_type: "text",
+          title: "Skip to next question",
+          payload: "skip_disabled_access"
+        }
+      ]
+    },
     "end": {
       text: "Thank you for your review - it's great. We'll send you a message when it has gone live! :)",
       quick_replies: [
@@ -269,3 +300,5 @@ function getQuestionData(questionKey, place, overallRating) {
   };
   return questionsData[questionKey];
 }
+
+export default getQuestionData;
