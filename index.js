@@ -227,7 +227,7 @@ class chatBot {
           currentQuestion="transport";
         else {
           currentQuestion="end";
-          finish(this.userId);
+          // finish(this.userId);
           this.sendEmail(userAnswers);
         }
         break;
@@ -270,7 +270,7 @@ class chatBot {
       case "staff":
         if (received_message.text === "Skip"){
           currentQuestion="end";
-          finish(this.userId);
+          // finish(this.userId);
           this.sendEmail(userAnswers);
         }
         else
@@ -283,7 +283,7 @@ class chatBot {
         break;
       case "staff-summary":
         currentQuestion="end";
-        finish(this.userId);
+        // finish(this.userId);
         this.sendEmail(userAnswers);
         break;
 
