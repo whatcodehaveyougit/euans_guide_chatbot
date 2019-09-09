@@ -46,11 +46,11 @@ function transportResponse(rating) {
 
 function accessResponse(rating, place) {
   if (rating < 3)
-   return "Sorry to hear that, please can you tell us more about " + place + "?\n";
+   return "That's not a good rating...\n";
   else if (rating == 3)
-    return "Disabled access at the " + place + " sounds ok - we're looking forward to hearing more!\n";
+    return "That sounds like it could've been better...\n";
   else
-    return "That's a great rating! People are going to love reading about " + place + "!\n"
+    return rating + "* is a great rating!\n"
 }
 
 function toiletResponse(rating, place) {
@@ -255,7 +255,7 @@ function getQuestionData(questionKey, place, rating) {
       quick_replies: ratings
     },
     "access-summary": {
-      text: "Would you be able to give any more detail on what you noticed?\n" +
+      text: accessResponse(rating) + "Would you be able to give any more detail on what you noticed?\n" +
       "\n" +
       "For example, do you have any comments on doors or ramps? Were there any lifts? What was the signage like? Were there any steps? Could you see everything you wanted to? Was there an induction loop? Was there any seating so you could stop and take a rest? Were there any alternative formats available such as braille, large print, easy read or BSL?",
       quick_replies: skip
