@@ -51,11 +51,14 @@ class chatBot {
         break;
       case "account":
         if (received_message.text === "No, I do not have an account")
-          this.currentQuestion = "visited";
+          this.currentQuestion = "new-user";
         else
           this.currentQuestion = "username";
         break;
       case "username":
+        this.currentQuestion = "visited";
+        break;
+      case "new-user":
         this.currentQuestion = "visited";
         break;
       case "visited":
