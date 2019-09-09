@@ -224,6 +224,13 @@ class chatBot {
     this.place = "";
     this.overallRating = "";
     this.images = [];
+    this.submitAllowed = false;
+  }
+
+  reset() {
+    this.userAnswers = {};
+    this.images = [];
+    this.submitAllowed = false;
   }
 
   handleMessage(received_message){
@@ -231,7 +238,7 @@ class chatBot {
       return null;
     } else if (received_message.text.toLowerCase() === "stop") {
       this.currentQuestion = "user-stop";
-    } else if (received_message.text.toLowerCase() === "submit") {
+    } else if (received_message.text.toLowerCase() === "submit" && this.submitAllowed) {
       this.currentQuestion = "user-submit";
     }
 
@@ -272,14 +279,14 @@ class chatBot {
       case "disabled-summary": this.currentQuestion = "continue-or-finish";
         break;
       case "continue-or-finish":
+        this.submitAllowed = true;
         if (received_message.text === "Continue")
           this.currentQuestion = "transport";
         else {
           this.currentQuestion = "end";
           // finish(this.userId);
           this.sendEmail(this.userAnswers);
-          this.userAnswers = {};
-          this.images = [];
+          this.reset();
         }
         break;
       case "transport":
@@ -323,8 +330,7 @@ class chatBot {
           this.currentQuestion="end";
           // finish(this.userId);
           this.sendEmail(this.userAnswers);
-          this.userAnswers = {};
-          this.images = [];
+          this.reset();
         }
         else
           this.currentQuestion = "staff-rating";
@@ -338,8 +344,7 @@ class chatBot {
         this.currentQuestion = "end";
         // finish(this.userId);
         this.sendEmail(this.userAnswers);
-        this.userAnswers = {};
-        this.images = [];
+        this.reset();
         break;
       case "end":
         this.currentQuestion = "visited";
@@ -353,8 +358,7 @@ class chatBot {
       case "user-submit":
         this.currentQuestion = "end";
         this.sendEmail(this.userAnswers);
-        this.userAnswers = {};
-        this.images = [];
+        this.reset();
         break;
 
         ///disabled summary needs overallRating = received_message.text;
