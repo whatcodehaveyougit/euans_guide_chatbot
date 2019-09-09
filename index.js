@@ -296,7 +296,7 @@ class chatBot {
       currentQuestionData=getQuestionData(currentQuestion,place,overallRating);
 
     console.log("currentQuestion:",currentQuestion,"currentQuestionData:",currentQuestionData,"attachment_url:",attachment_url);
-    callSendAPI(this.userId, currentQuestionData);
+    this.callSendAPI(currentQuestionData);
   }
 
   handlePostback(received_postback) {
@@ -330,7 +330,7 @@ class chatBot {
     }
     // Send the message to acknowledge the postback
     // setCurrentQuestion(response);
-    this.callSendAPI(this.userId, response);
+    this.callSendAPI(response);
   }
 
   handleAttachment(received_message){
@@ -405,7 +405,7 @@ class chatBot {
     reviewAsString = reviewAsString.replace(/"/g, " ");
     reviewAsString = reviewAsString.replace(/{|}|\?/g, "");
 
-    const review = formatBody(reviewAsString);
+    const review = this.formatBody(reviewAsString);
 
     const title = reviewObject["Great! Now, what would you like to title your review?"];
 
@@ -491,10 +491,10 @@ app.post("/webhook", (req, res) => {
       // pass the event to the appropriate handler function
       if (webhook_event.message || webhook_event.attachments) {
         userAnswers[currentQuestion] = webhook_event.message.text;
-        handleMessage(sender_psid, webhook_event.message);
+        currentBot.handleMessage(webhook_event.message);
       } else if (webhook_event.postback) {
         userAnswers[currentQuestion] = webhook_event.postback.text;
-        handlePostback(sender_psid, webhook_event.postback);
+        currentBot.handlePostback(webhook_event.postback);
       }
     });
     // Return a '200 OK' response to all events
@@ -527,10 +527,6 @@ app.get("/webhook", (req, res) => {
     }
   }
 });
-
-
-
-
 
 function finish(sender_psid) {
   console.log("Users answers: ", userAnswers);
