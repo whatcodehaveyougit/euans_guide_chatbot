@@ -453,7 +453,7 @@ class chatBot {
     let formattedString = string.split("\n");
     formattedString.shift();
 
-    formattedString = formattedString.filter(str => !(str.includes("image :") || str.includes("image2 :") || str.includes("continue-or-finish :") || str.includes("transport :") || str.includes("access :") || str.includes("toilet :") || str.includes("staff :")));
+    formattedString = formattedString.filter(str => !(str.includes("image :") || str.includes("image2 :") || str.includes("continue-or-finish :") || str.includes("transport :") || str.includes("access :") || str.includes("toilet :") || str.includes("staff :") || str.includes("end :")));
 
     formattedString = formattedString.join("\n");
 
