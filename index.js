@@ -438,7 +438,7 @@ class chatBot {
     return (!isNaN(text))&&(text >= 0)&&(text <= 5)
   }
 
-  static formatBody(string) {
+  formatBody(string) {
     let formattedString = string.split("\n");
     formattedString.shift();
 
