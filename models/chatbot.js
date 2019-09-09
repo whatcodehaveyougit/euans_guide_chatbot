@@ -164,10 +164,10 @@ class chatBot {
       case "staff-summary": this.currentQuestion = "anything-else";
         break;
       case "anything-else":
-        if (received_message.text.slice(0, 6) === "Submit")
-          this.endReview();
-        else
+        if (photosLater)
           this.currentQuestion = "image-last";
+        else
+          this.endReview();
         break;
       case "image-last":
         if (received_message.text.slice(0, 6) === "Submit")
