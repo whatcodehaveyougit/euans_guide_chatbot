@@ -13,6 +13,7 @@ class chatBot {
     this.overallRating = "";
     this.images = [];
     this.submitAllowed = false;
+    this.photosLater = false;
   }
 
   reset() {
@@ -134,7 +135,7 @@ class chatBot {
         break;
       case "staff":
         if (this.checkSkip(received_message))
-          this.endReview();
+          this.currentQuestion = "anything-else";
         else
           this.currentQuestion = "staff-rating";
         break;

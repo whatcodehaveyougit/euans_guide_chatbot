@@ -98,6 +98,11 @@ function getQuestionData(questionKey, place, overallRating) {
         },
         {
           content_type: "text",
+          title: "Upload Photos Later",
+          payload: "no"
+        }
+        {
+          content_type: "text",
           title: "No Photos to Upload",
           payload: "no"
         }
