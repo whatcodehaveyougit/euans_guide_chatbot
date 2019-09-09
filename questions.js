@@ -26,6 +26,15 @@ const ratings = [
   }
 ];
 
+function overallResponse(rating, place) {
+  if (rating < 3)
+   return "Sorry to hear that, please can you tell us more about " + place + "?\n";
+  else if (rating == 3)
+    return "Disabled access at the " + place + " sounds ok - we're looking forward to hearing more!\n";
+  else
+    return "That's a great rating! People are going to love reading about " + place + "!\n"
+}
+
 const infoOrSkip = [
   {
     content_type: "text",
@@ -155,7 +164,7 @@ function getQuestionData(questionKey, place, overallRating) {
       "Now for a rating... Out of 5, where 5 is great and 1 is bad, how would you rate the disabled access overall?",
       quick_replies: ratings
     },
-    "overall-summary": {text: "People are going to love reading about  " + place + "! Now could you summarise your experience? \n" +
+    "overall-summary": {text: overallResponse(overallRating, place) + "Now could you summarise your experience? \n" +
     "\n" +
     "Some things you might want to talk about include:\n" +
     "What did you do there?\n" +
