@@ -1,3 +1,31 @@
+const ratings = [
+    {
+        content_type: "text",
+        title: "1",
+        payload: "one"
+    },
+    {
+        content_type: "text",
+        title: "2",
+        payload: "two"
+    },
+    {
+        content_type: "text",
+        title: "3",
+        payload: "three"
+    },
+    {
+        content_type: "text",
+        title: "4",
+        payload: "four"
+    },
+    {
+        content_type: "text",
+        title: "5",
+        payload: "five"
+    }
+];
+
 function getQuestionData(questionKey, place, overallRating) {
     const questionsData = {
         "hello": {
@@ -60,18 +88,33 @@ function getQuestionData(questionKey, place, overallRating) {
                 "Now for a rating... Out of 5, where 5 is great and 1 is bad, how would you rate the disabled access overall?",
             quick_replies: ratings
         },
-        "disabled-summary": {text: "People are going to love reading about  " + place + "?"},
+        "disabled-summary": {text: "People are going to love reading about  " + place + "! Now could you summarise your experience? \n" +
+                "\n" +
+                "Some things you might want to talk about include:\n" +
+                "What did you do there?\n" +
+                "What did you like about the place? \n" +
+                "What wasn't quite right? \n" +
+                "What made it special?"},
         "continue-or-finish": {
-            text: "Thank you very much, your review is nearly complete!",
+            text: "That's your review nearly complete! \n" +
+                "\n" +
+                "Some of our users do like to know some additional information before they visit.This focuses on 4 main areas:\n" +
+                "\n" +
+                "1) Getting there \n" +
+                "2) Getting in and getting around\n" +
+                "3) Toilets\n" +
+                "4) Staff\n" +
+                "\n" +
+                "These are all optional questions so if you don't have anything else to add then no problem! Would you like to finish and submit your review or add more information?",
             quick_replies: [
                 {
                     content_type: "text",
-                    title: "Continue",
+                    title: "Add more information",
                     payload: "continue_option_question"
                 },
                 {
                     content_type: "text",
-                    title: "Finish",
+                    title: "Finish and submit",
                     payload: "finish_option_question"
                 }
             ]
