@@ -114,9 +114,11 @@ class chatBot {
         else
           this.currentQuestion = "access-rating";
         break;
-      case "access-rating": this.currentQuestion="access-summary";
+      case "access-rating":
+        if (this.isARatingNumber(received_message.text))
+          this.currentQuestion = "access-summary";
         break;
-      case "access-summary": this.currentQuestion="toilet";
+      case "access-summary": this.currentQuestion = "toilet";
         break;
       case "toilet":
         if (this.checkSkip(received_message))
@@ -128,7 +130,7 @@ class chatBot {
         if (this.isARatingNumber(received_message.text))
           this.currentQuestion = "toilet-summary";
         break;
-      case "toilet-summary": this.currentQuestion="staff";
+      case "toilet-summary": this.currentQuestion = "staff";
         break;
       case "staff":
         if (this.checkSkip(received_message))
@@ -292,7 +294,7 @@ class chatBot {
   }
 
   formatBody(string) {
-    const filterArray = ["hello :", "image :", "image2 :", "continue-or-finish :", "transport :", "access :", "toilet :", "staff :", "end :", ": Skip"];
+    const filterArray = ["hello :", "image :", "image2 :", "image-last :", "continue-or-finish :", "transport :", "access :", "toilet :", "staff :", "end :", ": Skip"];
     let formattedString = string.split("\n");
 
     formattedString = formattedString.filter(str => !filterArray.some(substring => str.includes(substring)));
