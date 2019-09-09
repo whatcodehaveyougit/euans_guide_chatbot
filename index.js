@@ -69,7 +69,7 @@ class chatBot {
         break;
       case "image":
       case "image2":
-        if (received_message.text === ("Upload Photos Now" || "Yes!"))
+        if (["Upload Photos Now", "Yes!"].includes(received_message.text))
           this.currentQuestion = "upload-image";
         else
           this.currentQuestion = "title";
