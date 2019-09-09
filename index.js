@@ -477,10 +477,10 @@ app.post("/webhook", (req, res) => {
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
       if (webhook_event.message || webhook_event.attachments) {
-        currentBot.userAnswers[currentQuestion] = webhook_event.message.text;
+        currentBot.userAnswers[currentBot.currentQuestion] = webhook_event.message.text;
         currentBot.handleMessage(webhook_event.message);
       } else if (webhook_event.postback) {
-        currentBot.userAnswers[currentQuestion] = webhook_event.postback.text;
+        currentBot.userAnswers[currentBot.currentQuestion] = webhook_event.postback.text;
         currentBot.handlePostback(webhook_event.postback);
       }
     });
