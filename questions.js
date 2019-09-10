@@ -139,12 +139,12 @@ function getQuestionData(questionKey, place, rating) {
       quick_replies: [
         {
           content_type: "text",
-          title: "Yes, I have an account on EuansGuide.com",
+          title: "Yes, I do",
           payload: "yes"
         },
         {
           content_type: "text",
-          title: "No, I do not have an account",
+          title: "No, I do not",
           payload: "no"
         }
       ]

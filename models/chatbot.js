@@ -190,6 +190,7 @@ class chatBot {
       case "user-stop": this.currentQuestion = "stop";
         break;
       case "stop":
+        this.reset();
         if (this.userAnswers !== {})
           this.currentQuestion = "visited";
         else
