@@ -17,6 +17,14 @@ class chatBot {
     this.tempAnswer = {};
   }
 
+  isEmpty(obj) {
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key))
+      return false;
+    }
+    return true;
+  }
+
   reset() {
     if (this.userAnswers["username"])
       this.tempAnswer["username"] = this.userAnswers["username"];
@@ -27,7 +35,6 @@ class chatBot {
     this.images = [];
     this.submitAllowed = false;
     this.photosLater = false;
-    console.log("user: ", this.userAnswers, "temp: ", this.tempAnswer);
   }
 
   endReview() {
@@ -183,7 +190,7 @@ class chatBot {
           this.currentQuestion = "upload-image";
         break;
       case "end":
-        if (this.userAnswers === {})
+        if (this.isEmpty(this.userAnswers))
           this.currentQuestion = "account";
         else
           this.currentQuestion = "visited";
@@ -192,7 +199,7 @@ class chatBot {
         break;
       case "stop":
         this.reset();
-        if (this.userAnswers === {})
+        if (this.isEmpty(this.userAnswers))
           this.currentQuestion = "account";
         else
           this.currentQuestion = "visited";
