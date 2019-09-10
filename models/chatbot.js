@@ -183,19 +183,19 @@ class chatBot {
           this.currentQuestion = "upload-image";
         break;
       case "end":
-        if (this.userAnswers !== {})
-          this.currentQuestion = "visited";
-        else
+        if (this.userAnswers === {})
           this.currentQuestion = "account";
+        else
+          this.currentQuestion = "visited";
         break;
       case "user-stop": this.currentQuestion = "stop";
         break;
       case "stop":
         this.reset();
-        if (this.userAnswers !== {})
-          this.currentQuestion = "visited";
-        else
+        if (this.userAnswers === {})
           this.currentQuestion = "account";
+        else
+          this.currentQuestion = "visited";
         break;
       case "user-submit": this.endReview();
         break;
