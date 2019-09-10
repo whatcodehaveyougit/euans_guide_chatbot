@@ -27,7 +27,7 @@ class chatBot {
     this.images = [];
     this.submitAllowed = false;
     this.photosLater = false;
-    console.log("user: ", userAnswers, "temp: ", tempAnswer);
+    console.log("user: ", this.userAnswers, "temp: ", this.tempAnswer);
   }
 
   endReview() {
