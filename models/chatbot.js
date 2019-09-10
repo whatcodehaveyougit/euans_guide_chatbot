@@ -14,10 +14,16 @@ class chatBot {
     this.images = [];
     this.submitAllowed = false;
     this.photosLater = false;
+    this.tempAnswer = {};
   }
 
   reset() {
-    this.userAnswers = {};
+    if (this.userAnswers["username"])
+      this.tempAnswer["username"] = this.userAnswers["username"];
+    else if (this.userAnswers["new-user"])
+      this.tempAnswer["new-user"] = this.userAnswers["new-user"];
+    this.userAnswers = this.tempAnswer;
+    this.tempAnswer = {};
     this.images = [];
     this.submitAllowed = false;
     this.photosLater = false;
