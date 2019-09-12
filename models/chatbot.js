@@ -209,6 +209,7 @@ class chatBot {
         }
         else if (received_message.text === "Abandon my review") {
           this.currentQuestion = "end";
+          break;
         }
         if (this.isEmpty(this.userAnswers))
           this.currentQuestion = "account";
