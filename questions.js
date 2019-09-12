@@ -320,12 +320,12 @@ function getQuestionData(questionKey, place, rating) {
       quick_replies: [
         {
           content_type: "text",
-          title: "Continue my review",
+          title: "Continue my review\n",
           payload: "continue"
         },
         {
           content_type: "text",
-          title: "Submit my review",
+          title: "Submit my review\n",
           payload: "submit"
         },
         {
