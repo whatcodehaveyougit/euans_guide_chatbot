@@ -14,6 +14,7 @@ class chatBot {
     this.images = [];
     this.submitAllowed = false;
     this.photosLater = false;
+    this.stop_question = "";
   }
 
   reset() {
@@ -21,6 +22,7 @@ class chatBot {
     this.images = [];
     this.submitAllowed = false;
     this.photosLater = false;
+    this.stop_question = "";
   }
 
   endReview() {
@@ -41,6 +43,7 @@ class chatBot {
     if (received_message.is_echo === true) {
       return null;
     } else if (received_message.text && received_message.text.toLowerCase() === "stop") {
+      this.stop_question = this.currentQuestion;
       this.currentQuestion = "user-stop";
     } else if (received_message.text && received_message.text.toLowerCase() === "submit" && this.submitAllowed) {
       this.currentQuestion = "user-submit";
@@ -179,7 +182,16 @@ class chatBot {
         break;
       case "user-stop": this.currentQuestion = "stop";
         break;
-      case "stop": this.currentQuestion = "visited";
+      case "stop":
+        if (received_message.text === "continue") {
+          this.currentQuestion = this.stop_question;
+        }
+        else if (received_message.text === "submit") {
+          this.endReview()
+        }
+        else if (received_message.text === "abandon") {
+          this.currentQuestion = "visited";
+        }
         break;
       case "user-submit": this.endReview();
         break;

@@ -326,7 +326,7 @@ function getQuestionData(questionKey, place, rating) {
         {
           content_type: "text",
           title: "Abandon my review",
-          payload: "submit"
+          payload: "abandon"
         }
       ]
     },
