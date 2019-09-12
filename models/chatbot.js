@@ -173,7 +173,7 @@ class chatBot {
         if (received_message.text.slice(0, 6) === "Submit")
           this.endReview();
         else
-          this.currentQuestion = "upload-image"
+          this.currentQuestion = "upload-image";
         break;
       case "end": this.currentQuestion = "visited";
         break;

@@ -311,8 +311,24 @@ function getQuestionData(questionKey, place, rating) {
       quick_replies: start
     },
     "stop": {
-      text: "Review stopped",
-      quick_replies: start
+      text: "It looks like you want to stop writing a review. Is that correct? Please confirm what action you’d like to take.",
+      quick_replies: [
+        {
+          content_type: "text",
+          title: "Continue my review",
+          payload: "continue"
+        },
+        {
+          content_type: "text",
+          title: "Submit my review",
+          payload: "submit"
+        },
+        {
+          content_type: "text",
+          title: "Abandon my review",
+          payload: "submit"
+        }
+      ]
     },
     "delete": {text: "Uh oh. Something's went wrong. Try deleting the chat and starting again. Sorry!"}
   };
