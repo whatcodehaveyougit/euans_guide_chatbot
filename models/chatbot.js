@@ -212,16 +212,15 @@ class chatBot {
           }
           else {
             this.currentQuestion = "stop-end";
-            this.reset();
           }
         }
         else if (received_message.text === "Abandon my review") {
           this.currentQuestion = "stop-end";
-          this.reset();
         }
         break;
       case "end":
       case "stop-end":
+        this.reset();
         this.setStartPoint();
         break;
       case "user-submit": this.endReview();
@@ -357,7 +356,7 @@ class chatBot {
   }
 
   formatBody(string) {
-    const filterArray = ["hello :", "image :", "image2 :", "image-last :", "continue-or-finish :", "transport :", "access :", "toilet :", "staff :", "end :", ": Skip"];
+    const filterArray = ["hello :", "image :", "image2 :", "image-last :", "continue-or-finish :", "transport :", "access :", "toilet :", "staff :", "end :", "stop: ", ": Skip"];
     let formattedString = string.split("\n");
 
     formattedString = formattedString.filter(str => !filterArray.some(substring => str.includes(substring)));
