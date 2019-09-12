@@ -183,13 +183,13 @@ class chatBot {
       case "user-stop": this.currentQuestion = "stop";
         break;
       case "stop":
-        if (received_message.text === "continue") {
+        if (received_message.text === "Continue my review") {
           this.currentQuestion = this.stop_question;
         }
-        else if (received_message.text === "submit") {
+        else if (received_message.text === "Submit my review") {
           this.endReview()
         }
-        else if (received_message.text === "abandon") {
+        else if (received_message.text === "Abandon my review") {
           this.currentQuestion = "visited";
         }
         break;
