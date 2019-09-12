@@ -46,7 +46,7 @@ class chatBot {
   }
 
   setStartPoint() {
-    console.log(this.userAnswers);
+    console.log("start point",this.userAnswers);
     if (this.isEmpty(this.userAnswers))
       this.currentQuestion = "account";
     else
