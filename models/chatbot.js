@@ -78,12 +78,16 @@ class chatBot {
       case "hello":
         if (received_message.text === "Review!")
           this.currentQuestion = "account";
-        else (received_message.text === "Chat!")
+        else if (received_message.text === "Chat!")
           this.currentQuestion = "chat";
         break;
       case "chat":
-        if (received_message.text === "Start a new review")
+        if (received_message.text === "Start a new review") {
+          this.reset();
           this.currentQuestion = "account";
+        } else {
+          this.currentQuestion = "stop-end";
+        }
         break;
       case "account":
         if (received_message.text.includes("No"))
