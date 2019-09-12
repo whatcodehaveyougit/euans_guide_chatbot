@@ -219,6 +219,7 @@ class chatBot {
         break;
       case "end":
       case "stop-end":
+        this.reset();
         this.setStartPoint();
         break;
       case "user-submit": this.endReview();
