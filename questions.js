@@ -27,43 +27,43 @@ const ratings = [
 ];
 
 function overallResponse(rating, place) {
-  if (rating/1 < 3)
+  if (rating < 3)
    return "Sorry to hear that, please can you tell us more about " + place + "?\n";
-  else if (rating/1 === 3)
+  else if (rating == 3)
     return "Disabled access at the " + place + " sounds ok - we're looking forward to hearing more!\n";
   else
     return "That's a great rating! People are going to love reading about " + place + "!\n"
 }
 
 function transportResponse(rating) {
-  if (rating/1 < 3)
+  if (rating < 3)
    return "That doesn't sound great.\n";
-  else if (rating/1 === 3)
+  else if (rating == 3)
     return "That sounds like it could've been better...\n";
   else
     return "That sounds convenient!\n"
 }
 
 function accessResponse(rating) {
-  if (rating/1 < 3)
+  if (rating < 3)
    return "That's not a good rating...\n";
-  else if (rating/1 === 3)
+  else if (rating == 3)
     return "That sounds like it could've been better...\n";
   else
     return rating + "* is a great rating!\n"
 }
 
 function toiletResponse(rating) {
-  if (rating/1 < 3)
+  if (rating < 3)
    return "They don't sound very good\n";
-  else if (rating/1 === 3)
+  else if (rating == 3)
     return "The loos sound like they could've been better...\n";
   else
     return "Wow! They sound great! We'd love to hear some more!\n"
 }
 
 function staffResponse(rating) {
-  if (rating/1 < 4)
+  if (rating < 4)
    return "That's useful to know...\n";
   else
     return "That's great to know!\n"
@@ -139,19 +139,19 @@ function getQuestionData(questionKey, place, rating) {
       quick_replies: [
         {
           content_type: "text",
-          title: "Yes, I have an account on EuansGuide.com",
+          title: "Yes, I do",
           payload: "yes"
         },
         {
           content_type: "text",
-          title: "No, I do not have an account",
+          title: "No, I do not",
           payload: "no"
         }
       ]
     },
     "username": {text: "Please enter your username or the associated email address so we can add this to your existing reviews."},
     "new-user": {text: "Please can you give us a username you would like us to associate with this review so that you can make changes to the review or add additional reviews at a later date from the same account. If the username is already taken we will try to assign you something similar to your request."},
-    "visited": {text: "Thank you, now back to your review. Please can you tell us the name of place that you visited?"},
+    "visited": {text: "Thank you, now on to your review. Please can you tell us the name of place that you visited?"},
     "city": {text: "Ok, great! Can you confirm which town or city " + place + " is in?"},
     "image": {
       text: "Do you have any photos or images you'd like to upload with your review?\n" +

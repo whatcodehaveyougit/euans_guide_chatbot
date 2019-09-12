@@ -15,10 +15,24 @@ class chatBot {
     this.submitAllowed = false;
     this.photosLater = false;
     this.stop_question = "";
+    this.tempAnswer = {};
+  }
+
+  isEmpty(obj) {
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key))
+      return false;
+    }
+    return true;
   }
 
   reset() {
-    this.userAnswers = {};
+    if (this.userAnswers["username"])
+      this.tempAnswer["username"] = this.userAnswers["username"];
+    else if (this.userAnswers["new-user"])
+      this.tempAnswer["new-user"] = this.userAnswers["new-user"];
+    this.userAnswers = this.tempAnswer;
+    this.tempAnswer = {};
     this.images = [];
     this.submitAllowed = false;
     this.photosLater = false;
@@ -178,7 +192,11 @@ class chatBot {
         else
           this.currentQuestion = "upload-image";
         break;
-      case "end": this.currentQuestion = "visited";
+      case "end":
+        if (this.isEmpty(this.userAnswers))
+          this.currentQuestion = "account";
+        else
+          this.currentQuestion = "visited";
         break;
       case "user-stop": this.currentQuestion = "stop";
         break;
@@ -187,11 +205,15 @@ class chatBot {
           this.currentQuestion = this.stop_question;
         }
         else if (received_message.text === "Submit my review") {
-          this.endReview()
+          this.reset();
         }
         else if (received_message.text === "Abandon my review") {
           this.currentQuestion = "end";
         }
+        if (this.isEmpty(this.userAnswers))
+          this.currentQuestion = "account";
+        else
+          this.currentQuestion = "visited";
         break;
       case "user-submit": this.endReview();
         break;
