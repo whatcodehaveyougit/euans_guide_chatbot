@@ -82,7 +82,8 @@ class chatBot {
           this.currentQuestion = "chat";
         break;
       case "chat":
-        this.currentQuestion = "account";
+        if (received_message.text === "Start a new review")
+          this.currentQuestion = "account";
         break;
       case "account":
         if (received_message.text.includes("No"))
