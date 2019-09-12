@@ -230,8 +230,13 @@ class chatBot {
         break;
       case "end":
       case "stop-end":
-        this.reset();
-        this.setStartPoint();
+        if (received_message.text === "Chat to us") {
+          this.reset();
+          this.currentQuestion = "chat";
+        } else {
+          this.reset();
+          this.setStartPoint();
+        }
         break;
       case "user-submit": this.endReview();
         break;
