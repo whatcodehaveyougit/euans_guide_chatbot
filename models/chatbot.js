@@ -211,15 +211,16 @@ class chatBot {
           }
           else {
             this.currentQuestion = "stop-end";
+            this.reset();
           }
         }
         else if (received_message.text === "Abandon my review") {
           this.currentQuestion = "stop-end";
+          this.reset();
         }
         break;
       case "end":
       case "stop-end":
-        this.reset();
         this.setStartPoint();
         break;
       case "user-submit": this.endReview();
