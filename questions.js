@@ -264,7 +264,7 @@ function getQuestionData(questionKey, place, rating) {
       quick_replies: skip
     },
     "toilet": {
-      text: "Thank you for taking the time to provide additional information on the disabled access at " + place + "!\n" + "Now, onto toilets. Our users consistently tell us how important both accessible toilets and information about toilets is. Are you able to tell us anything about the toilets at " + place + "?",
+      text: "Thank you for taking the time to provide additional information on the disabled access at " + place + "!\n" + "\nNow, onto toilets. Our users consistently tell us how important both accessible toilets and information about toilets is. Are you able to tell us anything about the toilets at " + place + "?",
       quick_replies: infoOrSkip
     },
     "toilet-rating": {
