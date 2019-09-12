@@ -45,6 +45,13 @@ class chatBot {
     this.reset();
   }
 
+  setStartPoint() {
+    if (this.isEmpty(this.userAnswers))
+      this.currentQuestion = "account";
+    else
+      this.currentQuestion = "visited";
+  }
+
   checkSkip(message) {
     return message.text.slice(0, 4) === "Skip";
   }
@@ -192,12 +199,6 @@ class chatBot {
         else
           this.currentQuestion = "upload-image";
         break;
-      case "end":
-        if (this.isEmpty(this.userAnswers))
-          this.currentQuestion = "account";
-        else
-          this.currentQuestion = "visited";
-        break;
       case "user-stop": this.currentQuestion = "stop";
         break;
       case "stop":
@@ -209,12 +210,16 @@ class chatBot {
             this.endReview()
           }
           else {
-            this.currentQuestion = "end";
+            this.currentQuestion = "stop-end";
           }
         }
         else if (received_message.text === "Abandon my review") {
-          this.currentQuestion = "end";
+          this.currentQuestion = "stop-end";
         }
+        break;
+      case "end":
+      case "stop-end":
+        this.setStartPoint();
         break;
       case "user-submit": this.endReview();
         break;

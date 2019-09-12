@@ -87,7 +87,12 @@ const skip = [infoOrSkip[1]];
 const start = [
   {
     content_type: "text",
-    title: "Start another review",
+    title: "Chat to us",
+    payload: "chat"
+  },
+  {
+    content_type: "text",
+    title: "Start a new review",
     payload: "review"
   }
 ];
@@ -151,7 +156,7 @@ function getQuestionData(questionKey, place, rating) {
     },
     "username": {text: "Please enter your username or the associated email address so we can add this to your existing reviews."},
     "new-user": {text: "Please can you give us a username you would like us to associate with this review so that you can make changes to the review or add additional reviews at a later date from the same account. If the username is already taken we will try to assign you something similar to your request."},
-    "visited": {text: "Thank you, now on to your review. Please can you tell us the name of place that you visited?"},
+    "visited": {text: "Thank you, now on to your review. Please can you tell us the name of the place that you visited?"},
     "city": {text: "Ok, great! Can you confirm which town or city " + place + " is in?"},
     "image": {
       text: "Do you have any photos or images you'd like to upload with your review?\n" +
@@ -329,6 +334,10 @@ function getQuestionData(questionKey, place, rating) {
           payload: "abandon"
         }
       ]
+    },
+    "stop-end": {
+      text: "Thank you for your time. Is there anything else you’d like to do while you are here?",
+      quick_replies: start
     },
     "delete": {text: "Uh oh. Something's went wrong. Try deleting the chat and starting again. Sorry!"}
   };
