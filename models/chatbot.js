@@ -190,7 +190,7 @@ class chatBot {
           this.endReview()
         }
         else if (received_message.text === "Abandon my review") {
-          this.currentQuestion = "visited";
+          this.currentQuestion = "end";
         }
         break;
       case "user-submit": this.endReview();
