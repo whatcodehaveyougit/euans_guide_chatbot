@@ -87,13 +87,13 @@ const skip = [infoOrSkip[1]];
 const start = [
   {
     content_type: "text",
-    title: "Chat to us",
-    payload: "chat"
+    title: "Start a new review",
+    payload: "review"
   },
   {
     content_type: "text",
-    title: "Start a new review",
-    payload: "review"
+    title: "Chat to us",
+    payload: "chat"
   }
 ];
 
@@ -136,6 +136,10 @@ function getQuestionData(questionKey, place, rating) {
           payload: "chat"
         }
       ]
+    },
+    "chat": {
+      text: "No problem! Leave us a message and we will get back to you as soon as possible!",
+      quick_replies: [start[0]]
     },
     "account": {
       text: "Thanks for choosing to share your experience with us, this shouldn't take too long!\n" +
