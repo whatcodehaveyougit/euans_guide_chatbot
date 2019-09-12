@@ -18,6 +18,20 @@ Heroku will wipe all local app files every deploy and also every 24 hours.
 You will need to access 'Facebook for Developers' to access the Euan's Guide app and add Facebook accounts as testers/developers. The developer website uses normal Facebook accounts to log in.
 The off/on button on this page will switch the app to 'live' mode allowing users to see it. You do not need the bot in 'live' mode for testing! The 'get started!' button will not appear to users not added as testers/developers while in development modes.
 
+### Messenger Profile API
+To change things like the 'get started' info text, send POST requests to the Messenger Profile API (we used Insomnia).
+The request looked like this:
+https://graph.facebook.com/v4.0/me/messenger_profile?access_token= [access token goes here!!!]
+
+{
+	"greeting":[
+		{
+			"locale":"default",
+			"text":"Hello {{user_full_name}}. You are chatting with a facebook bot, not a person! Click get started to get started. blah blah blah info text"
+		}
+	]
+}
+The access token is found in Heroku => Settings => Config Vars  (you want page_access_token). You will need to do this process again when connecting this bot to the real Euan's Guide page.
 
 
 ### Using the bot.
