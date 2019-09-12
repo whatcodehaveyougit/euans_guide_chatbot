@@ -205,16 +205,16 @@ class chatBot {
           this.currentQuestion = this.stop_question;
         }
         else if (received_message.text === "Submit my review") {
-          this.reset();
+          if (this.submitAllowed) {
+            this.endReview()
+          }
+          else {
+            this.currentQuestion = "end";
+          }
         }
         else if (received_message.text === "Abandon my review") {
           this.currentQuestion = "end";
-          break;
         }
-        if (this.isEmpty(this.userAnswers))
-          this.currentQuestion = "account";
-        else
-          this.currentQuestion = "visited";
         break;
       case "user-submit": this.endReview();
         break;
