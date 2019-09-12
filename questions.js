@@ -164,17 +164,17 @@ function getQuestionData(questionKey, place, rating) {
       quick_replies: [
         {
           content_type: "text",
-          title: "Upload Photos Now",
+          title: "Upload photos now",
           payload: "yes"
         },
         {
           content_type: "text",
-          title: "Upload Photos Later",
+          title: "Upload photos later",
           payload: "no"
         },
         {
           content_type: "text",
-          title: "No Photos to Upload",
+          title: "No photos to upload",
           payload: "no"
         }
       ]
@@ -203,9 +203,9 @@ function getQuestionData(questionKey, place, rating) {
       "Now for a rating... Out of 5, where 5 is great and 1 is bad, how would you rate the disabled access overall?",
       quick_replies: ratings
     },
-    "overall-summary": {text: overallResponse(rating, place) + "Now could you summarise your experience? \n" +
+    "overall-summary": {text: overallResponse(rating, place) + "\nNow could you summarise your experience? \n" +
     "\n" +
-    "Some things you might want to talk about include:\n" +
+    "Some things you might want to talk about include:\n\n" +
     "What did you do there?\n" +
     "What did you like about the place? \n" +
     "What wasn't quite right? \n" +
@@ -213,7 +213,7 @@ function getQuestionData(questionKey, place, rating) {
     "continue-or-finish": {
       text: "That's your review nearly complete! \n" +
       "\n" +
-      "Some of our users do like to know some additional information before they visit.This focuses on 4 main areas:\n" +
+      "Some of our users do like to know some additional information before they visit. This focuses on 4 main areas:\n" +
       "\n" +
       "1) Getting there \n" +
       "2) Getting in and getting around\n" +
@@ -245,7 +245,7 @@ function getQuestionData(questionKey, place, rating) {
       quick_replies: ratings
     },
     "transport-summary": {
-      text: transportResponse(rating) + "Could you give us some more information? Did you drive? If so, where did you park? If you travelled using public transport where was the nearest bus stop or train station?\n" +
+      text: transportResponse(rating) + "\nCould you give us some more information? Did you drive? If so, where did you park? If you travelled using public transport where was the nearest bus stop or train station?\n" +
       "What information would help others most?",
       quick_replies: skip
     },
@@ -258,7 +258,7 @@ function getQuestionData(questionKey, place, rating) {
       quick_replies: ratings
     },
     "access-summary": {
-      text: accessResponse(rating) + "Would you be able to give any more detail on what you noticed?\n" +
+      text: accessResponse(rating) + "\nWould you be able to give any more detail on what you noticed?\n" +
       "\n" +
       "For example, do you have any comments on doors or ramps? Were there any lifts? What was the signage like? Were there any steps? Could you see everything you wanted to? Was there an induction loop? Was there any seating so you could stop and take a rest? Were there any alternative formats available such as braille, large print, easy read or BSL?",
       quick_replies: skip
@@ -272,7 +272,7 @@ function getQuestionData(questionKey, place, rating) {
       quick_replies: ratings
     },
     "toilet-summary": {
-      text: toiletResponse(rating) + "Would you be able to provide some more detail? Things to mention might include: Was there an accessible loo? How easy was it to find? Was there enough space to manoeuvre? Did it have grab rails? Was it clean and tidy? Was there space for a carer? Do you know if it was a certified Changing Places toilet?",
+      text: toiletResponse(rating) + "\nWould you be able to provide some more detail? Things to mention might include: Was there an accessible loo? How easy was it to find? Was there enough space to manoeuvre? Did it have grab rails? Was it clean and tidy? Was there space for a carer? Do you know if it was a certified Changing Places toilet?",
       quick_replies: skip
     },
     "staff": {
@@ -286,7 +286,7 @@ function getQuestionData(questionKey, place, rating) {
       quick_replies: ratings
     },
     "staff-summary": {
-      text: staffResponse(rating) + "Would you be able to tell us a bit more about the welcome you received?\n" +
+      text: staffResponse(rating) + "\nWould you be able to tell us a bit more about the welcome you received?\n" +
       "Was there anyone who particularly who stood out? If so, what did they do to make it a memorable experience?",
       quick_replies: skip
     },
