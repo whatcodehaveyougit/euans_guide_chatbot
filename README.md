@@ -31,6 +31,8 @@ https://graph.facebook.com/v4.0/me/messenger_profile?access_token= [access token
 		}
 	]
 }
+
+
 The access token is found in Heroku => Settings => Config Vars  (you want page_access_token). You will need to do this process again when connecting this bot to the real Euan's Guide page.
 
 
