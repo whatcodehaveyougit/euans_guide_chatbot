@@ -45,4 +45,4 @@ Once the get started button has been clicked the messenger will open and the bot
 
 <img src="https://github.com/gadgetguy82/euans_guide_chatbot/blob/feature/readme/Images/Screenshot%202019-09-09%20at%201.29.20%20pm.png?raw=true" width="250" height="300" alt="ChatOrReview">
 
-Currently the chat does nothing else than tell the user that the staff will get back to them. If the user clicks Review the bot sends the questions one at a time to the user then waits for a response.
+Currently the chat does nothing else than tell the user that the staff will get back to them. If the user clicks Review the bot sends the questions one at a time to the user then waits for a response
